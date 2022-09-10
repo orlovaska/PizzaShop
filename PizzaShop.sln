@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31410.357
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShopLibrary", "ShopLibrary\ShopLibrary.csproj", "{D460CF3E-4DF9-44E6-828F-6E22DFFA22DE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShopWinFormsUI", "ShopWinFormsUI\ShopWinFormsUI.csproj", "{8DBC24B6-FFEC-46BA-8AFC-E6C80E956CC6}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D460CF3E-4DF9-44E6-828F-6E22DFFA22DE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D460CF3E-4DF9-44E6-828F-6E22DFFA22DE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D460CF3E-4DF9-44E6-828F-6E22DFFA22DE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D460CF3E-4DF9-44E6-828F-6E22DFFA22DE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8DBC24B6-FFEC-46BA-8AFC-E6C80E956CC6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8DBC24B6-FFEC-46BA-8AFC-E6C80E956CC6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8DBC24B6-FFEC-46BA-8AFC-E6C80E956CC6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8DBC24B6-FFEC-46BA-8AFC-E6C80E956CC6}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {C6F0F69F-71C8-44DA-AA6B-7A0AEF64605C}
+	EndGlobalSection
+EndGlobal
