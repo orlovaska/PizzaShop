@@ -3,9 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31410.357
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShopLibrary", "ShopLibrary\ShopLibrary.csproj", "{D460CF3E-4DF9-44E6-828F-6E22DFFA22DE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ShopLibrary", "ShopLibrary\ShopLibrary.csproj", "{D460CF3E-4DF9-44E6-828F-6E22DFFA22DE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShopWinFormsUI", "ShopWinFormsUI\ShopWinFormsUI.csproj", "{8DBC24B6-FFEC-46BA-8AFC-E6C80E956CC6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ShopWinFormsUI", "ShopWinFormsUI\ShopWinFormsUI.csproj", "{8DBC24B6-FFEC-46BA-8AFC-E6C80E956CC6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AddToDB", "AddToDB\AddToDB.csproj", "{D1650E48-90A1-418D-8609-7E85F1D3CDA5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{8DBC24B6-FFEC-46BA-8AFC-E6C80E956CC6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8DBC24B6-FFEC-46BA-8AFC-E6C80E956CC6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8DBC24B6-FFEC-46BA-8AFC-E6C80E956CC6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D1650E48-90A1-418D-8609-7E85F1D3CDA5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D1650E48-90A1-418D-8609-7E85F1D3CDA5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D1650E48-90A1-418D-8609-7E85F1D3CDA5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D1650E48-90A1-418D-8609-7E85F1D3CDA5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

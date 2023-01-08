@@ -1,4 +1,7 @@
-﻿using System;
+﻿using PizzaShop.DataAccess;
+using PizzaShop.Models;
+using ShopLibrary;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -18,27 +21,63 @@ namespace ShopWinFormsUI
             StartPosition = FormStartPosition.CenterScreen;
         }
 
-        private void EnterLabel_Load(object sender, EventArgs e)
+        private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            textBoxPassword.PasswordChar = '•';
-            pictureBoxOpenEye.Visible = false;
-            textBoxLogin.MaxLength = 100;
-            textBoxPassword.MaxLength = 100;
+            Registration registration = new Registration();
+            registration.Show();
+            this.Hide();
         }
 
-        private void EnterLabel_Click(object sender, EventArgs e)
+        private void pictureBoxCloseEye_Click(object sender, EventArgs e)
         {
-            var loginUser = textBoxLogin.Text;
-            var passwordUser = textBoxPassword.Text;
+            textBoxPassword.UseSystemPasswordChar = false;
+            pictureBoxCloseEye.Visible = false;
+            pictureBoxOpenEye.Visible = true;
+        }
 
-            if (true)
+        private void pictureBoxOpenEye_Click(object sender, EventArgs e)
+        {
+            textBoxPassword.UseSystemPasswordChar = true;
+            pictureBoxCloseEye.Visible = true;
+            pictureBoxOpenEye.Visible = false;
+        }
+
+        private void buttonEnter_Click(object sender, EventArgs e)
+        {
+
+            Catalog catalog = new Catalog();
+            //catalog.AddCategory_All();
+            catalog.Show();
+            this.Hide();
+        }
+
+        public bool AvailabilityEmailInDb(string email)
+        {
+            List<string> customer = new List<string>();
+
+            foreach (IDataConnection db in GlobalConfig.Connections)
             {
-                MessageBox.Show("Авторизация успешна");
+                customer = db.GetCustomersEmail_All();
             }
-            else
+            return customer.Contains(email);
+        }
+
+        public bool PasswordVerification(string email, string password)
+        {
+            bool output = false;
+            List<CustomerModel> customers = new List<CustomerModel>();
+
+            foreach (IDataConnection db in GlobalConfig.Connections)
             {
-                MessageBox.Show("Аккаунт не найден!");
+                customers = db.GetCustomers_All();
             }
+
+            foreach (CustomerModel customer in customers)
+            {
+                if (customer.Email == email && customer.HashPassword == HashingUntil.HashingPassword(password))
+                    output = true;
+            }
+            return output;
         }
     }
 }

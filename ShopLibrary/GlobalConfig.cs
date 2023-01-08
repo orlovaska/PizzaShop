@@ -1,8 +1,11 @@
 ﻿using System;
+using ShopLibrary;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using PizzaShop.DataAccess;
 
 namespace ShopLibrary
 {
@@ -14,8 +17,13 @@ namespace ShopLibrary
             if (databaseSQL == true)
             {
                 SqlConnector sql = new SqlConnector();
-                Connections.Add(sql);
+                Connections.Add((IDataConnection)sql);
             }
+        }
+
+        public static string ConectionString(string name)
+        {
+            return ConfigurationManager.ConnectionStrings[name].ConnectionString;
         }
     }
 }

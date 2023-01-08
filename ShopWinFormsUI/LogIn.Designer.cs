@@ -34,10 +34,10 @@ namespace ShopWinFormsUI
             this.label1 = new System.Windows.Forms.Label();
             this.textBoxLogin = new System.Windows.Forms.TextBox();
             this.textBoxPassword = new System.Windows.Forms.TextBox();
-            this.LabelEnter = new System.Windows.Forms.Label();
             this.linkLabel1 = new System.Windows.Forms.LinkLabel();
             this.pictureBoxOpenEye = new System.Windows.Forms.PictureBox();
             this.pictureBoxCloseEye = new System.Windows.Forms.PictureBox();
+            this.buttonEnter = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxOpenEye)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxCloseEye)).BeginInit();
             this.SuspendLayout();
@@ -48,9 +48,9 @@ namespace ShopWinFormsUI
             this.loginText.Font = new System.Drawing.Font("Segoe UI", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.loginText.Location = new System.Drawing.Point(53, 100);
             this.loginText.Name = "loginText";
-            this.loginText.Size = new System.Drawing.Size(101, 38);
+            this.loginText.Size = new System.Drawing.Size(89, 38);
             this.loginText.TabIndex = 0;
-            this.loginText.Text = "Логин:";
+            this.loginText.Text = "Email:";
             // 
             // label1
             // 
@@ -65,7 +65,7 @@ namespace ShopWinFormsUI
             // textBoxLogin
             // 
             this.textBoxLogin.Font = new System.Drawing.Font("Segoe UI", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.textBoxLogin.Location = new System.Drawing.Point(191, 111);
+            this.textBoxLogin.Location = new System.Drawing.Point(191, 100);
             this.textBoxLogin.Name = "textBoxLogin";
             this.textBoxLogin.Size = new System.Drawing.Size(179, 38);
             this.textBoxLogin.TabIndex = 2;
@@ -73,22 +73,10 @@ namespace ShopWinFormsUI
             // textBoxPassword
             // 
             this.textBoxPassword.Font = new System.Drawing.Font("Segoe UI", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.textBoxPassword.Location = new System.Drawing.Point(191, 182);
+            this.textBoxPassword.Location = new System.Drawing.Point(191, 180);
             this.textBoxPassword.Name = "textBoxPassword";
             this.textBoxPassword.Size = new System.Drawing.Size(179, 38);
             this.textBoxPassword.TabIndex = 3;
-            // 
-            // LabelEnter
-            // 
-            this.LabelEnter.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.LabelEnter.Font = new System.Drawing.Font("Segoe UI Semibold", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.LabelEnter.Location = new System.Drawing.Point(208, 236);
-            this.LabelEnter.Name = "LabelEnter";
-            this.LabelEnter.Size = new System.Drawing.Size(146, 62);
-            this.LabelEnter.TabIndex = 4;
-            this.LabelEnter.Text = "Войти";
-            this.LabelEnter.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.LabelEnter.Click += new System.EventHandler(this.EnterLabel_Click);
             // 
             // linkLabel1
             // 
@@ -99,6 +87,7 @@ namespace ShopWinFormsUI
             this.linkLabel1.TabIndex = 5;
             this.linkLabel1.TabStop = true;
             this.linkLabel1.Text = "Ещё нет аккаута?";
+            this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
             // 
             // pictureBoxOpenEye
             // 
@@ -110,6 +99,7 @@ namespace ShopWinFormsUI
             this.pictureBoxOpenEye.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBoxOpenEye.TabIndex = 6;
             this.pictureBoxOpenEye.TabStop = false;
+            this.pictureBoxOpenEye.Click += new System.EventHandler(this.pictureBoxOpenEye_Click);
             // 
             // pictureBoxCloseEye
             // 
@@ -120,21 +110,34 @@ namespace ShopWinFormsUI
             this.pictureBoxCloseEye.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBoxCloseEye.TabIndex = 7;
             this.pictureBoxCloseEye.TabStop = false;
+            this.pictureBoxCloseEye.Click += new System.EventHandler(this.pictureBoxCloseEye_Click);
+            // 
+            // buttonEnter
+            // 
+            this.buttonEnter.Font = new System.Drawing.Font("Segoe UI Semibold", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.buttonEnter.Location = new System.Drawing.Point(207, 237);
+            this.buttonEnter.Name = "buttonEnter";
+            this.buttonEnter.Size = new System.Drawing.Size(146, 62);
+            this.buttonEnter.TabIndex = 8;
+            this.buttonEnter.Text = "Войти";
+            this.buttonEnter.UseVisualStyleBackColor = true;
+            this.buttonEnter.Click += new System.EventHandler(this.buttonEnter_Click);
             // 
             // LogIn
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(523, 374);
-            this.Controls.Add(this.pictureBoxCloseEye);
+            this.ClientSize = new System.Drawing.Size(552, 423);
+            this.Controls.Add(this.buttonEnter);
             this.Controls.Add(this.pictureBoxOpenEye);
             this.Controls.Add(this.linkLabel1);
-            this.Controls.Add(this.LabelEnter);
             this.Controls.Add(this.textBoxPassword);
             this.Controls.Add(this.textBoxLogin);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.loginText);
+            this.Controls.Add(this.pictureBoxCloseEye);
             this.Name = "LogIn";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Авторизация";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxOpenEye)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxCloseEye)).EndInit();
@@ -149,10 +152,10 @@ namespace ShopWinFormsUI
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox textBoxLogin;
         private System.Windows.Forms.TextBox textBoxPassword;
-        private System.Windows.Forms.Label LabelEnter;
         private System.Windows.Forms.LinkLabel linkLabel1;
         private System.Windows.Forms.PictureBox pictureBoxOpenEye;
         private System.Windows.Forms.PictureBox pictureBoxCloseEye;
+        private System.Windows.Forms.Button buttonEnter;
     }
 }
 

@@ -4,11 +4,11 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using PizzaShop.Data;
+using PizzaShop.DataAccess;
 
 namespace PizzaShop.Migrations
 {
-    [DbContext(typeof(PizzaShopContext))]
+    [DbContext(typeof(SqlConnector))]
     partial class PizzaShopContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)
@@ -19,15 +19,12 @@ namespace PizzaShop.Migrations
                 .HasAnnotation("ProductVersion", "5.0.17")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("PizzaShop.Models.Customer", b =>
+            modelBuilder.Entity("PizzaShop.Models.CustomerModel", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Address")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Email")
                         .HasColumnType("nvarchar(max)");
@@ -35,7 +32,10 @@ namespace PizzaShop.Migrations
                     b.Property<string>("FirstName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Lastname")
+                    b.Property<string>("HashPassword")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LastName")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Phone")
@@ -46,30 +46,7 @@ namespace PizzaShop.Migrations
                     b.ToTable("Customers");
                 });
 
-            modelBuilder.Entity("PizzaShop.Models.Order", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("CustomerId")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("OrderFulfilled")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime>("OrderPlaced")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CustomerId");
-
-                    b.ToTable("Orders");
-                });
-
-            modelBuilder.Entity("PizzaShop.Models.OrderDetail", b =>
+            modelBuilder.Entity("PizzaShop.Models.OrderDetailModel", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -94,12 +71,41 @@ namespace PizzaShop.Migrations
                     b.ToTable("OrderDetails");
                 });
 
-            modelBuilder.Entity("PizzaShop.Models.Product", b =>
+            modelBuilder.Entity("PizzaShop.Models.OrderModel", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("CustomerId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("OrderFulfilled")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("OrderPlaced")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CustomerId");
+
+                    b.ToTable("Orders");
+                });
+
+            modelBuilder.Entity("PizzaShop.Models.ProductModel", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("CategoryId")
+                        .HasColumnType("int");
+
+                    b.Property<byte[]>("Image")
+                        .HasColumnType("image");
 
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
@@ -109,29 +115,38 @@ namespace PizzaShop.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("CategoryId");
+
                     b.ToTable("Products");
                 });
 
-            modelBuilder.Entity("PizzaShop.Models.Order", b =>
+            modelBuilder.Entity("ShopLibrary.Models.CategoryModel", b =>
                 {
-                    b.HasOne("PizzaShop.Models.Customer", "Customer")
-                        .WithMany("Orders")
-                        .HasForeignKey("CustomerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Navigation("Customer");
+                    b.Property<byte[]>("Image")
+                        .HasColumnType("image");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("CategoryModel");
                 });
 
-            modelBuilder.Entity("PizzaShop.Models.OrderDetail", b =>
+            modelBuilder.Entity("PizzaShop.Models.OrderDetailModel", b =>
                 {
-                    b.HasOne("PizzaShop.Models.Order", "Order")
+                    b.HasOne("PizzaShop.Models.OrderModel", "Order")
                         .WithMany("OrderDetails")
                         .HasForeignKey("OrderId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("PizzaShop.Models.Product", "Product")
+                    b.HasOne("PizzaShop.Models.ProductModel", "Product")
                         .WithMany()
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -142,14 +157,41 @@ namespace PizzaShop.Migrations
                     b.Navigation("Product");
                 });
 
-            modelBuilder.Entity("PizzaShop.Models.Customer", b =>
+            modelBuilder.Entity("PizzaShop.Models.OrderModel", b =>
+                {
+                    b.HasOne("PizzaShop.Models.CustomerModel", "Customer")
+                        .WithMany("Orders")
+                        .HasForeignKey("CustomerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Customer");
+                });
+
+            modelBuilder.Entity("PizzaShop.Models.ProductModel", b =>
+                {
+                    b.HasOne("ShopLibrary.Models.CategoryModel", "Category")
+                        .WithMany("Products")
+                        .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Category");
+                });
+
+            modelBuilder.Entity("PizzaShop.Models.CustomerModel", b =>
                 {
                     b.Navigation("Orders");
                 });
 
-            modelBuilder.Entity("PizzaShop.Models.Order", b =>
+            modelBuilder.Entity("PizzaShop.Models.OrderModel", b =>
                 {
                     b.Navigation("OrderDetails");
+                });
+
+            modelBuilder.Entity("ShopLibrary.Models.CategoryModel", b =>
+                {
+                    b.Navigation("Products");
                 });
 #pragma warning restore 612, 618
         }

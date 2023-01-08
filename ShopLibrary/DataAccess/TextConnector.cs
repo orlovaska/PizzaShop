@@ -1,15 +1,16 @@
-﻿using PizzaShop.Models;
+﻿using PizzaShop.DataAccess;
+using PizzaShop.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ShopLibrary
+namespace PizzaShop.DataAccess
 {
-    class SqlConnector : IDataConnection
+    class TextConnector /*: IDataConnection*/
     {
-        public CustomerModel CreateCustomer(CustomerModel model)
+        public CustomerModel CreateCustomer(CustomerModel customer)
         {
             throw new NotImplementedException();
         }

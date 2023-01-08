@@ -5,11 +5,11 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using PizzaShop.Data;
+using PizzaShop.DataAccess;
 
 namespace PizzaShop.Migrations
 {
-    [DbContext(typeof(PizzaShopContext))]
+    [DbContext(typeof(SqlConnector))]
     [Migration("20220905193048_AddEmail")]
     partial class AddEmail
     {
@@ -28,7 +28,7 @@ namespace PizzaShop.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Address")
+                    b.Property<string>("Password")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Email")
@@ -37,7 +37,7 @@ namespace PizzaShop.Migrations
                     b.Property<string>("FirstName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Lastname")
+                    b.Property<string>("LastName")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Phone")
