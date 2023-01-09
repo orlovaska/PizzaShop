@@ -14,7 +14,9 @@ namespace PizzaShop.Models
         public string HashPassword { get; set; }
         public string Phone { get; set; }
         public string Email { get; set; }
+
         public ICollection<OrderModel> Orders { get; set; } = null!;
+        public ICollection<AddressModel> Addresses { get; set; } = null!;
 
         public CustomerModel(string firstName, string lastName, string hashPassword, string phone, string email)
         {

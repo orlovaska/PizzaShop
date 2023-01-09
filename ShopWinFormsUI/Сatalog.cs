@@ -47,7 +47,7 @@ namespace ShopWinFormsUI
 
             foreach (var category in categories)
             {
-                AddCategory(category.Name, ImageFromByteArr(category.Image));
+                AddCategory(category);
             }
         }
         public void AddProducts_All()
@@ -63,7 +63,7 @@ namespace ShopWinFormsUI
                 AddProduct(product.Name, ImageFromByteArr(product.Image));
             }
         }
-        public void AddProducts_FromCategory(string category)
+        public void AddProducts_FromCategory(CategoryModel category)
         {
             List<ProductModel> products = new List<ProductModel>();
             foreach (IDataConnection db in GlobalConfig.Connections)
@@ -86,19 +86,17 @@ namespace ShopWinFormsUI
             userControlProduct.NameProduct = nameProduct;
             flowLayoutPanel2.Controls.Add(userControlProduct);
         }
-        public void AddCategory(string nameCategory, Image imageCategory)
+
+        public void AddCategory(CategoryModel category)
         {
-            CategoryUC userControlProduct = new CategoryUC();
-            userControlProduct.Image.BackgroundImageLayout = ImageLayout.Stretch;
-            userControlProduct.Image.BackgroundImage = imageCategory;
-            userControlProduct.Name = nameCategory;
+            CategoryUC userControlProduct = new CategoryUC(category);
 
             userControlProduct.ChoosingСategoryEvent += UserControlProduct_ChoosingСategoryEvent;
 
             flowLayoutPanel2.Controls.Add(userControlProduct);
         }
 
-        private void UserControlProduct_ChoosingСategoryEvent(object sender, string e)
+        private void UserControlProduct_ChoosingСategoryEvent(object sender, CategoryModel e)
         {
             flowLayoutPanel2.Controls.Clear();
             ButtonBackActive(true);

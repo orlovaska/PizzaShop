@@ -15,7 +15,7 @@ namespace PizzaShop.DataAccess
         List<CategoryModel> GetCategories_All();
         List<string> GetCustomersEmail_All();
         List<string> GetCategoryName();
-        List<ProductModel> GetProductsFromCategory(string category);
+        List<ProductModel> GetProductsFromCategory(CategoryModel category);
         //List<CategoryModel> GetCategory_All();
     }
 }

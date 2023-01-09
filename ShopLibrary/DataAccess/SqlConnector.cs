@@ -13,6 +13,9 @@ namespace PizzaShop.DataAccess
         public DbSet<OrderModel> Orders { get; set; } = null!;
         public DbSet<ProductModel> Products { get; set; } = null!;
         public DbSet<OrderDetailModel> OrderDetails { get; set; } = null!;
+        public DbSet<CartsModel> Carts { get; set; } = null!;
+        public DbSet<AddressModel> Addresses { get; set; } = null!;
+        public DbSet<StatusModel> Statuses { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -81,11 +84,11 @@ namespace PizzaShop.DataAccess
             }
         }
 
-        public List<ProductModel> GetProductsFromCategory(string category)
+        public List<ProductModel> GetProductsFromCategory(CategoryModel category)
         {
             using (SqlConnector context = new SqlConnector())
             {
-                return context.Products.Where(p => p.Category.Name == category).ToList();
+                return context.Products.Where(p => p.Category.Id == category.Id).ToList();
             }
         }
     }

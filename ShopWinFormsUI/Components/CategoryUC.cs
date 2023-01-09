@@ -12,26 +12,24 @@ using PizzaShop.Models;
 using PizzaShop.DataAccess;
 using System.IO;
 using ShopLibrary;
+using Newtonsoft.Json.Linq;
 
 namespace ShopWinFormsUI
 {
     public partial class CategoryUC : UserControl
     {
-        public event EventHandler<string> ChoosingСategoryEvent;
+        public event EventHandler<CategoryModel> ChoosingСategoryEvent;
+        public CategoryModel Category { get; set; }
 
-        public CategoryUC()
+        public CategoryUC(CategoryModel category)
         {
+            Category = category;
             InitializeComponent();
+            labelName.Text = category.Name;
+            pictureBoxImage.BackgroundImageLayout = ImageLayout.Stretch;
+            pictureBoxImage.BackgroundImage = ImageFromByteArr(category.Image);
         }
-        private string name;
-        private PictureBox image;
 
-        [Category("Custom Props")]
-        public string Name
-        {
-            get { return name; }
-            set { labelName.Text = value; }
-        }
         [Category("Custom Props")]
         public PictureBox Image 
         {
@@ -39,14 +37,17 @@ namespace ShopWinFormsUI
             set { pictureBoxImage = value; }
         }
 
-        private void label2_Click(object sender, EventArgs e)
-        {
-
-        }
 
         private void pictureBox1_Click(object sender, EventArgs e)
         {
-            ChoosingСategoryEvent?.Invoke(this, labelName.Text);         
+            ChoosingСategoryEvent?.Invoke(this, Category);         
+        }
+
+        public Image ImageFromByteArr(byte[] byteArray)
+        {
+            MemoryStream memoryStream = new MemoryStream(byteArray);
+            Bitmap bitmap = new Bitmap(memoryStream);
+            return bitmap;
         }
 
     }
