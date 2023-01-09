@@ -38,7 +38,6 @@ namespace ShopWinFormsUI
             this.button2 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.button6 = new System.Windows.Forms.Button();
-            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.flowLayoutPanel2.SuspendLayout();
             this.panel2.SuspendLayout();
             this.SuspendLayout();
@@ -49,10 +48,9 @@ namespace ShopWinFormsUI
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.flowLayoutPanel2.AutoScroll = true;
-            this.flowLayoutPanel2.Controls.Add(this.flowLayoutPanel1);
-            this.flowLayoutPanel2.Location = new System.Drawing.Point(218, 40);
+            this.flowLayoutPanel2.Location = new System.Drawing.Point(200, 200);
             this.flowLayoutPanel2.Name = "flowLayoutPanel2";
-            this.flowLayoutPanel2.Size = new System.Drawing.Size(658, 401);
+            this.flowLayoutPanel2.Size = new System.Drawing.Size(20, 20);
             this.flowLayoutPanel2.TabIndex = 1;
             // 
             // panel1
@@ -147,13 +145,6 @@ namespace ShopWinFormsUI
             this.button6.UseVisualStyleBackColor = true;
             this.button6.Click += new System.EventHandler(this.button2_Click);
             // 
-            // flowLayoutPanel1
-            // 
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(3, 3);
-            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(8, 8);
-            this.flowLayoutPanel1.TabIndex = 0;
-            // 
             // Catalog
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 28F);
@@ -185,6 +176,5 @@ namespace ShopWinFormsUI
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button6;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
     }
 }
