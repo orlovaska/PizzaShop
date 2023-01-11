@@ -38,7 +38,7 @@ namespace ShopWinFormsUI
             this.button2 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.button6 = new System.Windows.Forms.Button();
-            this.flowLayoutPanel2.SuspendLayout();
+            this.panel3 = new System.Windows.Forms.Panel();
             this.panel2.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -50,7 +50,7 @@ namespace ShopWinFormsUI
             this.flowLayoutPanel2.AutoScroll = true;
             this.flowLayoutPanel2.Location = new System.Drawing.Point(200, 200);
             this.flowLayoutPanel2.Name = "flowLayoutPanel2";
-            this.flowLayoutPanel2.Size = new System.Drawing.Size(20, 20);
+            this.flowLayoutPanel2.Size = new System.Drawing.Size(35, 32);
             this.flowLayoutPanel2.TabIndex = 1;
             // 
             // panel1
@@ -145,11 +145,19 @@ namespace ShopWinFormsUI
             this.button6.UseVisualStyleBackColor = true;
             this.button6.Click += new System.EventHandler(this.button2_Click);
             // 
+            // panel3
+            // 
+            this.panel3.Location = new System.Drawing.Point(241, 58);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(635, 396);
+            this.panel3.TabIndex = 5;
+            // 
             // Catalog
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 28F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(879, 453);
+            this.Controls.Add(this.panel3);
             this.Controls.Add(this.button6);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.flowLayoutPanel2);
@@ -160,7 +168,6 @@ namespace ShopWinFormsUI
             this.Name = "Catalog";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Сatalog";
-            this.flowLayoutPanel2.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
             this.ResumeLayout(false);
 
@@ -176,5 +183,6 @@ namespace ShopWinFormsUI
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button6;
+        private System.Windows.Forms.Panel panel3;
     }
 }
