@@ -3,11 +3,22 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:vm="clr-namespace:ShopWPFUI.ViewModels"
+        xmlns:view="clr-namespace:ShopWPFUI.View"
         xmlns:local="clr-namespace:ShopWPFUI"
         mc:Ignorable="d"
         Title="MainWindow" Height="600" Width="850">
-    <Grid>
+    
+    <Window.DataContext>
+        <vm:NavigationViewModel/>
+    </Window.DataContext>
 
+    <Grid>
+        
+        <!--<Menu>
+            <MenuItem Command="{Binding CurrentView}" />
+        </Menu>-->
+        
         <!--// Window Border //-->
 
         <Border Background="#212529"
@@ -25,7 +36,7 @@
             <!--// Navigation Panel //-->
 
             <Grid HorizontalAlignment="Left"
-                  Width="228">
+                  Width="225">
 
                 <Border Background="#272B2F"
                         CornerRadius="20,0,0,20" />
@@ -33,7 +44,9 @@
                 <StackPanel Height="400"
                             Width="225">
 
-                    <!--// Профиль //-->
+                    
+                    
+                    
 
                     <RadioButton Style="{StaticResource BtnStyle}"
                               Command="{Binding ProfilCommand}"
@@ -107,8 +120,10 @@
             </Grid>
 
             <Grid Grid.Column="1">
+                <!--<view:ProfileView />-->
 
-                <ContentControl x:Name="Pages"
+                <ContentControl x:Name="Page"
+                                
                                 Content="{Binding CurrentView}" />
 
             </Grid>

@@ -23,7 +23,7 @@ namespace ShopWPFUI.ViewModels
         public ICommand NovigationCommand { get; set; }
 
 
-        private void Autoruzation(object obj) => CurrentView = new AuthorizationViewModel();
+        private void Autorization(object obj) => CurrentView = new AuthorizationViewModel();
         private void Registration(object obj) => CurrentView = new RegistrationViewModel();
         private void Navigation(object obj) => CurrentView = new NavigationViewModel();
 
@@ -32,8 +32,10 @@ namespace ShopWPFUI.ViewModels
             RegistrationCommand = new RelayCommand(Registration);
             NovigationCommand = new RelayCommand(Navigation);
 
+            CurrentView = new RelayCommand(Navigation);
+
             // Startup Page
-            CurrentView = new RelayCommand(Autoruzation);
+            CurrentView = new RelayCommand(Autorization);
         }
     }
 }

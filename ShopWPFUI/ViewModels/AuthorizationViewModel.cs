@@ -8,5 +8,9 @@ namespace ShopWPFUI.ViewModels
 {
     internal class AuthorizationViewModel : BaseViewModel
     {
+        public AuthorizationViewModel()
+        {
+
+        }
     }
 }

@@ -6,7 +6,13 @@ using System.Threading.Tasks;
 
 namespace ShopWPFUI.ViewModels
 {
-    internal class ProfileViewModel : BaseViewModel
+    public class ProfileViewModel : BaseViewModel
     {
+        public int CustomerID { get; set; }
+
+        public ProfileViewModel()
+        {
+            CustomerID = 100528;
+        }
     }
 }

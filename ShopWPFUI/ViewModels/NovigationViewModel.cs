@@ -37,6 +37,7 @@ namespace ShopWPFUI.ViewModels
 
             // Startup Page
             CurrentView = new RelayCommand(Profil);
+
         }
     }
 }
