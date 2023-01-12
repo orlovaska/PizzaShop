@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ShopWPFUI.ViewModel
+namespace ShopWPFUI.ViewModels
 {
-    internal class СatalogViewModel
+    internal class OrdersViewModel : BaseViewModel
     {
     }
 }
