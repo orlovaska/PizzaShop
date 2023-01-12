@@ -18,8 +18,8 @@
             <!--// Base Grid //-->
 
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="228" />
-                <ColumnDefinition Width="622" />
+                <ColumnDefinition Width="225" />
+                <ColumnDefinition Width="625" />
             </Grid.ColumnDefinitions>
 
             <!--// Navigation Panel //-->
@@ -31,7 +31,7 @@
                         CornerRadius="20,0,0,20" />
 
                 <StackPanel Height="400"
-                            Width="228">
+                            Width="225">
 
                     <!--// Профиль //-->
 
