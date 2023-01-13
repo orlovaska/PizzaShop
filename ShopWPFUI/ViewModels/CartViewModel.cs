@@ -8,5 +8,10 @@ namespace ShopWPFUI.ViewModels
 {
     internal class CartViewModel : BaseViewModel
     {
+        public int CustomerID { get; set; }
+        public CartViewModel()
+        {
+            CustomerID = 1;
+        }
     }
 }

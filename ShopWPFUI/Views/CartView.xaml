@@ -4,9 +4,38 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:ShopWPFUI.View"
+             xmlns:vm="clr-namespace:ShopWPFUI.ViewModels"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
+
+    <UserControl.DataContext>
+        <vm:CartViewModel />
+    </UserControl.DataContext>
+
     <Grid>
-            
+        <Border Background="green"
+                CornerRadius="20" />
+
+        <Grid>
+
+            <!--// Base Grid //-->
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="225" />
+                <ColumnDefinition Width="625" />
+            </Grid.ColumnDefinitions>
+
+            <!--// Navigation Panel //-->
+
+            <Grid HorizontalAlignment="Left"
+                  Width="225">
+
+                <Border Background="green"
+                        CornerRadius="20,0,0,20" />
+
+
+            </Grid>
+
+        </Grid>
     </Grid>
 </UserControl>

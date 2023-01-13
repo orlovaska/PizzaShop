@@ -120,11 +120,9 @@
             </Grid>
 
             <Grid Grid.Column="1">
-                <!--<view:ProfileView />-->
 
-                <ContentControl x:Name="Page"
-                                
-                                Content="{Binding CurrentView}" />
+                <ContentControl                            
+                               Content="{Binding CurrentView}" />
 
             </Grid>
 

@@ -14,5 +14,9 @@ namespace ShopWPFUI.ViewModels
         {
             CustomerID = 100528;
         }
+        public override string ToString()
+        {
+            return "Как это сделать";
+        }
     }
 }

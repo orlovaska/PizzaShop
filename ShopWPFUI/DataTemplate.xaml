@@ -1,0 +1,14 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:vm="clr-namespace:ShopWPFUI.ViewModels"
+                    xmlns:view="clr-namespace:ShopWPFUI.View">
+
+    <DataTemplate DataType="{x:Type vm:ProfileViewModel}">
+        <view:ProfileView />
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type vm:CartViewModel}">
+        <view:CartView />
+    </DataTemplate>
+
+</ResourceDictionary>

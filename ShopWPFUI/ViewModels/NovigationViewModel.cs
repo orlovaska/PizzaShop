@@ -31,12 +31,13 @@ namespace ShopWPFUI.ViewModels
 
         public NavigationViewModel()
         {
+            ProfilCommand = new RelayCommand(Profil);
             OrdersCommand = new RelayCommand(Orders);
             CatalogCommand = new RelayCommand(Catalog);
             CartCommand = new RelayCommand(Cart);
 
             // Startup Page
-            CurrentView = new RelayCommand(Profil);
+            CurrentView = new ProfileViewModel();
 
         }
     }

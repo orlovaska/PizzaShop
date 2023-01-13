@@ -8,5 +8,9 @@ namespace ShopWPFUI.ViewModels
 {
     internal class OrdersViewModel : BaseViewModel
     {
+        public OrdersViewModel()
+        {
+
+        }
     }
 }
