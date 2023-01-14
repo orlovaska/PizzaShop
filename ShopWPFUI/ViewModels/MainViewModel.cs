@@ -18,21 +18,20 @@ namespace ShopWPFUI.ViewModels
             set { _currentView = value; OnPropertyChanged(); }
         }
 
-        public ICommand AutorizationCommand { get; }
-        public ICommand RegistrationCommand { get;}
-        public ICommand NovigationCommand { get;}
+        //public ICommand AutorizationCommand { get; }
+        //public ICommand RegistrationCommand { get; }
+        //public ICommand NovigationCommand { get;  }
 
 
-        private void Autorization(object obj) => CurrentView = new AuthorizationViewModel();
-        private void Registration(object obj) => CurrentView = new RegistrationViewModel();
-        private void Navigation(object obj) => CurrentView = new NavigationViewModel();
+        //private void Autorization(object obj) => CurrentView = new AuthorizationViewModel();
+        //private void Registration(object obj) => CurrentView = new RegistrationViewModel();
+        //private void Navigation(object obj) => CurrentView = new NavigationViewModel();
 
         public MainViewModel()
         {
-            RegistrationCommand = new RelayCommand(Registration);
-            NovigationCommand = new RelayCommand(Navigation);
-
-            CurrentView = new RelayCommand(Navigation);
+            //RegistrationCommand = new RelayCommand(Registration);
+            //NovigationCommand = new RelayCommand(Navigation);
+            //AutorizationCommand = new RelayCommand(Autorization);
 
             // Startup Page
             CurrentView = new AuthorizationViewModel();

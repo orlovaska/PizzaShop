@@ -8,28 +8,14 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     
-    <!--<UserControl.DataContext>
-        <vm:RegistrationViewModel />
-    </UserControl.DataContext>-->
-
     <UserControl.DataContext>
-        <vm:AuthorizationViewModel />
+        <vm:RegistrationViewModel />
     </UserControl.DataContext>
-
-    <UserControl.Resources>
-        <BooleanToVisibilityConverter x:Key="BooleanToVisibility"/>
-    </UserControl.Resources>
-
-    <UserControl.Visibility>
-        <Binding Path="IsViewVisible" Mode=" TwoWay"
-                 Converter="{StaticResource BooleanToVisibility}"/>
-    </UserControl.Visibility>
-
 
     <Grid>
    
 
-        <Border Background="#212529"
+        <Border Background="red"
                 CornerRadius="20" />
 
         <Grid>

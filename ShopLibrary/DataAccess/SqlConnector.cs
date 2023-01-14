@@ -91,5 +91,51 @@ namespace PizzaShop.DataAccess
                 return context.Products.Where(p => p.Category.Id == category.Id).ToList();
             }
         }
+
+        public bool PasswordVerification(string email, string password)
+        {
+            bool verificationIsSuccess = false;
+            using (SqlConnector context = new SqlConnector())
+            {
+                foreach (CustomerModel customer in context.Customers.ToList())
+                {
+                    if (customer.Email == email && customer.HashPassword == HashingUntil.HashingPassword(password))
+                        verificationIsSuccess = true;
+                }
+            }        //TODO - Исправить вывод - сейчас для тестов 
+            return true;
+        }
+
+        public void AddCustomer(CustomerModel customer)
+        {
+            using (SqlConnector context = new SqlConnector())
+            {
+                context.Customers.Add(customer);
+            }
+        }
+
+        public void EditCustomer(CustomerModel customer)
+        {
+            using (SqlConnector context = new SqlConnector())
+            {
+                //TORO
+            }
+        }
+
+        public void DeleteCustomer(CustomerModel customer)
+        {
+            using (SqlConnector context = new SqlConnector())
+            {
+                context.Customers.Remove(customer);
+            }
+        }
+
+        public void AddOrder(OrderModel order)
+        {
+            using (SqlConnector context = new SqlConnector())
+            {
+                context.Orders.Add(order);
+            }
+        }
     }
 }

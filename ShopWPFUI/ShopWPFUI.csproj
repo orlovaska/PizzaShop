@@ -16,6 +16,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\ShopLibrary\ShopLibrary.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Resource Include="Images\img_customer.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>

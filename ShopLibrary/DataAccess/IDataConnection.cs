@@ -9,13 +9,19 @@ namespace PizzaShop.DataAccess
 {
     public interface IDataConnection
     {
-        CustomerModel CreateCustomer(CustomerModel customer);
+        bool PasswordVerification(string email, string password);
+        void AddCustomer(CustomerModel customer);
+        void EditCustomer(CustomerModel customer);
+        void DeleteCustomer(CustomerModel customer);
+
+        void AddOrder(OrderModel order);
+
+
         List<ProductModel> GetProducts_All();
         List<CustomerModel> GetCustomers_All();
         List<CategoryModel> GetCategories_All();
         List<string> GetCustomersEmail_All();
         List<string> GetCategoryName();
         List<ProductModel> GetProductsFromCategory(CategoryModel category);
-        //List<CategoryModel> GetCategory_All();
     }
 }

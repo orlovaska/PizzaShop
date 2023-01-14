@@ -1,7 +1,13 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using PizzaShop.DataAccess;
+using ShopLibrary;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
+using System.Security.Principal;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
@@ -9,11 +15,17 @@ namespace ShopWPFUI.ViewModels
 {
     public class AuthorizationViewModel : BaseViewModel
     {
+        private object _currentView;
         private string _email;
         private string _password;
         private string _errorMessage;
-        private bool _isViewVisible;
+        private bool _isViewVisible = true;
 
+        public object CurrentView
+        {
+            get { return _currentView; }
+            set { _currentView = value; OnPropertyChanged(); }
+        }
         public string Email
         {
             get { return _email; }
@@ -41,10 +53,12 @@ namespace ShopWPFUI.ViewModels
         public ICommand RememberPasswordCommand { get; }
 
 
+
         public AuthorizationViewModel()
         {
             LoginCommand = new RelayCommand(ExecuteLoginCommand, CanExecuteCommand);
             RecoverPasswordCommand = new RelayCommand(ExecuterecoverPassCommand);
+
         }
 
         
@@ -52,7 +66,7 @@ namespace ShopWPFUI.ViewModels
         private bool CanExecuteCommand(object arg)
         {
             bool validData;
-            if (string.IsNullOrWhiteSpace(Email) || Email.Length < 3 || Password.Length < 3 || string.IsNullOrWhiteSpace(Password))
+            if (string.IsNullOrWhiteSpace(Email) || Email.Length < 3 || string.IsNullOrWhiteSpace(Password) || Password.Length < 3)
             {
                 validData = false;
             }
@@ -66,7 +80,24 @@ namespace ShopWPFUI.ViewModels
 
         private void ExecuteLoginCommand(object obj)
         {
-            throw new NotImplementedException();
+            var isValidUser = false;
+            foreach (IDataConnection db in GlobalConfig.Connections)
+            {
+                isValidUser = db.PasswordVerification(Email, Password);
+            }
+            isValidUser = true; //TODO строка для тестов. удалить
+            if (isValidUser)
+            {
+                Thread.CurrentPrincipal = new GenericPrincipal(
+                    new GenericIdentity(Email), null);
+                IsViewVisible = false;
+                
+
+            }
+            else
+            {
+                ErrorMessage = "* Неверный пароль или почта";
+            }
         }
         private void ExecuterecoverPassCommand(object obj)
         {
