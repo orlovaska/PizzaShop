@@ -11,6 +11,15 @@
     <UserControl.DataContext>
         <vm:AuthorizationViewModel />
     </UserControl.DataContext>
+    <UserControl.Resources>
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibility"/>
+    </UserControl.Resources>
+
+    <!--<UserControl.Visibility>
+        <Binding Path="IsViewVisible" Mode=" TwoWay"
+                 Converter="{StaticResource BooleanToVisibility}"/>
+    </UserControl.Visibility>-->
+
     
     <Grid>
 
@@ -35,14 +44,29 @@
 
                 <Border Background="#272B2F"
                         CornerRadius="20,0,0,20" />
+                
+                
 
 
             </Grid>
 
             <Grid Grid.Column="1">
 
-                <ContentControl x:Name="Pages"
-                                Content="{Binding CurrentView}" />
+                <TextBlock Text="Username"
+                           Style="{StaticResource Text_Style}" Margin="65,277,0,0" VerticalAlignment="Top"/>
+                <TextBox x:Name="txtUser"
+                         Text="{Binding Username, UpdateSourceTrigger=PropertyChanged}"
+                         FontSize="13"
+                         FontWeight="Medium"
+                         FontFamily="Montserrat"                            
+                         Foreground="White"
+                         CaretBrush="LightGray"
+                         BorderBrush="DarkGray"
+                         BorderThickness="0,0,0,2"
+                         Height="28"
+                         VerticalContentAlignment="Center"
+                         Margin="-10,304,10,118"
+                         Padding="20,0,0,0"/>
 
             </Grid>
 

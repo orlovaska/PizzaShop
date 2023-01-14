@@ -18,10 +18,10 @@ namespace ShopWPFUI.ViewModels
             set { _currentView = value; OnPropertyChanged(); }
         }
 
-        public ICommand ProfilCommand { get; set; }
-        public ICommand OrdersCommand { get; set; }
-        public ICommand CatalogCommand { get; set; }
-        public ICommand CartCommand { get; set; }
+        public ICommand ProfilCommand { get;  }
+        public ICommand OrdersCommand { get;  }
+        public ICommand CatalogCommand { get; }
+        public ICommand CartCommand { get; }
 
 
         private void Profil(object obj) => CurrentView = new ProfileViewModel();

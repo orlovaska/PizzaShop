@@ -18,9 +18,9 @@ namespace ShopWPFUI.ViewModels
             set { _currentView = value; OnPropertyChanged(); }
         }
 
-        public ICommand AutorizationCommand { get; set; }
-        public ICommand RegistrationCommand { get; set; }
-        public ICommand NovigationCommand { get; set; }
+        public ICommand AutorizationCommand { get; }
+        public ICommand RegistrationCommand { get;}
+        public ICommand NovigationCommand { get;}
 
 
         private void Autorization(object obj) => CurrentView = new AuthorizationViewModel();
