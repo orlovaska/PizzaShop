@@ -35,7 +35,7 @@ namespace ShopWPFUI.ViewModels
             CurrentView = new RelayCommand(Navigation);
 
             // Startup Page
-            CurrentView = new RelayCommand(Autorization);
+            CurrentView = new AuthorizationViewModel();
         }
     }
 }

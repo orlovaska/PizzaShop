@@ -10,7 +10,7 @@
         Title="MainWindow" Height="600" Width="850">
     
     <Window.DataContext>
-        <vm:NavigationViewModel/>
+        <vm:MainViewModel/>
     </Window.DataContext>
 
     <Grid>
@@ -24,108 +24,8 @@
         <Border Background="#212529"
                 CornerRadius="20" />
 
-        <Grid>
+        <ContentControl                            
+                            Content="{Binding CurrentView}" />
 
-            <!--// Base Grid //-->
-
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="225" />
-                <ColumnDefinition Width="625" />
-            </Grid.ColumnDefinitions>
-
-            <!--// Navigation Panel //-->
-
-            <Grid HorizontalAlignment="Left"
-                  Width="225">
-
-                <Border Background="#272B2F"
-                        CornerRadius="20,0,0,20" />
-
-                <StackPanel Height="400"
-                            Width="225">
-
-                    
-                    
-                    
-
-                    <RadioButton Style="{StaticResource BtnStyle}"
-                              Command="{Binding ProfilCommand}"
-                              IsChecked="True">
-
-                        <Grid>
-
-                            <Image Source="Images/img_customer.png"
-                                   Style="{StaticResource Image_Style}" />
-
-                            <TextBlock Text="Профиль"
-                                       Style="{StaticResource Text_Style}" />
-
-                        </Grid>
-
-                    </RadioButton>
-
-                    <!--// Мои заказы //-->
-
-                    <RadioButton Style="{StaticResource BtnStyle}"
-                              Command="{Binding OrdersCommand}">
-
-                        <Grid>
-
-                            <Image Source="Images/img_order.png"
-                                   Style="{StaticResource Image_Style}" />
-
-                            <TextBlock Text="Мои заказы"
-                                       Style="{StaticResource Text_Style}" />
-
-                        </Grid>
-
-                    </RadioButton>
-
-                    <!--// Каталог //-->
-
-                    <RadioButton Style="{StaticResource BtnStyle}"
-                              Command="{Binding CatalogCommand}">
-
-                        <Grid>
-
-                            <Image Source="Images/img_product.png"
-                                   Style="{StaticResource Image_Style}" />
-
-                            <TextBlock Text="Каталог"
-                                       Style="{StaticResource Text_Style}" />
-
-                        </Grid>
-
-                    </RadioButton>
-
-                    <!--// Корзина //-->
-
-                    <RadioButton Style="{StaticResource BtnStyle}"
-                              Command="{Binding CartCommand}">
-
-                        <Grid>
-
-                            <Image Source="Images/img_shipment.png"
-                                   Style="{StaticResource Image_Style}" />
-
-                            <TextBlock Text="Корзина"
-                                       Style="{StaticResource Text_Style}" />
-
-                        </Grid>
-
-                    </RadioButton>
-
-                </StackPanel>
-
-            </Grid>
-
-            <Grid Grid.Column="1">
-
-                <ContentControl                            
-                               Content="{Binding CurrentView}" />
-
-            </Grid>
-
-        </Grid>
     </Grid>
 </Window>

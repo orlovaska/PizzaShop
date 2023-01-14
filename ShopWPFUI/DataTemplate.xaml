@@ -11,4 +11,21 @@
         <view:CartView />
     </DataTemplate>
 
+    <DataTemplate DataType="{x:Type vm:AuthorizationViewModel}">
+        <view:AuthorizationView />
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type vm:RegistrationViewModel}">
+        <view:RegistrationView />
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type vm:CatalogViewModel}">
+        <view:СatalogView/>
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type vm:OrdersViewModel}">
+        <view:OrdersView/>
+    </DataTemplate>
+
+
 </ResourceDictionary>
