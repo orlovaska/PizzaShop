@@ -12,20 +12,104 @@
     <Window.DataContext>
         <vm:MainViewModel/>
     </Window.DataContext>
+    
 
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0">
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="47"/>
+                <ColumnDefinition Width="47"/>
+                <ColumnDefinition Width="47"/>
+                <!--<ColumnDefinition Width="5"/>-->
+            </Grid.ColumnDefinitions>
+
+            <Button x:Name="btnMinimize"                           
+                            BorderThickness="0"
+                            Content="–"
+                            Foreground="White"
+                            FontSize="20"
+                            FontFamily="Montserrat"
+                            Cursor="Hand"
+                            Grid.Column="1"
+                            Click="btnMinimize_Click">
+                
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Setter Property="Background" Value="#28AEED"/>
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="#278BEF"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+            </Button>
+
+            <Button x:Name="btnMaximize"                           
+                            BorderThickness="0"
+                            Content="☐"
+                            Foreground="White"
+                            FontSize="16"
+                            FontFamily="Montserrat"
+                            Cursor="Hand"
+                            Grid.Column="2"
+                            Click="btnMaximize_Click">
+
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Setter Property="Background" Value="#28AEED"/>
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="#278BEF"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+            </Button>
+
+
+
+            <Button x:Name="btnClose"                          
+                            BorderThickness="0"
+                            Content="✕"
+                            Foreground="White"
+                            FontSize="12"
+                            FontFamily="Montserrat"
+                            Cursor="Hand"
+                            Grid.Column="3"
+                            Click="btnClose_Click">
+
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Setter Property="Background" Value="#DA34AE"/>
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="#C62DAE"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+            </Button>
+        </Grid>
         <!--<Menu>
             <MenuItem Command="{Binding CurrentView}" />
         </Menu>-->
         
         <!--// Window Border //-->
 
-        <Border Background="#212529"
-                CornerRadius="20" />
+        <Grid Grid.Row="1" >
+            <ContentControl Content="{Binding CurrentView}" />
+        </Grid>
+        
 
-        <ContentControl                            
-                            Content="{Binding CurrentView}" />
+        <!--<ContentControl Content="{Binding CurrentView}" />-->
 
     </Grid>
 </Window>

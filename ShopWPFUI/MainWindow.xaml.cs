@@ -24,5 +24,21 @@ namespace ShopWPFUI
         {
             InitializeComponent();
         }
+
+        private void btnMinimize_Click(object sender, RoutedEventArgs e)
+        {
+            WindowState = WindowState.Minimized;
+        }
+        private void btnMaximize_Click(object sender, RoutedEventArgs e)
+        {
+            WindowState = WindowState.Maximized;
+        }
+        private void btnClose_Click(object sender, RoutedEventArgs e)
+        {
+            Application.Current.Shutdown();
+        }
+        
+        
+
     }
 }
