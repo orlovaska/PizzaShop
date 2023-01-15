@@ -13,12 +13,12 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace ShopWPFUI.View
+namespace ShopWPFUI.Views
 {
     /// <summary>
     /// Логика взаимодействия для CartView.xaml
     /// </summary>
-    public partial class CartView : UserControl
+    public partial class CartView :  UserControl
     {
         public CartView()
         {

@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:vm="clr-namespace:ShopWPFUI.ViewModels"
-        xmlns:view="clr-namespace:ShopWPFUI.View"
+        xmlns:view="clr-namespace:ShopWPFUI.Views"
         xmlns:local="clr-namespace:ShopWPFUI"    
         mc:Ignorable="d"
         Height="600" Width="850"
