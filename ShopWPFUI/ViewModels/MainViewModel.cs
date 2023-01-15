@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 using System.Transactions;
 using System.Windows.Input;
 
-
 namespace ShopWPFUI.ViewModels
 {
     internal class MainViewModel: BaseViewModel
@@ -16,7 +15,6 @@ namespace ShopWPFUI.ViewModels
         public BaseViewModel CurrentViewModel
         {
             get { return _currentViewModel; }
-            //set { _currentView = value; OnPropertyChanged(); }
         }
 
         //public ICommand AutorizationCommand { get; }
@@ -32,12 +30,6 @@ namespace ShopWPFUI.ViewModels
         {
             _navigationStore = navigationStore;
             _navigationStore.CurrentViewModelChanged += OnCurrentViewModelChanged;
-            //RegistrationCommand = new RelayCommand(Registration);
-            //NovigationCommand = new RelayCommand(Navigation);
-            //AutorizationCommand = new RelayCommand(Autorization);
-
-            // Startup Page
-            //CurrentView = new AuthorizationViewModel(_navigationStore);
         }
 
         private void OnCurrentViewModelChanged()

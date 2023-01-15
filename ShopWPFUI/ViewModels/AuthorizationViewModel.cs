@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using PizzaShop.DataAccess;
 using ShopLibrary;
+using ShopWPFUI.Commands;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,17 +16,11 @@ namespace ShopWPFUI.ViewModels
 {
     public class AuthorizationViewModel : BaseViewModel
     {
-        private object _currentView;
         private string _email;
         private string _password;
         private string _errorMessage;
-        private bool _isViewVisible = true;
 
-        public object CurrentView
-        {
-            get { return _currentView; }
-            set { _currentView = value; OnPropertyChanged(); }
-        }
+
         public string Email
         {
             get { return _email; }
@@ -36,11 +31,6 @@ namespace ShopWPFUI.ViewModels
             get { return _password; }
             set { _password = value; OnPropertyChanged(nameof(Password)); }
         }
-        public bool IsViewVisible
-        {
-            get { return _isViewVisible; }
-            set { _isViewVisible = value; OnPropertyChanged(nameof(IsViewVisible)); }
-        }
         public string ErrorMessage
         {
             get { return _errorMessage; }
@@ -49,8 +39,8 @@ namespace ShopWPFUI.ViewModels
 
         public ICommand LoginCommand { get; }
         public ICommand RecoverPasswordCommand { get; }
-        public ICommand ShowPasswordCommand { get; }
-        public ICommand RememberPasswordCommand { get; }
+        //public ICommand ShowPasswordCommand { get; }
+        //public ICommand RememberPasswordCommand { get; }
         public ICommand NavigateRegistrationCommand { get; }
         public ICommand NavigateNavigationationCommand { get;}
 
@@ -95,9 +85,7 @@ namespace ShopWPFUI.ViewModels
             {
                 Thread.CurrentPrincipal = new GenericPrincipal(
                     new GenericIdentity(Email), null);
-                IsViewVisible = false;
                 NavigateNavigationationCommand.Execute(null);
-
             }
             else
             {

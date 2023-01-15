@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
-namespace ShopWPFUI
+namespace ShopWPFUI.Commands
 {
     internal class NavigateCommand<ViewModel> : ICommand
         where ViewModel : BaseViewModel
