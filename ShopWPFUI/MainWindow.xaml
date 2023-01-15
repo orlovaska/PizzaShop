@@ -12,9 +12,12 @@
         Background="Transparent"
         Title="MainWindow" 
         WindowStyle="None">
-    <Window.DataContext>
+    
+    <!--<Window.DataContext>
         <vm:MainViewModel/>
-    </Window.DataContext>
+    </Window.DataContext>-->
+    
+
     
     <WindowChrome.WindowChrome>
         <WindowChrome CaptionHeight="0"/>
@@ -121,7 +124,7 @@
             </Menu>-->
 
             <Grid Grid.Row="1" >
-                <ContentControl Content="{Binding CurrentView}" />
+                <ContentControl Content="{Binding CurrentViewModel}" />
             </Grid>
         </Grid>
     </Border>

@@ -51,19 +51,24 @@ namespace ShopWPFUI.ViewModels
         public ICommand RecoverPasswordCommand { get; }
         public ICommand ShowPasswordCommand { get; }
         public ICommand RememberPasswordCommand { get; }
+        public ICommand NavigateRegistrationCommand { get; }
+        public ICommand NavigateNavigationationCommand { get;}
 
 
 
-        public AuthorizationViewModel()
+
+        public AuthorizationViewModel(NavigationStore navigationStore)
         {
-            LoginCommand = new RelayCommand(ExecuteLoginCommand, CanExecuteCommand);
+            LoginCommand = new RelayCommand(ExecuteLoginCommand, CanExecuteLoginCommand);
             RecoverPasswordCommand = new RelayCommand(ExecuterecoverPassCommand);
+            NavigateRegistrationCommand = new NavigateCommand<RegistrationViewModel>(navigationStore,() => new RegistrationViewModel(navigationStore));
+            NavigateNavigationationCommand = new NavigateCommand<NavigationViewModel>(navigationStore, () => new NavigationViewModel(navigationStore));
 
         }
 
         
 
-        private bool CanExecuteCommand(object arg)
+        private bool CanExecuteLoginCommand(object arg)
         {
             bool validData;
             if (string.IsNullOrWhiteSpace(Email) || Email.Length < 3 || string.IsNullOrWhiteSpace(Password) || Password.Length < 3)
@@ -91,7 +96,7 @@ namespace ShopWPFUI.ViewModels
                 Thread.CurrentPrincipal = new GenericPrincipal(
                     new GenericIdentity(Email), null);
                 IsViewVisible = false;
-                
+                NavigateNavigationationCommand.Execute(null);
 
             }
             else

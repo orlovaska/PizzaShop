@@ -7,9 +7,9 @@
              xmlns:vm="clr-namespace:ShopWPFUI.ViewModels" 
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <UserControl.DataContext>
+    <!--<UserControl.DataContext>
         <vm:NavigationViewModel/>
-    </UserControl.DataContext>
+    </UserControl.DataContext>-->
 
     <Grid>
 

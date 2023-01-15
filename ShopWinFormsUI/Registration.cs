@@ -87,10 +87,10 @@ namespace ShopWinFormsUI
                     HashingUntil.HashingPassword(textBoxPassword.Text),
                     textBoxEmail.Text);
 
-                foreach (IDataConnection db in GlobalConfig.Connections)
-                {
-                    db.CreateCustomer(customer);
-                }
+                //foreach (IDataConnection db in GlobalConfig.Connections)
+                //{
+                //    db.CreateCustomer(customer);
+                //}
 
                 Catalog catalog = new Catalog();
                 catalog.AddCategory_All();

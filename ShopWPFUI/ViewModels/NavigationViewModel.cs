@@ -29,7 +29,7 @@ namespace ShopWPFUI.ViewModels
         private void Catalog(object obj) => CurrentView = new CatalogViewModel();
         private void Cart(object obj) => CurrentView = new CartViewModel();
 
-        public NavigationViewModel()
+        public NavigationViewModel(NavigationStore navigationStore)
         {
             ProfilCommand = new RelayCommand(Profil);
             OrdersCommand = new RelayCommand(Orders);
