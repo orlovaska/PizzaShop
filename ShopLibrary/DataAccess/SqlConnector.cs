@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using PizzaShop.Migrations;
 using PizzaShop.Models;
 using ShopLibrary;
 using System.Collections.Generic;
@@ -20,7 +21,7 @@ namespace PizzaShop.DataAccess
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             //optionsBuilder.UseSqlServer(GlobalConfig.ConectionString("Shop"));
-            optionsBuilder.UseSqlServer(@"Data Source = (localdb)\MSSQLLocalDB; Initial Catalog = PizzaShop; Integrated Security = True; Connect Timeout = 30; Encrypt = False; TrustServerCertificate = False; ApplicationIntent = ReadWrite; MultiSubnetFailover = False");
+            optionsBuilder.UseSqlServer(@"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=PizzaShop;Integrated Security=True");
         }
 
         public CustomerModel CreateCustomer(CustomerModel model)
@@ -33,7 +34,6 @@ namespace PizzaShop.DataAccess
                 return model;
             }
         }
-
         public List<ProductModel> GetProducts_All() 
         {
             using (SqlConnector context = new SqlConnector())
@@ -41,7 +41,6 @@ namespace PizzaShop.DataAccess
                 return context.Products.ToList();
             }
         }
-
         public List<CustomerModel> GetCustomers_All()
         {
             using (SqlConnector context = new SqlConnector())
@@ -49,7 +48,6 @@ namespace PizzaShop.DataAccess
                 return context.Customers.ToList();
             }
         }
-
         public List<string> GetCustomersEmail_All()
         {
             using (SqlConnector context = new SqlConnector())
@@ -62,7 +60,6 @@ namespace PizzaShop.DataAccess
                 return Emails;
             }
         }
-
         public List<CategoryModel> GetCategories_All()
         {
             using (SqlConnector context = new SqlConnector())
@@ -70,7 +67,6 @@ namespace PizzaShop.DataAccess
                 return context.Categories.ToList();
             }
         }
-
         public List<string> GetCategoryName()
         {
             using (SqlConnector context = new SqlConnector())
@@ -83,7 +79,6 @@ namespace PizzaShop.DataAccess
                 return categoryNames;
             }
         }
-
         public List<ProductModel> GetProductsFromCategory(CategoryModel category)
         {
             using (SqlConnector context = new SqlConnector())
@@ -91,7 +86,6 @@ namespace PizzaShop.DataAccess
                 return context.Products.Where(p => p.Category.Id == category.Id).ToList();
             }
         }
-
         public bool PasswordVerification(string email, string password)
         {
             bool verificationIsSuccess = false;
@@ -105,7 +99,6 @@ namespace PizzaShop.DataAccess
             }        //TODO - Исправить вывод - сейчас для тестов 
             return true;
         }
-
         public void AddCustomer(CustomerModel customer)
         {
             using (SqlConnector context = new SqlConnector())
@@ -113,15 +106,13 @@ namespace PizzaShop.DataAccess
                 context.Customers.Add(customer);
             }
         }
-
         public void EditCustomer(CustomerModel customer)
         {
             using (SqlConnector context = new SqlConnector())
             {
-                //TORO
+                //TODO
             }
         }
-
         public void DeleteCustomer(CustomerModel customer)
         {
             using (SqlConnector context = new SqlConnector())
@@ -129,13 +120,25 @@ namespace PizzaShop.DataAccess
                 context.Customers.Remove(customer);
             }
         }
-
         public void AddOrder(OrderModel order)
         {
             using (SqlConnector context = new SqlConnector())
             {
                 context.Orders.Add(order);
             }
+        }
+        public bool EmailIsUnique(string email)
+        {
+            bool emailIsUnique = true;
+            using (SqlConnector context = new SqlConnector())
+            {
+                foreach (CustomerModel customer in context.Customers.ToList())
+                {
+                    if (customer.Email == email)
+                        emailIsUnique = false;
+                }
+            }        //TODO - Исправить вывод - сейчас для тестов 
+            return true;
         }
     }
 }

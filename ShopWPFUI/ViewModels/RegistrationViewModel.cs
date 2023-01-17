@@ -1,9 +1,15 @@
-﻿using System;
+﻿using PizzaShop.DataAccess;
+using ShopLibrary;
+using ShopWPFUI.Commands;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.AccessControl;
+using System.Security.Principal;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace ShopWPFUI.ViewModels
 {
@@ -14,12 +20,19 @@ namespace ShopWPFUI.ViewModels
 
 
         private readonly NavigationStore _navigationStore;
+
+        private string _phoneNumber;
         private string _fullName;
         private string _email;
         private string _password;
         private string _errorMessage;
 
 
+        public string PhoneNumber
+        {
+            get { return _phoneNumber; }
+            set { _phoneNumber = value; OnPropertyChanged(nameof(PhoneNumber)); }
+        }
         public string Email
         {
             get { return _email; }
@@ -41,9 +54,54 @@ namespace ShopWPFUI.ViewModels
             set { _fullName = value; OnPropertyChanged(nameof(FullName)); }
         }
 
+        public ICommand LoginCommand { get; }
+        public ICommand NavigateAuthorizationCommand { get; }
+        public ICommand NavigateNavigationationCommand { get; }
+
         public RegistrationViewModel(NavigationStore navigationStore)
         {
             _navigationStore = navigationStore;
+            LoginCommand = new RelayCommand(ExecuteLoginCommand, CanExecuteLoginCommand);
+            NavigateAuthorizationCommand = new NavigateCommand<AuthorizationViewModel>(navigationStore, () => new AuthorizationViewModel(navigationStore));
+            NavigateNavigationationCommand = new NavigateCommand<NavigationViewModel>(navigationStore, () => new NavigationViewModel(navigationStore));
+        }
+
+        private bool CanExecuteLoginCommand(object arg)
+        {
+            bool validData = true;
+            if (string.IsNullOrWhiteSpace(Email) || Email.Length < 3)
+            {
+                validData = false;
+            }
+            if (string.IsNullOrWhiteSpace(PhoneNumber) || PhoneNumber.Length < 10)
+            {
+                validData = false;
+            }
+            if (string.IsNullOrWhiteSpace(Password) || Password.Length < 3)
+            {
+                validData = false;
+            }
+            return validData;
+
+        }
+
+        private void ExecuteLoginCommand(object obj)
+        {
+            var isValidUser = false;
+            foreach (IDataConnection db in GlobalConfig.Connections)
+            {
+                isValidUser = db.EmailIsUnique(Email);
+            }
+            if (isValidUser)
+            {
+                Thread.CurrentPrincipal = new GenericPrincipal(
+                    new GenericIdentity(Email), null);
+                NavigateNavigationationCommand.Execute(null);
+            }
+            else
+            {
+                ErrorMessage = "* Пользователь с данной почтой уже зарегистрирован";
+            }
         }
     }
 }

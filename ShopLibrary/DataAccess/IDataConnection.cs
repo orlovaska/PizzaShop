@@ -10,6 +10,7 @@ namespace PizzaShop.DataAccess
     public interface IDataConnection
     {
         bool PasswordVerification(string email, string password);
+        bool EmailIsUnique(string email);
         void AddCustomer(CustomerModel customer);
         void EditCustomer(CustomerModel customer);
         void DeleteCustomer(CustomerModel customer);

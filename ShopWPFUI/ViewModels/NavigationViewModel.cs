@@ -11,6 +11,8 @@ namespace ShopWPFUI.ViewModels
 {
     internal class NavigationViewModel: BaseViewModel
     {
+
+
         private object _currentView;
         public object CurrentView
         {

@@ -4,9 +4,9 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:ShopWPFUI.Views"
-             xmlns:vm="clr-namespace:ShopWPFUI.ViewModels" 
+             xmlns:vm="clr-namespace:ShopWPFUI.ViewModels" d:DataContext="{d:DesignInstance Type=vm:NavigationViewModel}"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="570" d:DesignWidth="850">
     <!--<UserControl.DataContext>
         <vm:NavigationViewModel/>
     </UserControl.DataContext>-->
@@ -39,11 +39,7 @@
                 <StackPanel Height="400"
                             Width="225">
 
-
-
-
-
-                    <RadioButton Style="{StaticResource BtnStyle}"
+                    <RadioButton Style="{StaticResource BtnMenuStyle}"
                               Command="{Binding ProfilCommand}"
                               IsChecked="True">
 
@@ -61,7 +57,7 @@
 
                     <!--// Мои заказы //-->
 
-                    <RadioButton Style="{StaticResource BtnStyle}"
+                    <RadioButton Style="{StaticResource BtnMenuStyle}"
                               Command="{Binding OrdersCommand}">
 
                         <Grid>
@@ -70,15 +66,15 @@
                                    Style="{StaticResource Image_Style}" />
 
                             <TextBlock Text="Мои заказы"
-                                       Style="{StaticResource Text_Style}" />
-
+                                       Style="{StaticResource Text_Style}"
+/>
                         </Grid>
 
                     </RadioButton>
 
                     <!--// Каталог //-->
 
-                    <RadioButton Style="{StaticResource BtnStyle}"
+                    <RadioButton Style="{StaticResource BtnMenuStyle}"
                               Command="{Binding CatalogCommand}">
 
                         <Grid>
@@ -95,7 +91,7 @@
 
                     <!--// Корзина //-->
 
-                    <RadioButton Style="{StaticResource BtnStyle}"
+                    <RadioButton Style="{StaticResource BtnMenuStyle}"
                               Command="{Binding CartCommand}">
 
                         <Grid>
