@@ -12,125 +12,88 @@
         <vm:RegistrationViewModel />
     </UserControl.DataContext>-->
 
-    <Grid>
-
-        <StackPanel Width="240"
-                            Grid.Row="1"
-                            Orientation="Vertical"
-                            Margin="0, 55,0,0">
+    <StackPanel Width="240"
+                        Grid.Row="1"
+                        Orientation="Vertical"
+                        Margin="0, 55,0,0">
 
 
-            <TextBlock Text="Регистрация"  
-                               
-                               Foreground="White"
-                               FontSize="25"
-                               FontWeight="Medium"
-                               FontFamily="Montserrat"
-                               HorizontalAlignment="Center"/>
-
-            <TextBlock Text="Ваше имя"
-                               Foreground="DarkGray"
-                               FontSize="12"
-                               FontWeight="Medium"
-                               FontFamily="Montserrat"                             
-                               Margin="0,35,0,0"/>
-
-            <TextBox x:Name="txtFullName"
-                             Text="{Binding FullName, UpdateSourceTrigger=PropertyChanged}"
-                             Style="{StaticResource Text_Box}"/>
-
-            <TextBlock Text="Номер телефона"
-                               Foreground="DarkGray"
-                               FontSize="12"
-                               FontWeight="Medium"
-                               FontFamily="Montserrat"                             
-                               Margin="0,35,0,0"/>
-
-            <TextBox x:Name="txtPhoneNumber"
-                             Text="{Binding PhoneNumber, UpdateSourceTrigger=PropertyChanged}"
-                             Style="{StaticResource Text_Box}"/>
-            
-            <TextBlock Text="Электронная почта"
-                               Foreground="DarkGray"
-                               FontSize="12"
-                               FontWeight="Medium"
-                               FontFamily="Montserrat"                             
-                               Margin="0,35,0,0"/>
-
-            <TextBox x:Name="txtEmail"
-                             Style="{StaticResource Text_Box}"/>
-
-            <TextBlock Text="Пароль"
-                               Foreground="DarkGray"
-                               FontSize="12"
-                               FontWeight="Medium"
-                               FontFamily="Montserrat"                             
-                               Margin="0,15,0,0"/>
-
-            <TextBox x:Name="txtPassword"
-                             Style="{StaticResource Text_Box}"/>
-
-
-            <TextBlock Text="{Binding ErrorMessage}"
-                               Foreground="#D7596D"
-                               FontSize="12"
-                               FontWeight="Medium"
-                               FontFamily="Montserrat"                             
-                               Margin="0,10,0,0"
-                               TextWrapping="Wrap"/>
-
-            <Button x:Name="btnLogin" 
-                            Command="{Binding LoginCommand}"
-                            BorderThickness="0"
-                            Content="Зарегистрироваться"
+        <TextBlock Text="Регистрация"                              
                             Foreground="White"
-                            FontSize="12"
+                            FontSize="25"
+                            FontWeight="Medium"
                             FontFamily="Montserrat"
-                            Cursor="Hand"                           
-                            Margin="0,30,0,0">
+                            HorizontalAlignment="Center"/>
 
-                <Button.Style>
-                    <Style TargetType="Button">
-                        <Setter Property="Background" Value="#462AD8"/>
-                        <Style.Triggers>
-                            <Trigger Property="IsMouseOver" Value="True">
-                                <Setter Property="Background" Value="#28AEED"/>
-                            </Trigger>
-                        </Style.Triggers>
-                    </Style>
-                </Button.Style>
+        <TextBlock Text="Ваше имя"
+                            Foreground="DarkGray"
+                            FontSize="12"
+                            FontWeight="Medium"
+                            FontFamily="Montserrat"                             
+                            Margin="0,35,0,0"/>
 
-                <Button.Template>
-                    <ControlTemplate TargetType="Button">
-                        <Border Width="150" Height="40"
-                                        CornerRadius="20"
-                                        Background="{TemplateBinding Background}">
-                            <ContentPresenter VerticalAlignment="Center"
-                                                      HorizontalAlignment="Center"/>
-                        </Border>
-                    </ControlTemplate>
-                </Button.Template>
-            </Button>
+        <TextBox x:Name="txtFullName"
+                            Text="{Binding FullName, UpdateSourceTrigger=PropertyChanged}"
+                            Style="{StaticResource Text_Box}"/>
 
-            <StackPanel Orientation="Horizontal"
-                                HorizontalAlignment="Center"
-                                Margin="0,15,0,0">
+        <TextBlock Text="Номер телефона"
+                            Foreground="DarkGray"
+                            FontSize="12"
+                            FontWeight="Medium"
+                            FontFamily="Montserrat"                             
+                            Margin="0,35,0,0"/>
 
-                <TextBlock Text="Уже есть аккаунт?"
-                           Foreground="DarkGray"
-                           Style="{StaticResource TextBlock}"/>
+        <TextBox x:Name="txtPhoneNumber"
+                            Text="{Binding PhoneNumber, UpdateSourceTrigger=PropertyChanged}"
+                            Style="{StaticResource Text_Box}"/>
 
-                <TextBlock Text="Войти"
-                                Foreground="White"
-                                Style="{StaticResource TextBlock}">
-                    <TextBlock.InputBindings>
-                        <MouseBinding Command="{Binding NavigateAuthorizationCommand}" MouseAction="LeftClick" />
-                    </TextBlock.InputBindings>
-                </TextBlock>
+        <TextBlock Text="Электронная почта"
+                            Foreground="DarkGray"
+                            FontSize="12"
+                            FontWeight="Medium"
+                            FontFamily="Montserrat"                             
+                            Margin="0,35,0,0"/>
 
-            </StackPanel>
+        <TextBox x:Name="txtEmail"
+                            Style="{StaticResource Text_Box}"/>
+
+        <TextBlock Text="Пароль"
+                            Foreground="DarkGray"
+                            FontSize="12"
+                            FontWeight="Medium"
+                            FontFamily="Montserrat"                             
+                            Margin="0,15,0,0"/>
+
+        <TextBox x:Name="txtPassword"
+                            Style="{StaticResource Text_Box}"/>
+
+
+        <TextBlock Text="{Binding ErrorMessage}"
+                            Style="{StaticResource TextBlock_Error}"/>
+
+        <Button x:Name="btnLogin" 
+                        Command="{Binding LoginCommand}"
+                        Content="Зарегистрироваться"
+                        Style="{StaticResource BtnStyle}"/>
+
+        <StackPanel Orientation="Horizontal"
+                            HorizontalAlignment="Center"
+                            Margin="0,15,0,0">
+
+            <TextBlock Text="Уже есть аккаунт?"
+                        Foreground="DarkGray"
+                        Style="{StaticResource TextBlock}"/>
+
+            <TextBlock Text="Войти"
+                            Foreground="White"
+                            Style="{StaticResource TextBlock}">
+                <TextBlock.InputBindings>
+                    <MouseBinding Command="{Binding NavigateAuthorizationCommand}" MouseAction="LeftClick" />
+                </TextBlock.InputBindings>
+            </TextBlock>
 
         </StackPanel>
 
-    </Grid>
+    </StackPanel>
+
 </UserControl>

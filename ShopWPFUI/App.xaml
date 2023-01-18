@@ -11,8 +11,7 @@
                 <ResourceDictionary Source="DataTemplate.xaml" />
                 <ResourceDictionary Source="Styles/Image.xaml" />
                 <ResourceDictionary Source="Styles/Text.xaml" />
-                <ResourceDictionary Source="Styles/ButtonMenu.xaml" />
-                <ResourceDictionary Source="Styles/Button.xaml" />
+                <ResourceDictionary Source="Styles/ButtonStyles.xaml" />
                 <ResourceDictionary Source="Styles/TextBlock.xaml" />
                 <ResourceDictionary Source="Styles/TextBox.xaml" />
                 <ResourceDictionary Source="Styles/TextBlockError.xaml" />
