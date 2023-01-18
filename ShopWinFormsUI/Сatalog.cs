@@ -40,10 +40,10 @@ namespace ShopWinFormsUI
         {
 
             List<CategoryModel> categories = new List<CategoryModel>();
-            foreach (IDataConnection db in GlobalConfig.Connections)
-            {
-                categories = db.GetCategories_All();
-            }
+            //foreach (IDataConnection db in GlobalConfig.Connections)
+            //{
+            //    categories = db.GetCategories_All();
+            //}
 
             foreach (var category in categories)
             {
@@ -53,10 +53,10 @@ namespace ShopWinFormsUI
         public void AddProducts_All()
         {
             List<ProductModel> products = new List<ProductModel>();
-            foreach (IDataConnection db in GlobalConfig.Connections)
-            {
-                products = db.GetProducts_All();
-            }
+            //foreach (IDataConnection db in GlobalConfig.Connections)
+            //{
+            //    products = db.GetProducts_All();
+            //}
 
             foreach (var product in products)
             {
@@ -66,10 +66,10 @@ namespace ShopWinFormsUI
         public void AddProducts_FromCategory(CategoryModel category)
         {
             List<ProductModel> products = new List<ProductModel>();
-            foreach (IDataConnection db in GlobalConfig.Connections)
-            {
-                products = db.GetProductsFromCategory(category);
-            }
+            //foreach (IDataConnection db in GlobalConfig.Connections)
+            //{
+            //    products = db.GetProductsFromCategory(category);
+            //}
 
             foreach (var product in products)
             {

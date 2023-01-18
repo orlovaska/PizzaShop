@@ -112,8 +112,9 @@
 
             <Grid Grid.Column="1">
 
-                <ContentControl                            
-                               Content="{Binding CurrentView}" />
+                <ContentControl >
+                    <TextBox HorizontalAlignment="Left" Margin="-166,383,0,0" TextWrapping="Wrap" Text="{Binding CurrentCustomerAccount.FirstName}" VerticalAlignment="Top" Width="120"/>
+                </ContentControl>
 
             </Grid>
 

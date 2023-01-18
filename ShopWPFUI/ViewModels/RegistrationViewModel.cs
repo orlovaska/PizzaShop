@@ -54,12 +54,16 @@ namespace ShopWPFUI.ViewModels
             set { _fullName = value; OnPropertyChanged(nameof(FullName)); }
         }
 
+        private IDataConnection dataRepository { get; set; }
+
         public ICommand LoginCommand { get; }
         public ICommand NavigateAuthorizationCommand { get; }
         public ICommand NavigateNavigationationCommand { get; }
 
         public RegistrationViewModel(NavigationStore navigationStore)
         {
+            dataRepository = new DataRepository();
+
             _navigationStore = navigationStore;
             LoginCommand = new RelayCommand(ExecuteLoginCommand, CanExecuteLoginCommand);
             NavigateAuthorizationCommand = new NavigateCommand<AuthorizationViewModel>(navigationStore, () => new AuthorizationViewModel(navigationStore));
@@ -87,11 +91,8 @@ namespace ShopWPFUI.ViewModels
 
         private void ExecuteLoginCommand(object obj)
         {
-            var isValidUser = false;
-            foreach (IDataConnection db in GlobalConfig.Connections)
-            {
-                isValidUser = db.EmailIsUnique(Email);
-            }
+            var isValidUser = dataRepository.EmailIsUnique(Email);
+
             if (isValidUser)
             {
                 Thread.CurrentPrincipal = new GenericPrincipal(

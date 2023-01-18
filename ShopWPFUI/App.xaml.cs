@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore.Query.Internal;
+using PizzaShop.DataAccess;
 using ShopWPFUI.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -17,8 +18,7 @@ namespace ShopWPFUI
     {
         protected override void OnStartup(StartupEventArgs e)
         {
-            ShopLibrary.GlobalConfig.InitializeConnection(true);
-            
+            //ShopLibrary.GlobalConfig.InitializeConnection(true);
 
             NavigationStore navigationStore = new NavigationStore();
 

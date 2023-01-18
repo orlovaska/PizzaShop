@@ -18,7 +18,7 @@ namespace ShopWinFormsUI
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
-            ShopLibrary.GlobalConfig.InitializeConnection(true);
+            //ShopLibrary.GlobalConfig.InitializeConnection(true);
             Application.Run(new LogIn());
         }
     }

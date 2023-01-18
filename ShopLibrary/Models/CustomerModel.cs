@@ -38,5 +38,9 @@ namespace PizzaShop.Models
             HashPassword = hashPassword;
             Email = email;
         }
+
+        public CustomerModel()
+        {
+        }
     }
 }

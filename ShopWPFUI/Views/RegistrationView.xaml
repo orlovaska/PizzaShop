@@ -55,6 +55,7 @@
                             Margin="0,35,0,0"/>
 
         <TextBox x:Name="txtEmail"
+                 Text="{Binding Email, UpdateSourceTrigger=PropertyChanged}"
                             Style="{StaticResource Text_Box}"/>
 
         <TextBlock Text="Пароль"
@@ -65,6 +66,7 @@
                             Margin="0,15,0,0"/>
 
         <TextBox x:Name="txtPassword"
+                 Text="{Binding Password, UpdateSourceTrigger=PropertyChanged}"
                             Style="{StaticResource Text_Box}"/>
 
 

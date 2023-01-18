@@ -55,10 +55,10 @@ namespace ShopWinFormsUI
         {
             List<string> customer = new List<string>();
 
-            foreach (IDataConnection db in GlobalConfig.Connections)
-            {
-                customer = db.GetCustomersEmail_All();
-            }
+            //foreach (IDataConnection db in GlobalConfig.Connections)
+            //{
+            //    customer = db.GetCustomersEmail_All();
+            //}
             return customer.Contains(email);
         }
 
@@ -67,10 +67,10 @@ namespace ShopWinFormsUI
             bool output = false;
             List<CustomerModel> customers = new List<CustomerModel>();
 
-            foreach (IDataConnection db in GlobalConfig.Connections)
-            {
-                customers = db.GetCustomers_All();
-            }
+            //foreach (IDataConnection db in GlobalConfig.Connections)
+            //{
+            //    customers = db.GetCustomers_All();
+            //}
 
             foreach (CustomerModel customer in customers)
             {

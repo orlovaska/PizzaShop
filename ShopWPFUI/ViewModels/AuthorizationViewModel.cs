@@ -36,6 +36,8 @@ namespace ShopWPFUI.ViewModels
             get { return _errorMessage; }
             set { _errorMessage = value; OnPropertyChanged(nameof(ErrorMessage)); }
         }
+        private IDataConnection dataRepository { get; set; }
+
 
         public ICommand LoginCommand { get; }
         public ICommand RecoverPasswordCommand { get; }
@@ -49,6 +51,8 @@ namespace ShopWPFUI.ViewModels
 
         public AuthorizationViewModel(NavigationStore navigationStore)
         {
+            dataRepository = new DataRepository();
+
             LoginCommand = new RelayCommand(ExecuteLoginCommand, CanExecuteLoginCommand);
             RecoverPasswordCommand = new RelayCommand(ExecuterecoverPassCommand);
             NavigateRegistrationCommand = new NavigateCommand<RegistrationViewModel>(navigationStore,() => new RegistrationViewModel(navigationStore));
@@ -75,11 +79,8 @@ namespace ShopWPFUI.ViewModels
 
         private void ExecuteLoginCommand(object obj)
         {
-            var isValidUser = false;
-            foreach (IDataConnection db in GlobalConfig.Connections)
-            {
-                isValidUser = db.PasswordVerification(Email, Password);
-            }
+            var isValidUser = dataRepository.PasswordVerification(Email, Password);
+
             isValidUser = true; //TODO строка для тестов. удалить
             if (isValidUser)
             {

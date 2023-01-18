@@ -14,6 +14,7 @@ namespace PizzaShop.DataAccess
         void AddCustomer(CustomerModel customer);
         void EditCustomer(CustomerModel customer);
         void DeleteCustomer(CustomerModel customer);
+        CustomerModel GetByEmail(string email);
 
         void AddOrder(OrderModel order);
 
