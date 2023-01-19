@@ -11,27 +11,5 @@
     <Grid>
         <Border Background="green"
                 CornerRadius="20" />
-
-        <Grid>
-
-            <!--// Base Grid //-->
-
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="225" />
-                <ColumnDefinition Width="625" />
-            </Grid.ColumnDefinitions>
-
-            <!--// Navigation Panel //-->
-
-            <Grid HorizontalAlignment="Left"
-                  Width="225">
-
-                <Border Background="green"
-                        CornerRadius="20,0,0,20" />
-
-
-            </Grid>
-
-        </Grid>
     </Grid>
 </UserControl>

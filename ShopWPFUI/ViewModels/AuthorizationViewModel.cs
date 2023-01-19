@@ -74,7 +74,7 @@ namespace ShopWPFUI.ViewModels
                 validData = true;
             }
 
-            return validData;
+            return true; //TODO - строка для тестов. Вернуть validData
         }
 
         private void ExecuteLoginCommand(object obj)

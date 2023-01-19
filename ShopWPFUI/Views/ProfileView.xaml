@@ -32,7 +32,7 @@
 
             <!--// Navigation Panel //-->
 
-            <Grid HorizontalAlignment="Left"
+            <Grid HorizontalAlignment="Stretch"
                   Width="225">
 
                 <Border Background="red"

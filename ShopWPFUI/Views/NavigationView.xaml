@@ -25,8 +25,9 @@
 
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="225" />
-                <ColumnDefinition Width="625" />
+                <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
+            
 
             <!--// Navigation Panel //-->
 
@@ -112,7 +113,9 @@
 
             <Grid Grid.Column="1">
 
-                <ContentControl Content="{Binding CurrentView}" />
+                <ContentControl Content="{Binding CurrentView}" 
+                                HorizontalContentAlignment="Stretch"
+                                VerticalContentAlignment="Stretch"/>
 
             </Grid>
 

@@ -8,6 +8,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Models\**" />
+    <EmbeddedResource Remove="Models\**" />
+    <None Remove="Models\**" />
+    <Page Remove="Models\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Remove="Images\img_home.png" />
     <None Remove="Images\img_order.png" />
     <None Remove="Images\img_product.png" />
@@ -38,10 +45,6 @@
     <Resource Include="Images\img_shipment.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Models\" />
   </ItemGroup>
 
 </Project>

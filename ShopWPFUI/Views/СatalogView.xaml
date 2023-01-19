@@ -7,51 +7,49 @@
              xmlns:vm="clr-namespace:ShopWPFUI.ViewModels" d:DataContext="{d:DesignInstance Type=vm:CatalogViewModel}"
              mc:Ignorable="d" 
              d:DesignHeight="570" d:DesignWidth="625">
-    
+
+
     <!--<UserControl.DataContext>
         <vm:CatalogViewModel />
     </UserControl.DataContext>-->
 
-    <Grid>
+    <Grid Background="Green">
         <Grid.RowDefinitions>
-            <RowDefinition Height="50"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="60"/>
+            <RowDefinition/>
         </Grid.RowDefinitions>
+        
+        <TextBlock Text ="Категории" Grid.Row="0" Margin="10" FontSize="22" FontWeight="Medium"/>
 
-        <Grid Grid.RowSpan="2">
-            <TextBlock Text="Shoes Store" HorizontalAlignment="Center" Margin="10" FontSize="28"/>
-        </Grid>
-        <ScrollViewer  Grid.Row="1" Background="#FFF1F1F1">
-            <StackPanel>
-                <TextBlock Text="Items" Margin="10" FontSize="22" FontWeight="Medium"/>
-                <StackPanel Margin="20 0">
-                    <ItemsControl x:Name="ListViewProducts" ItemsSource="{Binding CategoryModel}">
-                        <ItemsControl.ItemTemplate>
-                            <DataTemplate>
-                                <Border Margin="10" Width="110" Height="160">
-                                    <StackPanel>
-                                        <Border Width="100" Height="100" CornerRadius="5" Margin="5">
-                                            <Border.Effect>
-                                                <DropShadowEffect ShadowDepth="1"/>
-                                            </Border.Effect>
-                                            <Border.Background>
-                                                <ImageBrush ImageSource="{Binding Image}"/>
-                                            </Border.Background>
-                                        </Border>
-                                        <TextBlock Margin="5" Text="{Binding Value, StringFormat={}{0:C}}" FontSize="17" FontFamily="Franklin Gothic Medium"/>
-                                        <TextBlock Margin="5 0" Text="{Binding Name}" FontSize="15"/>
-                                    </StackPanel>
-                                </Border>
-                            </DataTemplate>
-                        </ItemsControl.ItemTemplate>
-                        <ItemsControl.ItemsPanel>
-                            <ItemsPanelTemplate>
-                                <WrapPanel/>
-                            </ItemsPanelTemplate>
-                        </ItemsControl.ItemsPanel>
-                    </ItemsControl>
-                </StackPanel>
+        <ScrollViewer HorizontalAlignment="Stretch"  Grid.Row="1" 
+                      VerticalScrollBarVisibility="Auto" Margin="0, 0, 10, 0">
+            <StackPanel Background="red" Margin="20, 0, 0, 0" HorizontalAlignment="Right">
+                <ItemsControl x:Name="Categories" ItemsSource="{Binding Categories}">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapPanel/>
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Border Margin="10" Width="160" Height="230">
+                                <StackPanel>
+                                    <Border Width="150" Height="150" CornerRadius="5" Margin="5">
+                                        <Border.Effect>
+                                            <DropShadowEffect ShadowDepth="1"/>
+                                        </Border.Effect>
+                                        <Border.Background>
+                                            <ImageBrush ImageSource="{Binding Image}"/>
+                                        </Border.Background>
+                                    </Border>
+                                    <TextBlock Margin="5 0" Text="{Binding Name}" FontSize="15"/>
+                                </StackPanel>
+                            </Border>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
             </StackPanel>
         </ScrollViewer>
+
     </Grid>
 </UserControl>
