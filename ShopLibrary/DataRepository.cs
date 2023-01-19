@@ -135,7 +135,15 @@ namespace ShopLibrary
                 foreach (CustomerModel customer in context.Customers.ToList())
                 {
                     if (customer.Email == email)
-                        customerModel = customer;
+                    {
+                        customerModel.Id = customer.Id;
+                        customerModel.FirstName = customer.FirstName;
+                        customerModel.LastName = customer.LastName;
+                        customerModel.Email = customer.Email;
+                        customerModel.Phone = customer.Phone;
+                        customerModel.HashPassword = string.Empty;
+                    }
+
                 }
             }
             return customerModel;

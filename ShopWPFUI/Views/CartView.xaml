@@ -6,11 +6,7 @@
              xmlns:local="clr-namespace:ShopWPFUI.Views"
              xmlns:vm="clr-namespace:ShopWPFUI.ViewModels"
              mc:Ignorable="d" 
-             d:DesignHeight="450"  d:DesignWidth="800">
-
-    <UserControl.DataContext>
-        <vm:CartViewModel />
-    </UserControl.DataContext>
+            d:DesignHeight="570" d:DesignWidth="625">
 
     <Grid>
         <Border Background="green"
