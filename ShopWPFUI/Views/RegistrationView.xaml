@@ -4,7 +4,8 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:ShopWPFUI.Views"
-             xmlns:vm="clr-namespace:ShopWPFUI.ViewModels" d:DataContext="{d:DesignInstance Type=vm:RegistrationViewModel}"
+             xmlns:vm="clr-namespace:ShopWPFUI.ViewModels" 
+             d:DataContext="{d:DesignInstance Type=vm:RegistrationViewModel}"
              mc:Ignorable="d" 
              d:DesignHeight="570" d:DesignWidth="850">
     

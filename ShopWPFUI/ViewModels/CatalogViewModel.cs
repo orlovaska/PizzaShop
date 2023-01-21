@@ -2,25 +2,58 @@
 using PizzaShop.Migrations;
 using PizzaShop.Models;
 using ShopLibrary;
+using ShopWPFUI.Commands;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Principal;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace ShopWPFUI.ViewModels
 {
     internal class CatalogViewModel : BaseViewModel
     {
-        public List<CategoryModel> Categories { get; set; }
-        public List<ProductModel> Products { get; set; }
+        public delegate void MethodContainer(CategoryModel selectedCatedory);
+        public event MethodContainer onCount = null;
 
-        private IDataConnection dataRepository { get; set; }
+        public CategoryModel _selectedCatedory;
+        public CategoryModel SelectedCatedory
+        {
+            get
+            {
+                return _selectedCatedory;
+            }
+
+            set
+            {
+                
+                _selectedCatedory = value;
+                onCount?.Invoke(SelectedCatedory);
+                OnPropertyChanged(nameof(SelectedCatedory));
+            }
+        }
+
+
+
+        public List<CategoryModel> Categories { get; set; }
+
+        public ICommand SelectCategoryCommand { get; set; }
+        private IDataConnection DataRepository { get; set; }
 
         public CatalogViewModel()
         {
-            dataRepository = new DataRepository();
-            Categories = dataRepository.GetCategories_All();
+            DataRepository = new DataRepository();
+            Categories = DataRepository.GetCategories_All();
+            //SelectCategoryCommand = new RelayCommand(GetCategory);
         }
+
+        //public void GetCategory(object obj)
+        //{
+        //    onCount?.Invoke(SelectedCatedory);
+        //}
+
+
     }
 }

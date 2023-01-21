@@ -19,8 +19,6 @@ namespace ShopWPFUI.ViewModels
 
 
 
-        private readonly NavigationStore _navigationStore;
-
         private string _phoneNumber;
         private string _fullName;
         private string _email;
@@ -64,7 +62,6 @@ namespace ShopWPFUI.ViewModels
         {
             dataRepository = new DataRepository();
 
-            _navigationStore = navigationStore;
             LoginCommand = new RelayCommand(ExecuteLoginCommand, CanExecuteLoginCommand);
             NavigateAuthorizationCommand = new NavigateCommand<AuthorizationViewModel>(navigationStore, () => new AuthorizationViewModel(navigationStore));
             NavigateNavigationationCommand = new NavigateCommand<NavigationViewModel>(navigationStore, () => new NavigationViewModel(navigationStore));

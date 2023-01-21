@@ -4,14 +4,12 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:vm="clr-namespace:ShopWPFUI.ViewModels"
-             xmlns:local="clr-namespace:ShopWPFUI.Views"
+             xmlns:local="clr-namespace:ShopWPFUI.Views" 
+             d:DataContext="{d:DesignInstance Type=vm:ProfileViewModel}"
              mc:Ignorable="d" 
              d:DesignHeight="570" d:DesignWidth="625"
              Style="{StaticResource Page_Style}">
     
-    <UserControl.DataContext>
-        <vm:ProfileViewModel />
-    </UserControl.DataContext>
 
     <Grid>
 
@@ -19,28 +17,9 @@
 
         <Border Background="red"
                 CornerRadius="20" />
-
-        <Grid>
-            
-
-            <!--// Base Grid //-->
-
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="225" />
-                <ColumnDefinition Width="625" />
-            </Grid.ColumnDefinitions>
-
-            <!--// Navigation Panel //-->
-
-            <Grid HorizontalAlignment="Stretch"
-                  Width="225">
-
-                <Border Background="red"
-                        CornerRadius="20,0,0,20" />
+        <TextBox Text ="{Binding CurrentCustomerAccount.FirstName}"/>
 
 
-            </Grid>
 
-        </Grid>
     </Grid>
 </UserControl>

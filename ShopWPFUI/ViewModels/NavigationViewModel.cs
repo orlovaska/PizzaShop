@@ -16,7 +16,6 @@ namespace ShopWPFUI.ViewModels
     internal class NavigationViewModel: BaseViewModel
     {
 
-
         private object _currentView;
         private CustomerModel _currentCustomerAccount;
 
@@ -45,27 +44,41 @@ namespace ShopWPFUI.ViewModels
         public ICommand OrdersCommand { get;  }
         public ICommand CatalogCommand { get; }
         public ICommand CartCommand { get; }
+        public ICommand NavigateAuthorizationCommand { get; }
+        public ICommand ProductsCommand { get; }
 
 
-        private void Profil(object obj) => CurrentView = new ProfileViewModel();
+        private void Profil(object obj) => CurrentView = new ProfileViewModel(CurrentCustomerAccount);
         private void Orders(object obj) => CurrentView = new OrdersViewModel();
-        private void Catalog(object obj) => CurrentView = new CatalogViewModel();
+        private void Catalog(object obj)
+        {
+            CatalogViewModel catalogViewModel = new CatalogViewModel();
+            catalogViewModel.onCount += Products;
+            CurrentView = catalogViewModel;
+        }
         private void Cart(object obj) => CurrentView = new CartViewModel();
+        private void Products(CategoryModel SelectedCatedory)
+        {
+            CurrentView = new ProductsViewModel(SelectedCatedory);
+        }
 
         public NavigationViewModel(NavigationStore navigationStore)
         {
             dataRepository = new DataRepository();
             CurrentCustomerAccount = new CustomerModel();
 
+            LoadCurrentUserData();
+
             ProfilCommand = new RelayCommand(Profil);
             OrdersCommand = new RelayCommand(Orders);
             CatalogCommand = new RelayCommand(Catalog);
             CartCommand = new RelayCommand(Cart);
+            //ProductsCommand = new RelayCommand(Products);
+            NavigateAuthorizationCommand = new NavigateCommand<AuthorizationViewModel>(navigationStore, () => new AuthorizationViewModel(navigationStore));
+
 
             // Startup Page
-            CurrentView = new ProfileViewModel();
-
-            LoadCurrentUserData();
+            CurrentView = new ProfileViewModel(CurrentCustomerAccount);
 
         }
 

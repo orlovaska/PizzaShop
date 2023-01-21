@@ -1,22 +1,38 @@
-﻿using System;
+﻿using PizzaShop.DataAccess;
+using PizzaShop.Models;
+using ShopLibrary;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace ShopWPFUI.ViewModels
 {
     public class ProfileViewModel : BaseViewModel
     {
-        public int CustomerID { get; set; }
+        private CustomerModel _currentCustomerAccount;
 
-        public ProfileViewModel()
+        public CustomerModel CurrentCustomerAccount
         {
-            CustomerID = 100528;
+            get
+            {
+                return _currentCustomerAccount;
+            }
+
+            set
+            {
+                _currentCustomerAccount = value;
+                OnPropertyChanged(nameof(CurrentCustomerAccount));
+            }
         }
-        public override string ToString()
+
+        private IDataConnection dataRepository { get; set; }
+
+        public ProfileViewModel(CustomerModel _currentCustomerAccount)
         {
-            return "Как это сделать";
+            CurrentCustomerAccount =_currentCustomerAccount;
         }
     }
 }
