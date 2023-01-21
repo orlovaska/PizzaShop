@@ -49,17 +49,17 @@ namespace ShopWPFUI.ViewModels
 
 
         private void Profil(object obj) => CurrentView = new ProfileViewModel(CurrentCustomerAccount);
-        private void Orders(object obj) => CurrentView = new OrdersViewModel();
+        private void Orders(object obj) => CurrentView = new OrdersViewModel(CurrentCustomerAccount);
         private void Catalog(object obj)
         {
             CatalogViewModel catalogViewModel = new CatalogViewModel();
             catalogViewModel.onCount += Products;
             CurrentView = catalogViewModel;
         }
-        private void Cart(object obj) => CurrentView = new CartViewModel();
+        private void Cart(object obj) => CurrentView = new CartViewModel(CurrentCustomerAccount);
         private void Products(CategoryModel SelectedCatedory)
         {
-            CurrentView = new ProductsViewModel(SelectedCatedory);
+            CurrentView = new ProductsViewModel(CurrentCustomerAccount, SelectedCatedory);
         }
 
         public NavigationViewModel(NavigationStore navigationStore)
@@ -87,6 +87,7 @@ namespace ShopWPFUI.ViewModels
             var customer = dataRepository.GetByEmail(Thread.CurrentPrincipal.Identity.Name);
             if (customer != null)
             {
+                CurrentCustomerAccount.Id = customer.Id;
                 CurrentCustomerAccount.Email = customer.Email;
                 CurrentCustomerAccount.FirstName = customer.FirstName;
                 CurrentCustomerAccount.LastName = customer.LastName;

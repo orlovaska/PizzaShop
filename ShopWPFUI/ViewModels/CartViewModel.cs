@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PizzaShop.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,10 +9,24 @@ namespace ShopWPFUI.ViewModels
 {
     internal class CartViewModel : BaseViewModel
     {
-        public int CustomerID { get; set; }
-        public CartViewModel()
+        private CustomerModel _currentCustomerAccount;
+        public CustomerModel CurrentCustomerAccount
         {
-            CustomerID = 1;
+            get
+            {
+                return _currentCustomerAccount;
+            }
+
+            set
+            {
+                _currentCustomerAccount = value;
+                OnPropertyChanged(nameof(CurrentCustomerAccount));
+            }
+        }
+
+        public CartViewModel(CustomerModel _currentCustomerAccount)
+        {
+            _currentCustomerAccount = CurrentCustomerAccount;
         }
     }
 }

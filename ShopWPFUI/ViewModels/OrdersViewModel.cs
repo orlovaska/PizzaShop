@@ -11,12 +11,35 @@ namespace ShopWPFUI.ViewModels
 {
     internal class OrdersViewModel : BaseViewModel
     {
+        private CustomerModel _currentCustomerAccount;
+        public CustomerModel CurrentCustomerAccount
+        {
+            get
+            {
+                return _currentCustomerAccount;
+            }
+
+            set
+            {
+                _currentCustomerAccount = value;
+                OnPropertyChanged(nameof(CurrentCustomerAccount));
+            }
+        }
+
         public List<OrderModel> ActiveOrders { get; set; }
         public List<OrderModel> CompletedOrders { get; set; }
 
 
-        public OrdersViewModel()
+        private IDataConnection DataRepository { get; set; }
+
+
+        public OrdersViewModel(CustomerModel currentCustomerAccount)
         {
+            DataRepository = new DataRepository();
+            CurrentCustomerAccount = currentCustomerAccount;
+
+            ActiveOrders = DataRepository.GetActiveOrders();
+            CompletedOrders = DataRepository.GetCompletedOrders();
             //foreach (IDataConnection db in GlobalConfig.Connections)
             //{
             //    ActiveOrders = db.GetCategories_All();

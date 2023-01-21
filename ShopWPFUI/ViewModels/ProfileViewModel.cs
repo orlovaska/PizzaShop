@@ -30,9 +30,9 @@ namespace ShopWPFUI.ViewModels
 
         private IDataConnection dataRepository { get; set; }
 
-        public ProfileViewModel(CustomerModel _currentCustomerAccount)
+        public ProfileViewModel(CustomerModel currentCustomerAccount)
         {
-            CurrentCustomerAccount =_currentCustomerAccount;
+            CurrentCustomerAccount = currentCustomerAccount;
         }
     }
 }

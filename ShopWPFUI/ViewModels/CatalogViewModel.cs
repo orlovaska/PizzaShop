@@ -49,11 +49,6 @@ namespace ShopWPFUI.ViewModels
             //SelectCategoryCommand = new RelayCommand(GetCategory);
         }
 
-        //public void GetCategory(object obj)
-        //{
-        //    onCount?.Invoke(SelectedCatedory);
-        //}
-
 
     }
 }
