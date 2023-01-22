@@ -103,6 +103,19 @@
                             <TextBlock Text="Корзина"
                                        Style="{StaticResource Text_Style}" />
 
+                            <TextBox Text="{Binding CurrentCustomerAccount}"
+                                     Width="16" Height="16" Background="#0bcdff"
+                                     FontSize="11" Margin="145,8,66,25"
+                                     TextAlignment="Center" BorderThickness="0" 
+                                     Foreground ="#DBDBDB">
+
+                                <TextBox.Resources>
+                                    <Style TargetType="{x:Type Border}">
+                                        <Setter Property="CornerRadius" Value="3"/>
+                                    </Style>
+                                </TextBox.Resources>
+                            </TextBox>
+
                         </Grid>
 
                     </RadioButton>

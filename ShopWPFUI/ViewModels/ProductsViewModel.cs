@@ -26,7 +26,7 @@ namespace ShopWPFUI.ViewModels
             set
             {
                 _selectedProduct = value;
-                AddToCartCommand.Execute(this);
+                //AddToCartCommand.Execute(this);
                 OnPropertyChanged(nameof(SelectedProduct));
             }
         }

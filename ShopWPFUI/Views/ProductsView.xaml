@@ -18,17 +18,35 @@
                    Margin="10" FontSize="22"/>
 
 
-        <ListView  x:Name="Categories" ItemsSource="{Binding Products}"
+        <ListView  x:Name="CategoriesListView" ItemsSource="{Binding Products}"
                     ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                     Grid.Row="1" Margin="10, 0, 20, 0" 
                     Background="Transparent"
                     BorderThickness="0"
-                   SelectedItem="{Binding SelectedProduct}">
+                    SelectedItem="{Binding SelectedProduct}">
+         
             <ListView.ItemsPanel>
                 <ItemsPanelTemplate>
                     <WrapPanel/>
                 </ItemsPanelTemplate>
             </ListView.ItemsPanel>
+
+            <ListView.Resources>
+                <Style TargetType="ListViewItem">
+                    <Style.Triggers >
+                        
+                        <EventTrigger RoutedEvent="MouseEnter">
+                        </EventTrigger>
+
+                        <Trigger Property="IsMouseOver" Value="true">
+                            <Setter Property="IsSelected" Value="True" />
+                        </Trigger>
+   
+                    </Style.Triggers>
+                    
+                </Style>
+            </ListView.Resources>
+
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
                     <Border Margin="10" Width="160" Height="240">
@@ -48,8 +66,11 @@
                                 <Run Text="{Binding Price}"/>
                                 <Run Text="₽"/>
                             </TextBlock>
-                            <Button Command="{Binding AddToCartCommand}"
+                            <Button Command="{Binding ElementName=CategoriesListView, 
+                                    Path= DataContext.AddToCartCommand}"                                
                                 Content="В корзину" HorizontalAlignment="Center" Margin="8">
+
+                   
                             </Button>
                         </StackPanel>
                     </Border>

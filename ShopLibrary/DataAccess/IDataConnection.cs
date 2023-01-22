@@ -30,5 +30,6 @@ namespace PizzaShop.DataAccess
         List<ProductModel> GetProductsFromCategory(CategoryModel category);
 
         public void AddToCart(CustomerModel customer, ProductModel product);
+        public List<CartsModel> GetCartByCustomer(CustomerModel customer);
     }
 }

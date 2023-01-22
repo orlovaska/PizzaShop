@@ -4,12 +4,128 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:ShopWPFUI.Views"
-             xmlns:vm="clr-namespace:ShopWPFUI.ViewModels"
+             xmlns:vm="clr-namespace:ShopWPFUI.ViewModels" 
+             d:DataContext="{d:DesignInstance Type=vm:CartViewModel}"
              mc:Ignorable="d" 
             d:DesignHeight="570" d:DesignWidth="625">
 
     <Grid>
-        <Border Background="green"
-                CornerRadius="20" />
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="60"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        
+        <TextBlock Text ="Как сделать это?" Foreground="#DBDBDB" Grid.Row="0" Margin="10" FontSize="22"/>
+        
+        <!--<ListView  x:Name="CategoriesListView" ItemsSource="{Binding Carts}"
+                    ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                    Grid.Row="1" Margin="10, 0, 20, 0" 
+                    Background="Transparent"
+                    BorderThickness="0"
+                    SelectedItem="{Binding SelectedCart}">
+
+            <ListView.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <StackPanel/>
+                </ItemsPanelTemplate>
+            </ListView.ItemsPanel>
+
+            --><!--<ListView.Resources>
+                <Style TargetType="ListViewItem">
+                    <Style.Triggers >
+
+                        <EventTrigger RoutedEvent="MouseEnter">
+                        </EventTrigger>
+
+                        <Trigger Property="IsMouseOver" Value="true">
+                            <Setter Property="IsSelected" Value="True" />
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </ListView.Resources>--><!--
+
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <Border Margin="10" Width="380" Height="130">
+                        <StackPanel Orientation ="Horizontal">
+                            <Border Width="50" Height="50" CornerRadius="5" >
+                                <Border.Effect>
+                                    <DropShadowEffect ShadowDepth="1"/>
+                                </Border.Effect>
+                                <Border.Background>
+                                    <ImageBrush ImageSource="{Binding Product.Image}"/>
+                                </Border.Background>
+                            </Border>
+                            <TextBlock Margin="5 0" Text="{Binding Product.Name}" 
+                                        Foreground="#DBDBDB" FontSize="15"/>
+                            <TextBlock Margin="5 0"
+                                        Foreground="#DBDBDB" FontSize="15">
+                                <Run Text="{Binding Product.Price}"/>
+                                <Run Text="₽"/>
+                            </TextBlock>
+                        </StackPanel>
+                    </Border>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ListView>-->
+
+
+        <ListView   ItemsSource="{Binding Carts}"
+                    ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                    Grid.Row="1" Margin="10, 0, 20, 0" 
+                    Background="Transparent"
+                    BorderThickness="0"
+                    SelectedItem="{Binding SelectedCart}">
+
+            <ListView.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel/>
+                </ItemsPanelTemplate>
+            </ListView.ItemsPanel>
+
+            <!--<ListView.Resources>
+                <Style TargetType="ListViewItem">
+                    <Style.Triggers >
+
+                        <EventTrigger RoutedEvent="MouseEnter">
+                        </EventTrigger>
+
+                        <Trigger Property="IsMouseOver" Value="true">
+                            <Setter Property="IsSelected" Value="True" />
+                        </Trigger>
+
+                    </Style.Triggers>
+
+                </Style>
+            </ListView.Resources>-->
+
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <Border Margin="10" Width="160" Height="240">
+                        <StackPanel>
+                            <Border Width="150" Height="150" CornerRadius="5" >
+                                <Border.Effect>
+                                    <DropShadowEffect ShadowDepth="1"/>
+                                </Border.Effect>
+                                <Border.Background>
+                                    <ImageBrush ImageSource="{Binding Product.Image}"/>
+                                </Border.Background>
+                            </Border>
+                            <TextBlock Margin="5 0" Text="{Binding Product.Name}" 
+                                        Foreground="#DBDBDB" FontSize="15"/>
+                            <TextBlock Margin="5 0"
+                                        Foreground="#DBDBDB" FontSize="15">
+                                <Run Text="{Binding Product.Price}"/>
+                                <Run Text="₽"/>
+                            </TextBlock>
+                            <TextBlock Margin="5 0"
+                                        Foreground="#DBDBDB" FontSize="15" 
+                                       Text="{Binding Quntity}"/>
+                        </StackPanel>
+                    </Border>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ListView>
     </Grid>
 </UserControl>

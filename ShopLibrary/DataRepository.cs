@@ -1,4 +1,5 @@
-﻿using PizzaShop.DataAccess;
+﻿using Microsoft.EntityFrameworkCore;
+using PizzaShop.DataAccess;
 using PizzaShop.Models;
 using System;
 using System.Collections.Generic;
@@ -174,19 +175,20 @@ namespace ShopLibrary
 
                 if (carts.Count == 0)
                 {
-                    CartsModel cart1 = new CartsModel();
-                    cart1.CustomerId = customer.Id;
-                    cart1.ProductId = product.Id;
 
-                    //cart1.Product.Name = product.Name;
-                    //cart1.Product.Price = product.Price;
-                    //cart1.Product.CategoryId = product.CategoryId;
-                    //cart1.Customer.Email = customer.Email;
-                    //cart1.Customer.Addresses = customer.Addresses;
-                    //cart1.Customer.Orders = customer.Orders;
-                    //cart1.Customer.FirstName = customer.FirstName;
-                    //cart1.Customer.LastName = customer.LastName;
-                    //cart1.Customer.Phone = customer.Phone;
+                    CustomerModel CurrentCustomer = context.Customers
+                    .Where(c => c.Id == customer.Id)
+                    .FirstOrDefault();
+
+                    ProductModel CurrentProduct = context.Products
+                    .Where(c => c.Id == product.Id)
+                    .FirstOrDefault();
+
+
+                    CartsModel cart1 = new CartsModel();
+                    cart1.Customer = CurrentCustomer;
+                    cart1.Product = CurrentProduct;                  
+
                     cart1.Quntity = 1;
                     context.Add(cart1);
                 }
@@ -199,6 +201,16 @@ namespace ShopLibrary
                 }
                 context.SaveChanges();
             }
+        }
+
+        public List<CartsModel> GetCartByCustomer(CustomerModel customer)
+        {
+            List<CartsModel> carts = new List<CartsModel>();
+            using (SqlConnector context = new SqlConnector())
+            { 
+                carts = context.Carts.Where(p => p.CustomerId == customer.Id).Include(p => p.Product).ToList();
+            }
+            return carts;
         }
     }
 }
