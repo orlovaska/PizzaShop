@@ -15,6 +15,9 @@ namespace PizzaShop.Models
         public string Phone { get; set; }
         public string Email { get; set; }
 
+        public int RoleId { get; set; }
+        public RoleModel Role { get; set; }
+
         public ICollection<OrderModel> Orders { get; set; } = null!;
         public ICollection<AddressModel> Addresses { get; set; } = null!;
 

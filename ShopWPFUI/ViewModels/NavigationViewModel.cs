@@ -19,6 +19,25 @@ namespace ShopWPFUI.ViewModels
         private object _currentView;
         private CustomerModel _currentCustomerAccount;
 
+
+        private int _numberOfProductCars;
+
+        public int NumberOfProductCars
+        {
+            get
+            {
+                return _numberOfProductCars;
+            }
+
+            set
+            {
+                _numberOfProductCars = value;
+                OnPropertyChanged(nameof(NumberOfProductCars));
+            }
+        }
+
+
+
         public object CurrentView
         {
             get { return _currentView; }
@@ -56,10 +75,23 @@ namespace ShopWPFUI.ViewModels
             catalogViewModel.onCount += Products;
             CurrentView = catalogViewModel;
         }
-        private void Cart(object obj) => CurrentView = new CartViewModel(CurrentCustomerAccount);
+        private void Cart(object obj)
+        {
+            CartViewModel cartViewModel = new CartViewModel(CurrentCustomerAccount);
+            CurrentView = cartViewModel;
+            cartViewModel.QuantityChange += Cart_QuantityChange;
+
+        }
         private void Products(CategoryModel SelectedCatedory)
         {
-            CurrentView = new ProductsViewModel(CurrentCustomerAccount, SelectedCatedory);
+            ProductsViewModel productsViewModel = new ProductsViewModel(CurrentCustomerAccount, SelectedCatedory);
+            CurrentView = productsViewModel;
+            productsViewModel.QuantityChange += Cart_QuantityChange;
+        }
+
+        private void Cart_QuantityChange(int productQuantityDifference)
+        {
+            NumberOfProductCars += productQuantityDifference;
         }
 
         public NavigationViewModel(NavigationStore navigationStore)
@@ -68,6 +100,7 @@ namespace ShopWPFUI.ViewModels
             CurrentCustomerAccount = new CustomerModel();
 
             LoadCurrentUserData();
+            NumberOfProductCars = dataRepository.GetCartByCustomer(CurrentCustomerAccount).Sum(x => x.Quntity);
 
             ProfilCommand = new RelayCommand(Profil);
             OrdersCommand = new RelayCommand(Orders);

@@ -13,6 +13,11 @@ namespace ShopWPFUI.ViewModels
 {
     internal class ProductsViewModel: BaseViewModel
     {
+
+        public delegate void AccountHandler(int productQuantityDifference);
+        public event AccountHandler QuantityChange;
+
+
         private ProductModel _selectedProduct;
         private CustomerModel _currentCustomerAccount;
 
@@ -59,12 +64,13 @@ namespace ShopWPFUI.ViewModels
             Products = DataRepository.GetProductsFromCategory(selectedCatedory);
 
             AddToCartCommand = new RelayCommand(AddToCart);
-            //Products = DataRepository.GetProducts_All();
         }
 
         public void AddToCart(object obj)
         {
             DataRepository.AddToCart(CurrentCustomerAccount, SelectedProduct);
+            QuantityChange.Invoke(1);
         }
+
     }
 }

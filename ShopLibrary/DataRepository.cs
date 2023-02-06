@@ -150,19 +150,19 @@ namespace ShopLibrary
             return customerModel;
         }
 
-        public List<OrderModel> GetActiveOrders()
+        public List<OrderModel> GetActiveOrders(CustomerModel customer)
         {
             using (SqlConnector context = new SqlConnector())
             {
-                return context.Orders.Where(p => p.Status.Id != 5 && p.Status.Id != 6).ToList();
+                return context.Orders.Where(p => p.CustomerId == customer.Id && p.Status.Id != 5 && p.Status.Id != 6).ToList();
             }
         }
 
-        public List<OrderModel> GetCompletedOrders()
+        public List<OrderModel> GetCompletedOrders(CustomerModel customer)
         {
             using (SqlConnector context = new SqlConnector())
             {
-                return context.Orders.Where(p => p.Status.Id == 5 || p.Status.Id == 6).ToList();
+                return context.Orders.Where(p => p.CustomerId == customer.Id && p.Status.Id == 5 || p.Status.Id == 6).ToList();
             }
         }
 
@@ -211,6 +211,32 @@ namespace ShopLibrary
                 carts = context.Carts.Where(p => p.CustomerId == customer.Id).Include(p => p.Product).ToList();
             }
             return carts;
+        }
+
+        public void DeleteFromCart(CustomerModel customer, ProductModel product)
+        {
+            using (SqlConnector context = new SqlConnector())
+            {
+                var result = context.Carts.Single(p => p.CustomerId == customer.Id && p.ProductId == product.Id);
+                if (result != null)
+                {
+                    context.Carts.Remove(result);
+                    context.SaveChanges();
+                }
+            }
+        }
+
+        public void ReduceQuntityOfProductFromCart(CustomerModel customer, ProductModel product)
+        {
+            using (SqlConnector context = new SqlConnector())
+            {
+                var result = context.Carts.Single(p => p.CustomerId == customer.Id && p.ProductId == product.Id);
+                if (result != null)
+                {
+                    result.Quntity--;
+                    context.SaveChanges();
+                }
+            }
         }
     }
 }

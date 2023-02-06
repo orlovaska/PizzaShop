@@ -103,7 +103,7 @@
                             <TextBlock Text="Корзина"
                                        Style="{StaticResource Text_Style}" />
 
-                            <TextBox Text="{Binding CurrentCustomerAccount}"
+                            <TextBox Text="{Binding NumberOfProductCars}"
                                      Width="16" Height="16" Background="#0bcdff"
                                      FontSize="11" Margin="145,8,66,25"
                                      TextAlignment="Center" BorderThickness="0" 

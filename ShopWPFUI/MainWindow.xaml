@@ -59,7 +59,7 @@
                                 Cursor="Hand"
                                 Grid.Column="1"
                                 Click="btnMinimize_Click">
-                
+
                     <Button.Style>
                         <Style TargetType="Button">
                             <Setter Property="Background" Value="#28AEED"/>
@@ -118,9 +118,6 @@
                     </Button.Style>
                 </Button>
             </Grid>
-            <!--<Menu>
-                <MenuItem Command="{Binding CurrentView}" />
-            </Menu>-->
 
             <Grid Grid.Row="1" >
                 <ContentControl Content="{Binding CurrentViewModel}" />

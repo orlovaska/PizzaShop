@@ -38,7 +38,7 @@
                         <EventTrigger RoutedEvent="MouseEnter">
                         </EventTrigger>
 
-                        <Trigger Property="IsMouseOver" Value="true">
+                        <Trigger Property="IsMouseOver" Value="True">
                             <Setter Property="IsSelected" Value="True" />
                         </Trigger>
    
@@ -69,8 +69,6 @@
                             <Button Command="{Binding ElementName=CategoriesListView, 
                                     Path= DataContext.AddToCartCommand}"                                
                                 Content="В корзину" HorizontalAlignment="Center" Margin="8">
-
-                   
                             </Button>
                         </StackPanel>
                     </Border>

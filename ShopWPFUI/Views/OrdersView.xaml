@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:ShopWPFUI.Views"
              xmlns:vm="clr-namespace:ShopWPFUI.ViewModels" 
+             d:DataContext="{d:DesignInstance Type=vm:OrdersViewModel}"
              mc:Ignorable="d" 
              d:DesignHeight="570" d:DesignWidth="625">
 
@@ -19,32 +20,112 @@
         </Grid.ColumnDefinitions>
 
         <Grid.RowDefinitions>
-            <RowDefinition Height="80"/>
-            <RowDefinition Height="30"/>
+            <RowDefinition Height="60"/>
+            <RowDefinition Height="70"/>
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <!--<StackPanel Width="625" Height="50"
  
                         Orientation="Horizontal"
                         Margin="0,0,0,520">-->
             <Button x:Name="btnLogin" 
+                    Grid.Row="1"
                     Grid.Column="0"
-                    Command="{Binding LoginCommand}"
+                    Command="{Binding ActiveOrdersCommand}"
                     Content="Активные"
                     Style="{StaticResource BtnStyle}"
-                    Margin="0,20,0,0" />
+                    Margin="0,12,0,12" />
 
 
             <Button x:Name="btn2Login" 
+                        Grid.Row="1"
                         Grid.Column="1"
-                        Command="{Binding LoginCommand}"
+                        Command="{Binding CompletedOrdersCommand}"
                         Content="Завершенные"
                         Style="{StaticResource BtnStyle}"
-                        Margin="0,20,0,0" />
+                        Margin="0,12,0,12" />
         
         
         <!--</StackPanel>-->
 
-            
+        <TextBlock Text ="Мои заказы" 
+                   Foreground="#DBDBDB" 
+                   Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"
+                   Margin="10" FontSize="22"/>
+
+
+
+        <ListView   x:Name="OrdersListView"
+                    ItemsSource="{Binding CurrentListOrders}"
+                    ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                    Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2"
+                    Margin="10, 0, 20, 0" 
+                    Background="Transparent"
+                    BorderThickness="0"
+                    SelectedItem="{Binding SelectedOrder}">
+
+            <ListView.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <StackPanel/>
+                </ItemsPanelTemplate>
+            </ListView.ItemsPanel>
+
+            <ListView.Resources>
+                <Style TargetType="ListViewItem">
+                    <Style.Triggers >
+
+                        <EventTrigger RoutedEvent="MouseEnter">
+                        </EventTrigger>
+
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="IsSelected" Value="True" />
+                        </Trigger>
+
+                    </Style.Triggers>
+
+                </Style>
+            </ListView.Resources>
+
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <Border Margin="10" Height="120">
+                        <StackPanel Orientation="Horizontal">
+                            <!--<Border Width="90" Height="90" CornerRadius="5" >
+                                <Border.Effect>
+                                    <DropShadowEffect ShadowDepth="1"/>
+                                </Border.Effect>
+                                <Border.Background>
+                                    <ImageBrush ImageSource="{Binding Product.Image}"/>
+                                </Border.Background>
+                            </Border>-->
+                            <TextBlock Margin="5, 20, 0, 0" Text="{Binding OrderPlaced}" 
+                                        Foreground="#DBDBDB" FontSize="15"/>
+                            
+                            <TextBlock Margin="5, 20, 0, 0" Text="{Binding OrderFulfilled}" 
+                                        Foreground="#DBDBDB" FontSize="15"/>
+                            
+                            <TextBlock Margin="5, 20, 0, 0" 
+                                        Foreground="#DBDBDB" FontSize="15">
+                                <Run Text="102032"/>
+                                <Run Text="₽"/>
+                            </TextBlock>
+
+                            <TextBlock Margin="5, 20, 0, 0" Text="{Binding Status}" 
+                                        Foreground="#DBDBDB" FontSize="15"/>
+
+                            <!--<Button x:Name="btnDeleteProduct" 
+                                        Command="{Binding ElementName=OrdersListView, 
+                                    Path= DataContext.DeleteProductFromCart}"
+                                    Content="+"
+                                    Style="{StaticResource BtnQuntityStyle}"
+                                    Margin="10,0,10,0" />-->
+                        </StackPanel>
+                    </Border>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ListView>
+
+
 
     </Grid>
 </UserControl>
