@@ -14,8 +14,8 @@ namespace ShopWPFUI.ViewModels
     internal class ProductsViewModel: BaseViewModel
     {
 
-        public delegate void AccountHandler(int productQuantityDifference);
-        public event AccountHandler QuantityChange;
+        public delegate void ChangeQuantityHandler(int productQuantityDifference);
+        public event ChangeQuantityHandler QuantityChange;
 
 
         private ProductModel _selectedProduct;

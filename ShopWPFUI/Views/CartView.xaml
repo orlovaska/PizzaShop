@@ -20,12 +20,15 @@
         <!--<TextBlock Text ="Корзина" Foreground="#DBDBDB" Grid.Row="0" Margin="10" FontSize="22"/>-->
 
 
-        <TextBlock Text ="{Binding SelectedCart.Product.Name}" Foreground="#DBDBDB" Grid.Row="0" 
-                   Margin="10" FontSize="22"/>
+        <TextBlock Foreground="#DBDBDB" Grid.Row="0" 
+                   Margin="10" FontSize="22">
+                   <Run Text="{Binding TotalPrice, Mode=OneWay}"/>
+                   <Run Text="₽"/>
+        </TextBlock>
 
         <ListView   x:Name="CartListView"
                     ItemsSource="{Binding Carts}"
-                    ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                    ScrollViewer.HorizontalScrollBarVisibility="Disabled" 
                     Grid.Row="1" Margin="10, 0, 20, 0" 
                     Background="Transparent"
                     BorderThickness="0"
@@ -90,16 +93,21 @@
                                     Content="+"
                                     Style="{StaticResource BtnQuntityStyle}"
                                     Margin="10,0,10,0" />
-                            <Button x:Name="btnDeleteProduct" 
+                                <Button x:Name="btnDeleteProduct" 
                                         Command="{Binding ElementName=CartListView, 
                                     Path= DataContext.DeleteProductFromCart}"
                                     Content="+"
                                     Style="{StaticResource BtnQuntityStyle}"
                                     Margin="10,0,10,0" />
 
+                            <TextBlock Margin="5, 20, 0, 0" 
+                                       Foreground="#DBDBDB" FontSize="15">
+                                <Run Text="{Binding Price, Mode=OneWay}"/>
+                                <Run Text="₽"/>
+                            </TextBlock>
                             <!--<TextBlock Margin="5, 20, 0, 0" 
                                         Foreground="#DBDBDB" FontSize="15" 
-                                       Text="{Binding Product.Price Quntity}{}"/>-->
+                                       Text="{Binding Price} "/>-->
                         </StackPanel>
                         </Border>
                     </DataTemplate>
