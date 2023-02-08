@@ -166,7 +166,7 @@ namespace ShopLibrary
         {
             using (SqlConnector context = new SqlConnector())
             {
-                return context.Orders.Where(p => p.CustomerId == customer.Id && p.Status.Id != 5 && p.Status.Id != 6).Include(p => p.Status)./*Include(p => p.OrderDetails).*/ToList();
+                return context.Orders.Where(p => p.CustomerId == customer.Id && p.Status.Id != 5 && p.Status.Id != 6).Include(p => p.Status).Include(p => p.OrderDetails).ToList();
             }
         }
 
@@ -174,7 +174,7 @@ namespace ShopLibrary
         {
             using (SqlConnector context = new SqlConnector())
             {
-                return context.Orders.Where(p => p.CustomerId == customer.Id && p.Status.Id == 5 || p.Status.Id == 6).Include(p => p.Status).ToList();
+                return context.Orders.Where(p => p.CustomerId == customer.Id && p.Status.Id == 5 || p.Status.Id == 6).Include(p => p.Status).Include(p => p.OrderDetails).ToList();
             }
         }
 
@@ -272,9 +272,9 @@ namespace ShopLibrary
                     .Where(c => c.Id == order.Id)
                     .FirstOrDefault();
 
-                OrderDetailModel orderDetail = new OrderDetailModel();
                 foreach (var cart in carts)
                 {
+                    OrderDetailModel orderDetail = new OrderDetailModel();
                     orderDetail.PriceAtCheckout = cart.Product.СurrentPrice;
                     orderDetail.Order = CurrentOrder;
                     orderDetail.Quntity = cart.Quntity;
@@ -283,6 +283,7 @@ namespace ShopLibrary
                     orderDetail.Product = CurrentProduct;
 
                     context.OrderDetails.Add(orderDetail);
+                    context.SaveChanges();
 
                 }
 

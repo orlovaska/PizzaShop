@@ -20,6 +20,6 @@ namespace PizzaShop.Models
         public ICollection<OrderDetailModel> OrderDetails { get; set; } = new List<OrderDetailModel>();
 
         [NotMapped]
-        public decimal Price => OrderDetails.Sum(p => p.PriceAtCheckout);
+        public decimal Price => OrderDetails.Sum(p => p.PriceAtCheckout * p.Quntity);
     }
 }
