@@ -16,7 +16,8 @@ namespace PizzaShop.DataAccess
         void DeleteCustomer(CustomerModel customer);
         CustomerModel GetByEmail(string email);
 
-        void AddOrder(OrderModel order);
+        OrderModel AddOrder(CustomerModel customer, OrderModel order); 
+        void AddOrderDetailsFromCarts(OrderModel order, ICollection<CartsModel> carts);
         List<OrderModel> GetActiveOrders(CustomerModel customer);
         List<OrderModel> GetCompletedOrders(CustomerModel customer);
 
@@ -35,5 +36,6 @@ namespace PizzaShop.DataAccess
         public void ReduceQuntityOfProductFromCart(CustomerModel customer, ProductModel product);
         public void AddToCart(CustomerModel customer, ProductModel product);
         public List<CartsModel> GetCartByCustomer(CustomerModel customer);
+        void DeleteAllCartsByCustomer(CustomerModel customer);
     }
 }

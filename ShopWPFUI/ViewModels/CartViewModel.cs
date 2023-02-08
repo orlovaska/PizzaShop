@@ -20,6 +20,9 @@ namespace ShopWPFUI.ViewModels
         public delegate void AccountHandler(int productQuantityDifference);
         public event AccountHandler QuantityChange;
 
+        public delegate void MakingOrderHandler(decimal totalPrice);
+        public event MakingOrderHandler ContinueMakingOrder;
+
 
         private CartsModel _selectedCart;
         private CustomerModel _currentCustomerAccount;
@@ -68,25 +71,24 @@ namespace ShopWPFUI.ViewModels
             }
         }
 
-        public ICommand DeleteProductFromCart { get; set; }
+        public ICommand DeleteProductFromCart { get;}
         public ICommand IncreaseQuntityOfProductInCart { get; }
         public ICommand ReduceQuntityOfProductInCart { get; }
+        public ICommand ContinueMakingOrderCommand { get;  }
+        private IDataConnection DataRepository { get;}
 
-        public ICommand ContinueMakingOrderCommand { get; set; }
-        private IDataConnection DataRepository { get; set; }
-
-        public CartViewModel(CustomerModel _currentCustomerAccount)
+        public CartViewModel(CustomerModel currentCustomerAccount)
         {
-            CurrentCustomerAccount = _currentCustomerAccount;
+            CurrentCustomerAccount = currentCustomerAccount;
             DataRepository = new DataRepository();
-            Carts = new ObservableCollection<CartsModel>((DataRepository.GetCartByCustomer(CurrentCustomerAccount)));
+            Carts = new ObservableCollection<CartsModel>(DataRepository.GetCartByCustomer(CurrentCustomerAccount));
             TotalPrice = Carts.Sum(p => p.Price);
 
             DeleteProductFromCart = new RelayCommand(DeleteProduct);
             IncreaseQuntityOfProductInCart = new RelayCommand(IncreaseQuntityOfProduct);
             ReduceQuntityOfProductInCart = new RelayCommand(ReduceQuntityOfProduct);
 
-            ContinueMakingOrderCommand = new RelayCommand(ContinueMakingOrder);
+            ContinueMakingOrderCommand = new RelayCommand(OnContinueMakingOrder);
         }
 
         private void RecalculateTotaPrice()
@@ -94,9 +96,9 @@ namespace ShopWPFUI.ViewModels
             TotalPrice = Carts.Sum(p => p.Price);
         }
 
-        private void ContinueMakingOrder(object obj)
+        private void OnContinueMakingOrder(object obj)
         {
-            throw new NotImplementedException();//TODO
+            ContinueMakingOrder?.Invoke(TotalPrice);
         }
 
         private void DeleteProduct(object obj)
@@ -107,7 +109,7 @@ namespace ShopWPFUI.ViewModels
                 DataRepository.DeleteFromCart(CurrentCustomerAccount, SelectedCart.Product);
                 Carts.Remove(itemToRemove);
 
-                QuantityChange.Invoke(-itemToRemove.Quntity);
+                QuantityChange?.Invoke(-itemToRemove.Quntity);
                 RecalculateTotaPrice();
             }
         }
@@ -124,7 +126,7 @@ namespace ShopWPFUI.ViewModels
                 cartsModel.Quntity--;
                 Carts.Insert(index, cartsModel);
 
-                QuantityChange.Invoke(-1);
+                QuantityChange?.Invoke(-1);
                 RecalculateTotaPrice();
             }
             else DeleteProductFromCart.Execute(obj);
@@ -141,7 +143,7 @@ namespace ShopWPFUI.ViewModels
             cartsModel.Quntity++;
             Carts.Insert(index, cartsModel);
 
-            QuantityChange.Invoke(1);
+            QuantityChange?.Invoke(1);
             RecalculateTotaPrice();
         }
     }

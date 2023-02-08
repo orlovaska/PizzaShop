@@ -19,7 +19,7 @@ namespace PizzaShop.Models
         public CustomerModel Customer { get; set; }
 
         [NotMapped]
-        public decimal Price => (decimal)Quntity * Product.Price;
+        public decimal Price => (decimal)Quntity * Product.СurrentPrice;
 
     }
 }

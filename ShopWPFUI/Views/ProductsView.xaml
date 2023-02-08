@@ -63,7 +63,7 @@
                                         Foreground="#DBDBDB" FontSize="15"/>
                             <TextBlock Margin="5 0"
                                         Foreground="#DBDBDB" FontSize="15">
-                                <Run Text="{Binding Price}"/>
+                                <Run Text="{Binding СurrentPrice}"/>
                                 <Run Text="₽"/>
                             </TextBlock>
                             <Button Command="{Binding ElementName=CategoriesListView, 

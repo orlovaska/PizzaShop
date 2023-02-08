@@ -21,7 +21,6 @@ namespace ShopWPFUI.ViewModels
 
 
         private int _numberOfProductCars;
-
         public int NumberOfProductCars
         {
             get
@@ -80,8 +79,22 @@ namespace ShopWPFUI.ViewModels
             CartViewModel cartViewModel = new CartViewModel(CurrentCustomerAccount);
             CurrentView = cartViewModel;
             cartViewModel.QuantityChange += Cart_QuantityChange;
+            cartViewModel.ContinueMakingOrder += Cart_ContinueMakingOrder;
 
         }
+
+        private void Cart_ContinueMakingOrder(decimal totalPrice)
+        {
+            PlaceOrderViewModel placeOrderViewModel = new PlaceOrderViewModel(CurrentCustomerAccount, totalPrice);
+            CurrentView = placeOrderViewModel;
+            placeOrderViewModel.CartsIsCleared += CartsIsCleared;
+        }
+
+        private void CartsIsCleared(object? sender, EventArgs e)
+        {
+            NumberOfProductCars = 0;
+        }
+
         private void Products(CategoryModel SelectedCatedory)
         {
             ProductsViewModel productsViewModel = new ProductsViewModel(CurrentCustomerAccount, SelectedCatedory);

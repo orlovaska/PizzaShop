@@ -4,6 +4,7 @@ using ShopLibrary;
 using ShopWPFUI.Commands;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -30,7 +31,7 @@ namespace ShopWPFUI.ViewModels
 
         public OrderModel SelectedOrder { get; set; }
 
-        public List<OrderModel> CurrentListOrders { get; set; }
+        public ObservableCollection<OrderModel> CurrentListOrders { get; set; }
 
         public List<OrderModel> ActiveOrders { get; set; }
         public List<OrderModel> CompletedOrders { get; set; }
@@ -47,6 +48,7 @@ namespace ShopWPFUI.ViewModels
             CurrentCustomerAccount = currentCustomerAccount;
 
             ActiveOrders = DataRepository.GetActiveOrders(CurrentCustomerAccount);
+            CurrentListOrders = new ObservableCollection<OrderModel>(ActiveOrders);
             CompletedOrders = DataRepository.GetCompletedOrders(CurrentCustomerAccount);
 
             ActiveOrdersCommand = new RelayCommand(ShowActiveOrders);
@@ -57,12 +59,16 @@ namespace ShopWPFUI.ViewModels
 
         private void ShowCompletedOrders(object obj)
         {
-            CurrentListOrders = CompletedOrders;
+            CurrentListOrders.Clear();
+            foreach(var order in CompletedOrders)
+                CurrentListOrders.Add(order);
         }
 
         private void ShowActiveOrders(object obj)
         {
-            CurrentListOrders = ActiveOrders;
+            CurrentListOrders.Clear();
+            foreach (var order in ActiveOrders)
+                CurrentListOrders.Add(order);
         }
     }
 }

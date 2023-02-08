@@ -14,13 +14,11 @@ namespace PizzaShop.Models
         public int Id { get; set; }
         public string Name { get; set; } = null!;
         [Column (TypeName = "decimal(6 ,2)")]
-        public decimal Price { get; set; }
+        public decimal СurrentPrice { get; set; }
         [Column(TypeName = "image")]
         public byte[] Image { get; set; }
         public int CategoryId { get; set; }
         public CategoryModel Category { get; set; }
 
-        //Add-Migration AddPic -project ShopLibrary
-        //Update-Database -project ShopLibrary
     }
 }

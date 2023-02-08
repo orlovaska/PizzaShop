@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Linq;
 
 namespace PizzaShop.Models
 {
@@ -15,6 +17,9 @@ namespace PizzaShop.Models
         public int CustomerId { get; set; }
         public CustomerModel Customer { get; set; } = null!;
 
-        public ICollection<OrderDetailModel> OrderDetails { get; set; } = null!;
+        public ICollection<OrderDetailModel> OrderDetails { get; set; } = new List<OrderDetailModel>();
+
+        [NotMapped]
+        public decimal Price => OrderDetails.Sum(p => p.PriceAtCheckout);
     }
 }

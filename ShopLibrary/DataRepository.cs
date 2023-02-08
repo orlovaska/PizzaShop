@@ -107,11 +107,23 @@ namespace ShopLibrary
                 context.Customers.Remove(customer);
             }
         }
-        public void AddOrder(OrderModel order)
+        public OrderModel AddOrder(CustomerModel customer, OrderModel order)
         {
             using (SqlConnector context = new SqlConnector())
             {
+                CustomerModel CurrentCustomer = context.Customers
+                   .Where(c => c.Id == customer.Id)
+                   .FirstOrDefault();
+
+                StatusModel CurrentStatus = context.Statuses
+                   .Where(c => c.Id == order.StatusId)
+                   .FirstOrDefault();
+
+                order.Status = CurrentStatus;
+                order.Customer = CurrentCustomer;
                 context.Orders.Add(order);
+                context.SaveChanges();
+                return order;
             }
         }
         public bool EmailIsUnique(string email)
@@ -154,7 +166,7 @@ namespace ShopLibrary
         {
             using (SqlConnector context = new SqlConnector())
             {
-                return context.Orders.Where(p => p.CustomerId == customer.Id && p.Status.Id != 5 && p.Status.Id != 6).ToList();
+                return context.Orders.Where(p => p.CustomerId == customer.Id && p.Status.Id != 5 && p.Status.Id != 6).Include(p => p.Status)./*Include(p => p.OrderDetails).*/ToList();
             }
         }
 
@@ -162,7 +174,7 @@ namespace ShopLibrary
         {
             using (SqlConnector context = new SqlConnector())
             {
-                return context.Orders.Where(p => p.CustomerId == customer.Id && p.Status.Id == 5 || p.Status.Id == 6).ToList();
+                return context.Orders.Where(p => p.CustomerId == customer.Id && p.Status.Id == 5 || p.Status.Id == 6).Include(p => p.Status).ToList();
             }
         }
 
@@ -236,6 +248,46 @@ namespace ShopLibrary
                     result.Quntity--;
                     context.SaveChanges();
                 }
+            }
+        }
+
+        public void DeleteAllCartsByCustomer(CustomerModel customer)
+        {
+            using (SqlConnector context = new SqlConnector())
+            {
+                var result = context.Carts.Where(p => p.CustomerId == customer.Id);
+                if (result != null)
+                {
+                    context.Carts.RemoveRange(result);
+                    context.SaveChanges();
+                }
+            }
+        }
+
+        public void AddOrderDetailsFromCarts(OrderModel order, ICollection<CartsModel> carts)
+        {
+            using (SqlConnector context = new SqlConnector())
+            {
+                OrderModel CurrentOrder = context.Orders
+                    .Where(c => c.Id == order.Id)
+                    .FirstOrDefault();
+
+                OrderDetailModel orderDetail = new OrderDetailModel();
+                foreach (var cart in carts)
+                {
+                    orderDetail.PriceAtCheckout = cart.Product.СurrentPrice;
+                    orderDetail.Order = CurrentOrder;
+                    orderDetail.Quntity = cart.Quntity;
+
+                    ProductModel CurrentProduct = context.Products.Where(c => c.Id == cart.ProductId).FirstOrDefault();
+                    orderDetail.Product = CurrentProduct;
+
+                    context.OrderDetails.Add(orderDetail);
+
+                }
+
+                //CurrentOrder.Price = carts.Sum(p => p.Price);
+                context.SaveChanges();
             }
         }
     }
