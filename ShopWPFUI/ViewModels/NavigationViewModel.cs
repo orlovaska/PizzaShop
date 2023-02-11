@@ -76,11 +76,28 @@ namespace ShopWPFUI.ViewModels
         }
         private void Cart(object obj)
         {
+            if (NumberOfProductCars > 0)
+            {
+                CartViewModel cartViewModel = new CartViewModel(CurrentCustomerAccount);
+                CurrentView = cartViewModel;
+                cartViewModel.QuantityChange += Cart_QuantityChange;
+                cartViewModel.ContinueMakingOrder += Cart_ContinueMakingOrder;
+            }
+            else
+            {
+                EmptyCartViewModel emptyCartViewModel = new EmptyCartViewModel();
+                CurrentView = emptyCartViewModel;
+                emptyCartViewModel.ShowsCatalog += EmptyCartViewModel_ShowsCatalog;
+            }
+
+        }
+
+        private void EmptyCartViewModel_ShowsCatalog(object? sender, EventArgs e)
+        {
             CartViewModel cartViewModel = new CartViewModel(CurrentCustomerAccount);
             CurrentView = cartViewModel;
             cartViewModel.QuantityChange += Cart_QuantityChange;
             cartViewModel.ContinueMakingOrder += Cart_ContinueMakingOrder;
-
         }
 
         private void Cart_ContinueMakingOrder(decimal totalPrice)

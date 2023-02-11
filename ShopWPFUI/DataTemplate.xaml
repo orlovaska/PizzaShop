@@ -12,6 +12,10 @@
         <view:CartView />
     </DataTemplate>
 
+    <DataTemplate DataType="{x:Type vm:EmptyCartViewModel}">
+        <view:EmptyCartView />
+    </DataTemplate>
+
     <DataTemplate DataType="{x:Type vm:PlaceOrderViewModel}">
         <view:PlaceOrderView />
     </DataTemplate>
