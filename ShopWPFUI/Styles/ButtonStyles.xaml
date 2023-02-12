@@ -165,7 +165,7 @@
                                         CornerRadius="10"
                                         Background="{TemplateBinding Background}">
                         <ContentPresenter VerticalAlignment="Center"
-                                                      HorizontalAlignment="Center"/>
+                        HorizontalAlignment="Center"/>
                     </Border>
                 </ControlTemplate>
             </Setter.Value>

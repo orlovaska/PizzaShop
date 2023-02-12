@@ -8,11 +8,8 @@
              
              d:DataContext="{d:DesignInstance Type=vm:CatalogViewModel}"
              mc:Ignorable="d" 
-             d:DesignHeight="570" d:DesignWidth="625">
-
-    <!--<UserControl.DataContext>
-        <vm:CatalogViewModel />
-    </UserControl.DataContext>-->
+             d:DesignHeight="570" d:DesignWidth="625"
+             Style="{StaticResource Page_Style}">
 
     <Grid>
         
