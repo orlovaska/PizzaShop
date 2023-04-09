@@ -106,7 +106,7 @@ namespace PizzaShop.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<decimal>("СurrentPrice")
+                    b.Property<decimal>("CurrentPrice")
                         .HasColumnType("decimal(6,2)");
 
                     b.HasKey("Id");

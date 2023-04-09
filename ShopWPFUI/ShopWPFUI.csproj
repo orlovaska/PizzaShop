@@ -15,11 +15,21 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="Images\img_delete.png" />
+    <None Remove="Images\img_edit.png" />
+    <None Remove="Images\img_fastfood.png" />
     <None Remove="Images\img_home.png" />
+    <None Remove="Images\img_logout.png" />
+    <None Remove="Images\img_money.png" />
     <None Remove="Images\img_order.png" />
     <None Remove="Images\img_product.png" />
+    <None Remove="Images\img_products.png" />
+    <None Remove="Images\img_report.png" />
+    <None Remove="Images\img_save.png" />
     <None Remove="Images\img_setting.png" />
     <None Remove="Images\img_shipment.png" />
+    <None Remove="Images\img_statistics.png" />
+    <None Remove="Images\img_users.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -30,7 +40,22 @@
     <Resource Include="Images\img_customer.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="Images\img_delete.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\img_edit.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\img_fastfood.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Images\img_home.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\img_logout.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\img_money.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Images\img_order.png">
@@ -39,10 +64,25 @@
     <Resource Include="Images\img_product.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="Images\img_products.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\img_report.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\img_save.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Images\img_setting.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Images\img_shipment.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\img_statistics.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\img_users.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
   </ItemGroup>

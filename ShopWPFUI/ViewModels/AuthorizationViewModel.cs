@@ -24,7 +24,7 @@ namespace ShopWPFUI.ViewModels
         public string Email
         {
             get { return _email; }
-            set { _email = value;  OnPropertyChanged(nameof(Email)); }
+            set { _email = value; OnPropertyChanged(nameof(Email)); }
         }
         public string Password
         {
@@ -43,8 +43,9 @@ namespace ShopWPFUI.ViewModels
         public ICommand RecoverPasswordCommand { get; }
         //public ICommand ShowPasswordCommand { get; }
         //public ICommand RememberPasswordCommand { get; }
-        public ICommand NavigateRegistrationCommand { get; }
-        public ICommand NavigateNavigationationCommand { get;}
+        public ICommand RegistrationCommand { get; }
+        public ICommand NavigationationCommand { get; }
+        public ICommand AdminNavigationationCommand { get; }
 
 
 
@@ -52,15 +53,22 @@ namespace ShopWPFUI.ViewModels
         public AuthorizationViewModel(NavigationStore navigationStore)
         {
             DataRepository = new DataRepository();
+            AllRoles = DataRepository.GetAllRoles();
+            if (AllRoles.Count != 0)
+            {
+                SelectedRole = AllRoles[0];
+                //SelectedRole = AllRoles[1];
+            }
 
             LoginCommand = new RelayCommand(ExecuteLoginCommand, CanExecuteLoginCommand);
-            RecoverPasswordCommand = new RelayCommand(ExecuterecoverPassCommand);
-            NavigateRegistrationCommand = new NavigateCommand<RegistrationViewModel>(navigationStore,() => new RegistrationViewModel(navigationStore));
-            NavigateNavigationationCommand = new NavigateCommand<NavigationViewModel>(navigationStore, () => new NavigationViewModel(navigationStore));
+            //RecoverPasswordCommand = new RelayCommand(ExecuterecoverPassCommand);
+            RegistrationCommand = new NavigateCommand<RegistrationViewModel>(navigationStore,() => new RegistrationViewModel(navigationStore));
+            NavigationationCommand = new NavigateCommand<NavigationViewModel>(navigationStore, () => new NavigationViewModel(navigationStore));
+            AdminNavigationationCommand = new NavigateCommand<AdminNavigationViewModel>(navigationStore, () => new AdminNavigationViewModel(navigationStore));
 
         }
 
-        
+
 
         private bool CanExecuteLoginCommand(object arg)
         {
@@ -74,7 +82,7 @@ namespace ShopWPFUI.ViewModels
                 validData = true;
             }
 
-            return true; //TODO - строка для тестов. Вернуть validData
+            return validData;
         }
 
         private void ExecuteLoginCommand(object obj)

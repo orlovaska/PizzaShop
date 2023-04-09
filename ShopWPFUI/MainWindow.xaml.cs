@@ -33,6 +33,15 @@ namespace ShopWPFUI
         private void btnMaximize_Click(object sender, RoutedEventArgs e)
         {
             WindowState = WindowState.Maximized;
+            btnMaximize.Visibility = Visibility.Hidden;
+            btnNormal.Visibility = Visibility.Visible;
+        }
+        
+        private void btnNormal_Click(object sender, RoutedEventArgs e)
+        {
+            WindowState = WindowState.Normal;
+            btnMaximize.Visibility = Visibility.Visible;
+            btnNormal.Visibility = Visibility.Hidden;
         }
         private void btnClose_Click(object sender, RoutedEventArgs e)
         {
@@ -47,8 +56,6 @@ namespace ShopWPFUI
         {
             this.MaxHeight = SystemParameters.MaximizedPrimaryScreenHeight;
         }
-
-
 
     }
 }

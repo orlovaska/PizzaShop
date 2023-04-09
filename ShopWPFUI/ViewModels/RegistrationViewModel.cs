@@ -1,8 +1,10 @@
 ﻿using PizzaShop.DataAccess;
+using PizzaShop.Models;
 using ShopLibrary;
 using ShopWPFUI.Commands;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Security.AccessControl;
 using System.Security.Principal;
@@ -10,6 +12,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using System.Windows.Media;
 
 namespace ShopWPFUI.ViewModels
 {
@@ -17,10 +20,9 @@ namespace ShopWPFUI.ViewModels
     internal class RegistrationViewModel : BaseViewModel
     {
 
-
-
         private string _phoneNumber;
-        private string _fullName;
+        private string _firstName;
+        private string _lastName;
         private string _email;
         private string _password;
         private string _errorMessage;
@@ -46,15 +48,21 @@ namespace ShopWPFUI.ViewModels
             get { return _errorMessage; }
             set { _errorMessage = value; OnPropertyChanged(nameof(ErrorMessage)); }
         }
-        public string FullName
+        public string FirstName
         {
-            get { return _fullName; }
-            set { _fullName = value; OnPropertyChanged(nameof(FullName)); }
+            get { return _firstName; }
+            set { _firstName = value; OnPropertyChanged(nameof(FirstName)); }
+        }
+
+        public string LastName
+        {
+            get { return _lastName; }
+            set { _lastName = value; OnPropertyChanged(nameof(LastName)); }
         }
 
         private IDataConnection dataRepository { get; set; }
 
-        public ICommand LoginCommand { get; }
+        public ICommand RegistrationCommand { get; }
         public ICommand NavigateAuthorizationCommand { get; }
         public ICommand NavigateNavigationationCommand { get; }
 
@@ -62,36 +70,74 @@ namespace ShopWPFUI.ViewModels
         {
             dataRepository = new DataRepository();
 
-            LoginCommand = new RelayCommand(ExecuteLoginCommand, CanExecuteLoginCommand);
+            RegistrationCommand = new RelayCommand(ExecuteRegistrationCommand, CanExecuteRegistrationCommand);
             NavigateAuthorizationCommand = new NavigateCommand<AuthorizationViewModel>(navigationStore, () => new AuthorizationViewModel(navigationStore));
             NavigateNavigationationCommand = new NavigateCommand<NavigationViewModel>(navigationStore, () => new NavigationViewModel(navigationStore));
         }
 
-        private bool CanExecuteLoginCommand(object arg)
+        private bool CanExecuteRegistrationCommand(object arg)
         {
             bool validData = true;
-            if (string.IsNullOrWhiteSpace(Email) || Email.Length < 3)
+
+            if (string.IsNullOrWhiteSpace(FirstName))
             {
                 validData = false;
+                ErrorMessage = "*Введите имя";
+                return validData;
             }
-            if (string.IsNullOrWhiteSpace(PhoneNumber) || PhoneNumber.Length < 10)
+
+            if (string.IsNullOrWhiteSpace(LastName))
             {
                 validData = false;
+                ErrorMessage = "*Введите фамилию";
+                return validData;
             }
+
+            var phone = new PhoneAttribute();
+            bool zaeb = phone.IsValid(PhoneNumber);
+            if (string.IsNullOrWhiteSpace(PhoneNumber) || !(PhoneNumber.Length == 10) || !phone.IsValid(PhoneNumber))
+            {
+                validData = false;
+                ErrorMessage = "*Введите корректный номер";
+                return validData;
+            }
+
+            var email = new EmailAddressAttribute();
+            if (string.IsNullOrWhiteSpace(Email) || !email.IsValid(Email))
+            {
+                validData = false;
+                ErrorMessage = "*Введите корректную почту";
+                return validData;
+            }
+
             if (string.IsNullOrWhiteSpace(Password) || Password.Length < 3)
             {
                 validData = false;
+                ErrorMessage = "*Придумайте пароль более 3 символов";
+                return validData;
+            }
+            if (validData)
+            {
+                if (!(ErrorMessage == "* Пользователь с данной почтой уже зарегистрирован"))
+                    ErrorMessage = "";
             }
             return validData;
 
         }
 
-        private void ExecuteLoginCommand(object obj)
+        private void ExecuteRegistrationCommand(object obj)
         {
-            var isValidUser = dataRepository.EmailIsUnique(Email);
+            bool isValidUser = dataRepository.EmailIsUnique(Email);
 
             if (isValidUser)
             {
+                CustomerModel customer = new CustomerModel();
+                customer.Email = Email;
+                customer.Phone = PhoneNumber;
+                customer.FirstName = FirstName;
+                customer.LastName = LastName;
+                dataRepository.AddCustomer(customer, dataRepository.GetAllRoles()[0], Password);
+
                 Thread.CurrentPrincipal = new GenericPrincipal(
                     new GenericIdentity(Email), null);
                 NavigateNavigationationCommand.Execute(null);

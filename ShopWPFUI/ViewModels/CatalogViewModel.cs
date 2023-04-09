@@ -39,7 +39,7 @@ namespace ShopWPFUI.ViewModels
 
         public List<CategoryModel> Categories { get; set; }
 
-        public ICommand SelectCategoryCommand { get; set; }
+        //public ICommand SelectCategoryCommand { get; set; }
         private IDataConnection DataRepository { get; set; }
 
         public CatalogViewModel()

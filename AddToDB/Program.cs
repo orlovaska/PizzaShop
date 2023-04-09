@@ -141,7 +141,7 @@ namespace PizzaShop
                 ProductModel product = new ProductModel();
                 {
                     product.Name = $"{rolls[i]} ролл";
-                    product.СurrentPrice = Convert.ToDecimal(random.Next(10000) / 100);
+                    product.CurrentPrice = Convert.ToDecimal(random.Next(10000) / 100);
                     product.CategoryId = 3;
                     Image image = Image.FromFile(@"C:\Users\User\Desktop\Shop\Роллы\" + rolls[i].ToString() + ".jpg");
                     product.Image = ImageToByteArray(image);
@@ -159,7 +159,7 @@ namespace PizzaShop
             ProductModel product = new ProductModel();
             {
                 product.Name = "Бабочка";
-                product.СurrentPrice = Convert.ToDecimal(random.Next(10000) / 100);
+                product.CurrentPrice = Convert.ToDecimal(random.Next(10000) / 100);
                 product.CategoryId = 4;
                 Image image = Image.FromFile(@"C:\Users\User\Desktop\Shop\Категории\" + "Бабочка" + ".jpg");
                 product.Image = ImageToByteArray(image);
@@ -179,7 +179,7 @@ namespace PizzaShop
                 ProductModel product = new ProductModel();
                 {
                     product.Name = burgers[i];
-                    product.СurrentPrice = Convert.ToDecimal(random.Next(10000) / 100);
+                    product.CurrentPrice = Convert.ToDecimal(random.Next(10000) / 100);
                     product.CategoryId = 4;
                     Image image = Image.FromFile(@"C:\Users\User\Desktop\Shop\Бургеры\" + burgers[i].ToString() + ".jpg");
                     product.Image = ImageToByteArray(image);
@@ -200,7 +200,7 @@ namespace PizzaShop
                 ProductModel product = new ProductModel();
                 {
                     product.Name = $"Суши {sushi[i]}";
-                    product.СurrentPrice = Convert.ToDecimal(random.Next(10000) / 100);
+                    product.CurrentPrice = Convert.ToDecimal(random.Next(10000) / 100);
                     product.CategoryId = 2;
                     Image image = Image.FromFile(@"C:\Users\User\Desktop\Shop\Суши\" + sushi[i].ToString() + ".jpg");
                     product.Image = ImageToByteArray(image);

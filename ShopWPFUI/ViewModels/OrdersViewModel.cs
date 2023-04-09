@@ -15,6 +15,7 @@ namespace ShopWPFUI.ViewModels
     internal class OrdersViewModel : BaseViewModel
     {
         private CustomerModel _currentCustomerAccount;
+        private int _widthOrderFulfilledColumn;
         public CustomerModel CurrentCustomerAccount
         {
             get
@@ -26,6 +27,19 @@ namespace ShopWPFUI.ViewModels
             {
                 _currentCustomerAccount = value;
                 OnPropertyChanged(nameof(CurrentCustomerAccount));
+            }
+        }
+
+        public int WidthOrderFulfilledColumn
+        {
+            get
+            {
+                return _widthOrderFulfilledColumn;
+            }
+            set
+            {
+                _widthOrderFulfilledColumn = value;
+                OnPropertyChanged(nameof(WidthOrderFulfilledColumn));
             }
         }
 
@@ -47,18 +61,19 @@ namespace ShopWPFUI.ViewModels
             DataRepository = new DataRepository();
             CurrentCustomerAccount = currentCustomerAccount;
 
-            ActiveOrders = DataRepository.GetActiveOrders(CurrentCustomerAccount);
+            ActiveOrders = DataRepository.GetActiveOrdersByCustomer(CurrentCustomerAccount);
             CurrentListOrders = new ObservableCollection<OrderModel>(ActiveOrders);
-            CompletedOrders = DataRepository.GetCompletedOrders(CurrentCustomerAccount);
+            CompletedOrders = DataRepository.GetCompletedOrdersByCustomer(CurrentCustomerAccount);
 
             ActiveOrdersCommand = new RelayCommand(ShowActiveOrders);
             CompletedOrdersCommand = new RelayCommand(ShowCompletedOrders);
 
-
+            WidthOrderFulfilledColumn = 0;
         }
 
         private void ShowCompletedOrders(object obj)
         {
+            WidthOrderFulfilledColumn = 140;
             CurrentListOrders.Clear();
             foreach(var order in CompletedOrders)
                 CurrentListOrders.Add(order);
@@ -66,6 +81,7 @@ namespace ShopWPFUI.ViewModels
 
         private void ShowActiveOrders(object obj)
         {
+            WidthOrderFulfilledColumn = 0;
             CurrentListOrders.Clear();
             foreach (var order in ActiveOrders)
                 CurrentListOrders.Add(order);

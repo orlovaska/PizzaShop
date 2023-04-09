@@ -19,7 +19,6 @@ namespace ShopWPFUI
             get { return _currentViewModel; }
             set
             {
-                //_currentViewModel?.Dispose();
                 _currentViewModel = value;
                 OnCurrentViewModelChanged();
             }

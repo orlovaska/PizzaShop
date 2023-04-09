@@ -17,6 +17,9 @@ namespace PizzaShop.Models
         public int CustomerId { get; set; }
         public CustomerModel Customer { get; set; } = null!;
 
+        public int AddressId { get; set; }
+        public AddressModel Address { get; set; }
+
         public ICollection<OrderDetailModel> OrderDetails { get; set; } = new List<OrderDetailModel>();
 
         [NotMapped]

@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 
 namespace PizzaShop.Models
 {
@@ -19,7 +14,7 @@ namespace PizzaShop.Models
         public CustomerModel Customer { get; set; }
 
         [NotMapped]
-        public decimal Price => (decimal)Quntity * Product.СurrentPrice;
+        public decimal Price => (decimal)Quntity * Product.CurrentPrice;
 
     }
 }

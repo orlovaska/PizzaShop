@@ -74,7 +74,7 @@ namespace ShopWinFormsUI
 
             foreach (CustomerModel customer in customers)
             {
-                if (customer.Email == email && customer.HashPassword == HashingUntil.HashingPassword(password))
+                if (customer.Email == email && customer.HashPassword == HashingUtility.HashingPassword(password))
                     output = true;
             }
             return output;

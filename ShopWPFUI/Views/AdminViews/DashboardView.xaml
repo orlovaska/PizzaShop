@@ -1,0 +1,557 @@
+﻿<UserControl x:Class="ShopWPFUI.Views.AdminViews.DashboardView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:treeView="clr-namespace:ShopWPFUI.ViewModels.AdminViewModels"
+             xmlns:models ="clr-namespace:PizzaShop.Models;assembly=ShopLibrary"
+             xmlns:local="clr-namespace:ShopWPFUI.Views.AdminViews"
+             xmlns:adminviewmodels="clr-namespace:ShopWPFUI.ViewModels.AdminViewModels" 
+             d:DataContext="{d:DesignInstance Type=treeView:DashboardViewModel}"
+             mc:Ignorable="d" 
+             d:DesignHeight="570" d:DesignWidth="625">
+    <Grid>
+
+        <!--<Grid.Resources>
+            <treeView:BindingProxy x:Key="Proxy" Data="{Binding}" />
+        </Grid.Resources>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="2*" />
+            <ColumnDefinition Width="3*" />
+        </Grid.ColumnDefinitions>
+
+        <Grid Grid.Column="0">
+            <treeView:TreeViewEx x:Name="GroupsTreeView" ScrollViewer.VerticalScrollBarVisibility="Auto" 
+                                 ItemsSource="{Binding AllCategories, Mode=TwoWay}"
+                                 SelectedItemEx="{Binding Path=SelectedObject, Mode=OneWayToSource}"
+                                 Background="Transparent">
+                <TreeView.Resources>
+                    <Style TargetType="TreeViewItem">
+                        <Style.Triggers >
+
+                            <EventTrigger RoutedEvent="MouseEnter"/>
+
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="IsSelected" Value="True" />
+                            </Trigger>
+
+                        </Style.Triggers>
+                    </Style>
+
+                    <HierarchicalDataTemplate DataType="{x:Type models:CategoryModel}" ItemsSource="{Binding Products}">
+                        <StackPanel Orientation="Horizontal">
+                            <Image Height="20" Width="20" 
+                                   Source="{Binding Image}" 
+                                   Margin="0,0,5,0" />
+                            <Label Content="{Binding Name}">
+                                <Label.ContextMenu>
+                                    <ContextMenu>
+                                        
+                                        
+                                        <MenuItem Header="Добавить категорию"
+                                                  Command="{Binding Source={StaticResource Proxy}, 
+                                            Path=Data.ShowAddCategoryBorderCommand}"/>
+
+                                        <MenuItem Header="Удалить категорию" 
+                                                  Command="{Binding Source={StaticResource Proxy}, 
+                                            Path=Data.DeleteCategoryCommand}"/>
+                                        <MenuItem Header="Редактировать категорию"
+                                                  Command="{Binding Source={StaticResource Proxy}, 
+                                            Path=Data.ShowEditCategoryBorderCommand}"/>
+                                    </ContextMenu>
+                                </Label.ContextMenu>
+                            </Label>
+                            <TextBlock Text=" [" Foreground="Blue" />
+                            <TextBlock Text="{Binding Products.Count}" Foreground="Blue" />
+                            <TextBlock Text="]" Foreground="Blue" />
+                        </StackPanel>
+                    </HierarchicalDataTemplate>
+                    <DataTemplate DataType="{x:Type models:ProductModel}">
+                        <StackPanel Orientation="Horizontal">
+                            <Image Height="20" Width="20" 
+                                   Source="{Binding Image}" 
+                                   Margin="0,0,5,0" />
+                            <Label>
+                                <Label.Content>
+                                    <TextBlock>
+                                        <TextBlock.Text>
+                                            <MultiBinding StringFormat="{}{0} {1}">
+                                                <Binding Path="Name" />
+                                                <Binding Path="CurrentPrice" />
+                                            </MultiBinding>
+                                        </TextBlock.Text>
+                                    </TextBlock>
+                                </Label.Content>
+
+                                <Label.ContextMenu>
+                                    <ContextMenu>
+                                        <ContextMenu.DataContext>
+                                            <adminviewmodels:DashboardViewModel />
+                                        </ContextMenu.DataContext>
+                                        <MenuItem Header="Добавить продукт" 
+                                                  Command="{Binding Source={StaticResource Proxy}, 
+                                            Path=Data.ShowAddProductBorderCommand}"/>
+                                        <MenuItem Header="Удалить продукт"
+                                                  Command="{Binding Source={StaticResource Proxy}, 
+                                            Path=Data.DeleteProductCommand}"/>
+                                        <MenuItem Header="Редактировать продукт"
+                                                  Command="{Binding Source={StaticResource Proxy}, 
+                                            Path=Data.ShowEditProductBorderCommand}"/>
+                                    </ContextMenu>
+                                </Label.ContextMenu>
+                            </Label>
+                        </StackPanel>
+                    </DataTemplate>
+                </TreeView.Resources>
+            </treeView:TreeViewEx>
+        </Grid>
+
+        <Grid Grid.Column="1" Margin="20">
+            <Border x:Name="CategoryBorder" Visibility="{Binding VisibilityCategoryBorder, UpdateSourceTrigger=PropertyChanged}">
+                <StackPanel Orientation="Vertical" Width="220">
+                    <TextBlock Text="Название категории"
+                        Foreground="DarkGray"
+                        FontSize="12"
+                        FontWeight="Medium"
+                        FontFamily="Montserrat"                             
+                        Margin="0,15,0,0"/>
+
+                    <TextBox Text="{Binding CategoryName, UpdateSourceTrigger=PropertyChanged}"
+                         Style="{StaticResource Text_Box}"/>
+
+
+                    <TextBlock Text="Фото категории"
+                        Foreground="DarkGray"
+                        FontSize="12"
+                        FontWeight="Medium"
+                        FontFamily="Montserrat"                             
+                        Margin="0,15,0,0"/>
+
+                    <TextBlock Text="{Binding FileName, UpdateSourceTrigger=PropertyChanged}"
+                        Foreground="White"
+                        FontSize="12"
+                        FontWeight="Medium"
+                        FontFamily="Montserrat"                             
+                        Margin="0,15,0,10"/>
+
+                    <TextBlock Text="{Binding CategoryErrorMessage}"
+                        Style="{StaticResource TextBlock_Error}"/>
+
+                    <StackPanel Orientation="Horizontal">
+                        <Button Content="{Binding CategoryAddButtonText}" Command="{Binding UpdateOrAddCategoryCommand}" Margin="5"/>
+                        <Button Content="Очистить" Command="{Binding ClearCategoryCommand}" Margin="5"/>
+                        <Button Content="Выбрать фото" Command="{Binding OpenCategoryFileDialogCommand}" Margin="5"/>
+                    </StackPanel>
+
+                    <Image Source="{Binding CategoryImage}" Width="150" Height="150"/>
+
+                </StackPanel>
+            </Border>
+
+            <Border x:Name="ProductBorder" Visibility="{Binding VisibilityProductBorder, UpdateSourceTrigger=PropertyChanged}">
+                <StackPanel Orientation="Vertical" Width="220">
+                    <TextBlock Text="Название продукта"
+                               Foreground="DarkGray"
+                               FontSize="12"
+                               FontWeight="Medium"
+                               FontFamily="Montserrat"                             
+                               Margin="0,15,0,0"/>
+
+                    <TextBox Text="{Binding ProductName, UpdateSourceTrigger=PropertyChanged}"
+                             Style="{StaticResource Text_Box}"/>
+
+                    <TextBlock Text="Цена продукта"
+                               Foreground="DarkGray"
+                               FontSize="12"
+                               FontWeight="Medium"
+                               FontFamily="Montserrat"                             
+                               Margin="0,15,0,0"/>
+
+                    <TextBox Text="{Binding ProductCurrentPrice, UpdateSourceTrigger=PropertyChanged}"
+                             Style="{StaticResource Text_Box}"/>
+
+                    <ComboBox ItemsSource="{Binding AllCategories}" 
+                              SelectedItem="{Binding ProductSelectedCategory}"
+                              DisplayMemberPath="Name"
+                              Text="{Binding ProductSelectedCategory.Name}"
+                              Margin="10"/>
+
+
+                    <TextBlock Text="Фото продукта"
+                        Foreground="DarkGray"
+                        FontSize="12"
+                        FontWeight="Medium"
+                        FontFamily="Montserrat"                             
+                        Margin="0,15,0,0"/>
+
+                    <TextBlock Text="{Binding FileName, UpdateSourceTrigger=PropertyChanged}"
+                        Foreground="White"
+                        FontSize="12"
+                        FontWeight="Medium"
+                        FontFamily="Montserrat"                             
+                        Margin="0,15,0,0"/>
+
+                    <TextBlock Text="{Binding ErrorMessage}"
+                        Style="{StaticResource TextBlock_Error}"/>
+
+                    <StackPanel Orientation="Horizontal">
+                        <Button Content="{Binding AddButtonText}" Command="{Binding UpdateOrAddProductCommand}" Margin="5"/>
+                        <Button Content="Очистить" Command="{Binding ClearProductCommand}" Margin="5"/>
+                        <Button Content="Выбрать фото" Command="{Binding OpenProductFileDialogCommand}" Margin="5"/>
+                    </StackPanel>
+
+                    <Image Source="{Binding ProductImage}" Width="150" Height="150"/>
+
+                </StackPanel>
+            </Border>
+        </Grid>-->
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="70"/>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="5*"/>
+            <RowDefinition Height="5*"/>
+            <RowDefinition Height="2*"/>
+
+        </Grid.RowDefinitions>
+
+        <TextBlock Foreground="#DBDBDB" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3"
+                   Margin="10" FontSize="22" Text="Информация"/>
+
+
+        <Border Grid.Column="0" Grid.Row="2"
+                Background="#303438"
+                CornerRadius="20"
+                Margin="20,30,10,30">
+
+            <Border.InputBindings>
+                <MouseBinding Command="{Binding CategoriesCommand}" MouseAction="LeftClick" />
+            </Border.InputBindings>
+
+            <DockPanel>
+                <Viewbox>
+                    <Border DockPanel.Dock="Left"
+                        Background="#1f1f1f" 
+                        CornerRadius="10"
+                        Width="70"
+                        Height="70"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Center"
+                        Margin="20, 20, 0, 30">
+
+                        <Image Source="/Images/img_product.png"
+                           Width="50" Height="50"
+                           Style="{StaticResource Image_Style}"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center"
+                           Margin="0"/>
+                    </Border>
+                </Viewbox>
+
+
+
+
+                <StackPanel Orientation="Vertical" 
+                            DockPanel.Dock="Right"
+                            HorizontalAlignment="Right" 
+                            Margin="10, 10, 30, 0">
+
+                    <TextBlock Text="Категории" FontWeight="Bold"
+                       Foreground="#DBDBDB" FontSize="16"
+                       VerticalAlignment="Top"
+                       HorizontalAlignment="Center"/>
+
+                    <TextBlock Text="{Binding CountOfCategories}" 
+                       Foreground="#DBDBDB" FontSize="20"
+                       VerticalAlignment="Top"
+                       HorizontalAlignment="Right"/>
+                </StackPanel>
+            </DockPanel>
+        </Border>
+
+        <Border Grid.Column="1" Grid.Row="2"
+                Background="#303438"
+                CornerRadius="20"
+                Margin="10, 30,10,30">
+
+            <Border.InputBindings>
+                <MouseBinding Command="{Binding ProductsCommand}" MouseAction="LeftClick" />
+            </Border.InputBindings>
+
+            <DockPanel>
+                <Viewbox>
+                    <Border DockPanel.Dock="Left"
+                        Background="#1f1f1f" 
+                        CornerRadius="10"
+                        Width="70"
+                        Height="70"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Center"
+                        Margin="20, 20, 0, 30">
+
+                        <Image Source="/Images/img_products.png"
+                           Width="50" Height="50"
+                           Style="{StaticResource Image_Style}"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center"
+                           Margin="0"/>
+                    </Border>
+                </Viewbox>
+
+
+
+                
+                <StackPanel Orientation="Vertical" 
+                            DockPanel.Dock="Right"
+                            HorizontalAlignment="Right" 
+                            Margin="10, 10, 30, 0">
+                    
+                    <TextBlock Text="Продукты" FontWeight="Bold"
+                       Foreground="#DBDBDB" FontSize="16"
+                       VerticalAlignment="Top"
+                       HorizontalAlignment="Center"/>
+
+                    <TextBlock Text="{Binding CountOfProducts}" 
+                       Foreground="#DBDBDB" FontSize="20"
+                       VerticalAlignment="Top"
+                       HorizontalAlignment="Right"/>
+                </StackPanel>
+            </DockPanel>
+            
+        </Border>
+
+        <!--<TextBlock Text="Смотреть подробности" DockPanel.Dock="Bottom"
+                   Foreground="#DBDBDB" FontSize="13"
+                   Grid.Column="1" Grid.Row="2"
+                   VerticalAlignment="Bottom"
+                   HorizontalAlignment="Right"
+                   Margin="30, 30, 40, 40">
+            <TextBlock.InputBindings>
+                <MouseBinding Command="{Binding RegistrationCommand}" MouseAction="LeftClick" />
+            </TextBlock.InputBindings>
+        </TextBlock>-->
+
+        <Border Grid.Column="2" Grid.Row="2"
+                Background="#303438"
+                CornerRadius="20"
+                Margin="10, 30,20,30">
+
+            <Border.InputBindings>
+                <MouseBinding Command="{Binding UpdateStatusCommand}" MouseAction="LeftClick" />
+            </Border.InputBindings>
+
+            <DockPanel>
+                <Viewbox>
+                    <Border DockPanel.Dock="Left"
+                        Background="#1f1f1f" 
+                        Grid.Column="1" Grid.Row="2"
+                        CornerRadius="10"
+                        Width="70"
+                        Height="70"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Center"
+                        Margin="25, 20, 0, 30">
+
+                        <Image Source="/Images/img_order.png"
+                           Width="50" Height="50"
+                           Style="{StaticResource Image_Style}"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center"
+                           Margin="-5, 0,0,0"/>
+                    </Border>
+                </Viewbox>
+
+
+
+
+                <StackPanel Orientation="Vertical" 
+                            DockPanel.Dock="Right"
+                            HorizontalAlignment="Right" 
+                            Margin="10, 10, 30, 0">
+
+                    <TextBlock Text="Активные заказы" TextWrapping="Wrap"
+                               FontWeight="Bold"
+                       Foreground="#DBDBDB" FontSize="16"
+                       VerticalAlignment="Top"
+                       HorizontalAlignment="Center"/>
+                    
+
+                    <TextBlock Text="{Binding CountOfActiveOrders}" 
+                       Foreground="#DBDBDB" FontSize="20"
+                       VerticalAlignment="Top"
+                       HorizontalAlignment="Right"/>
+                </StackPanel>
+            </DockPanel>
+
+        </Border>
+        
+        
+
+        <Border Grid.Column="0" Grid.Row="3"
+                Background="#303438"
+                CornerRadius="20"
+                Margin="20,30,10,30">
+
+            <Border.InputBindings>
+                <MouseBinding Command="{Binding CustomersCommand}" MouseAction="LeftClick" />
+            </Border.InputBindings>
+            
+            <DockPanel>
+                <Viewbox>
+                    <Border DockPanel.Dock="Left"
+                        Background="#1f1f1f" 
+                        CornerRadius="10"
+                        Width="70"
+                        Height="70"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Center"
+                        Margin="20, 20, 0, 30">
+
+                        <Image Source="/Images/img_users.png"
+                           Width="70" Height="70"
+                           Style="{StaticResource Image_Style}"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center"
+                           Margin="0, 0,0,-20"/>
+                    </Border>
+                </Viewbox>
+
+
+
+
+                <StackPanel Orientation="Vertical" 
+                            DockPanel.Dock="Right"
+                            HorizontalAlignment="Right" 
+                            Margin="10, 10, 20, 0">
+
+                    <TextBlock Text="Пользователи" FontWeight="Bold"
+                       Foreground="#DBDBDB" FontSize="16"
+                       VerticalAlignment="Top"
+                       HorizontalAlignment="Center"/>
+
+                    <TextBlock Text="{Binding CountOfUsers}" 
+                       Foreground="#DBDBDB" FontSize="20"
+                       VerticalAlignment="Top"
+                       HorizontalAlignment="Right"/>
+                </StackPanel>
+            </DockPanel>
+
+        </Border>
+
+        <Border Grid.Column="1" Grid.Row="3"
+                Background="#303438"
+                CornerRadius="20"
+                Margin="10, 30,10,30">
+            
+            <!--<Border.InputBindings>
+                <MouseBinding Command="{Binding RegistrationCommand}" MouseAction="LeftClick" />
+            </Border.InputBindings>-->
+            
+            <DockPanel>
+                <Viewbox>
+                    <Border DockPanel.Dock="Left"
+                        Background="#1f1f1f" 
+                        CornerRadius="10"
+                        Width="70"
+                        Height="70"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Center"
+                        Margin="20, 20, 0, 30">
+
+                        <Image Source="/Images/img_money.png"
+                           Width="50" Height="50"
+                           Style="{StaticResource Image_Style}"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center"
+                           Margin="0"/>
+                    </Border>
+                </Viewbox>
+
+
+
+
+                <StackPanel Orientation="Vertical" 
+                            DockPanel.Dock="Right"
+                            HorizontalAlignment="Right" 
+                            Margin="10, 10, 30, 0">
+
+                    <TextBlock Text="Заработок" FontWeight="Bold"
+                       Foreground="#DBDBDB" FontSize="16"
+                       VerticalAlignment="Top"
+                       HorizontalAlignment="Center"/>
+
+                    <TextBlock 
+                       Foreground="#DBDBDB" FontSize="20"
+                       VerticalAlignment="Top"
+                       HorizontalAlignment="Right">
+                        <Run Text="{Binding SummOfOrders}"/>
+                        <Run Text=" ₽"/>
+                    </TextBlock>
+                </StackPanel>
+            </DockPanel>
+
+        </Border>
+
+        <Border Grid.Column="2" Grid.Row="3"
+                Background="#303438"
+                CornerRadius="20"
+                Margin="10, 30,20,30">
+            
+            <!--<Border.InputBindings>
+                <MouseBinding Command="{Binding RegistrationCommand}" MouseAction="LeftClick" />
+            </Border.InputBindings>-->
+            
+            <DockPanel>
+                <Viewbox>
+                    <Border DockPanel.Dock="Left"
+                        Background="#1f1f1f" 
+                        CornerRadius="10"
+                        Width="70"
+                        Height="70"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Center"
+                        Margin="20, 20, 0, 30">
+                        
+                        <Image Source="/Images/img_statistics.png"
+                           Width="45" Height="45"
+                           Style="{StaticResource Image_Style}"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center"
+                           Margin="0"/>
+                    </Border>
+                </Viewbox>
+
+
+
+
+                <StackPanel Orientation="Vertical" 
+                            DockPanel.Dock="Right"
+                            HorizontalAlignment="Right" 
+                            Margin="10, 10, 30, 0">
+
+                    <TextBlock Text="Среднее время заказа" TextWrapping="Wrap"
+                               FontWeight="Bold"
+                       Foreground="#DBDBDB" FontSize="16"
+                       VerticalAlignment="Top"
+                       HorizontalAlignment="Center"/>
+
+                    <TextBlock
+                       Foreground="#DBDBDB" FontSize="20"
+                       VerticalAlignment="Top"
+                       HorizontalAlignment="Right">
+                         <Run Text="{Binding AverageTimeOrders}"/>
+                        <Run Text=" мин"/>
+                    </TextBlock>
+                </StackPanel>
+            </DockPanel>
+
+        </Border>
+
+    </Grid>
+</UserControl>

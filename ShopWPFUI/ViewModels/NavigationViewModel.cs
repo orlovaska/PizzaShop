@@ -64,6 +64,7 @@ namespace ShopWPFUI.ViewModels
         public ICommand CartCommand { get; }
         public ICommand NavigateAuthorizationCommand { get; }
         public ICommand ProductsCommand { get; }
+        public ICommand LogoutCommand { get; }
 
 
         private void Profil(object obj) => CurrentView = new ProfileViewModel(CurrentCustomerAccount);

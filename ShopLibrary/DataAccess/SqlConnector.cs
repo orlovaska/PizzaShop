@@ -1,13 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using PizzaShop.Migrations;
 using PizzaShop.Models;
-using ShopLibrary;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace PizzaShop.DataAccess
 {
-    public class SqlConnector: DbContext
+    public class SqlConnector : DbContext
     {
         public DbSet<CategoryModel> Categories { get; set; } = null!;
         public DbSet<CustomerModel> Customers { get; set; } = null!;
@@ -20,10 +16,9 @@ namespace PizzaShop.DataAccess
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            //optionsBuilder.UseSqlServer(GlobalConfig.ConectionString("Shop"));
             optionsBuilder.UseSqlServer(@"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=PizzaShop;Integrated Security=True");
         }
 
-        
+
     }
 }

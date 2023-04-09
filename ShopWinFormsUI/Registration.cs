@@ -84,7 +84,7 @@ namespace ShopWinFormsUI
                 CustomerModel customer = new CustomerModel(
                     textBoxFirstName.Text,
                     textBoxLastName.Text,
-                    HashingUntil.HashingPassword(textBoxPassword.Text),
+                    HashingUtility.HashingPassword(textBoxPassword.Text),
                     textBoxEmail.Text);
 
                 //foreach (IDataConnection db in GlobalConfig.Connections)

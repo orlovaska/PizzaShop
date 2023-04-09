@@ -5,9 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:vm="clr-namespace:ShopWPFUI.ViewModels"
         xmlns:view="clr-namespace:ShopWPFUI.Views"
-        xmlns:local="clr-namespace:ShopWPFUI"    
+        xmlns:local="clr-namespace:ShopWPFUI" 
+        d:DataContext="{d:DesignInstance Type=vm:MainViewModel}"
         mc:Ignorable="d"
-        Height="600" Width="850"
+        Height="600" Width="850" MinWidth="965"
         AllowsTransparency="True"
         Background="Transparent"
         Title="MainWindow" 
@@ -81,6 +82,34 @@
                                 Cursor="Hand"
                                 Grid.Column="2"
                                 Click="btnMaximize_Click">
+                    
+                    
+
+                    <Button.Style>
+                        <Style TargetType="Button">
+                            <Setter Property="Background" Value="#28AEED"/>
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Background" Value="#278BEF"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                </Button>
+
+
+                <Button x:Name="btnNormal" 
+                                Visibility="Hidden"
+                                BorderThickness="0"
+                                Content="❐"
+                                Foreground="White"
+                                FontSize="16"
+                                FontFamily="Montserrat"
+                                Cursor="Hand"
+                                Grid.Column="2"
+                                Click="btnNormal_Click">
+
+
 
                     <Button.Style>
                         <Style TargetType="Button">

@@ -18,8 +18,6 @@ namespace ShopWPFUI
     {
         protected override void OnStartup(StartupEventArgs e)
         {
-            //ShopLibrary.GlobalConfig.InitializeConnection(true);
-
             NavigationStore navigationStore = new NavigationStore();
 
             navigationStore.CurrentViewModel = new AuthorizationViewModel(navigationStore);

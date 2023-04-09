@@ -18,7 +18,7 @@
                    Margin="10" FontSize="22"/>
 
 
-        <ListView  x:Name="CategoriesListView" ItemsSource="{Binding Products}"
+        <ListView  x:Name="ProductsListView" ItemsSource="{Binding Products}"
                     ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                     Grid.Row="1" Margin="10, 0, 20, 0" 
                     Background="Transparent"
@@ -34,16 +34,14 @@
             <ListView.Resources>
                 <Style TargetType="ListViewItem">
                     <Style.Triggers >
-                        
-                        <EventTrigger RoutedEvent="MouseEnter">
-                        </EventTrigger>
+
+                        <EventTrigger RoutedEvent="MouseEnter"/>
 
                         <Trigger Property="IsMouseOver" Value="True">
                             <Setter Property="IsSelected" Value="True" />
                         </Trigger>
-   
+
                     </Style.Triggers>
-                    
                 </Style>
             </ListView.Resources>
 
@@ -63,12 +61,15 @@
                                         Foreground="#DBDBDB" FontSize="15"/>
                             <TextBlock Margin="5 0"
                                         Foreground="#DBDBDB" FontSize="15">
-                                <Run Text="{Binding СurrentPrice}"/>
+                                <Run Text="{Binding CurrentPrice}"/>
                                 <Run Text="₽"/>
                             </TextBlock>
-                            <Button Command="{Binding ElementName=CategoriesListView, 
+                            <Button Command="{Binding ElementName=ProductsListView, 
                                     Path= DataContext.AddToCartCommand}"                                
-                                Content="В корзину" HorizontalAlignment="Center" Margin="8">
+                                    Content="В корзину" 
+                                    Style="{StaticResource BtnCartStyle}"
+                                    HorizontalAlignment="Center" 
+                                    Margin="8">
                             </Button>
                         </StackPanel>
                     </Border>

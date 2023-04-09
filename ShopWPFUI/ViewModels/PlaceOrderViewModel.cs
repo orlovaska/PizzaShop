@@ -17,6 +17,21 @@ namespace ShopWPFUI.ViewModels
         public event EventHandler CartsIsCleared;
 
         private CustomerModel _currentCustomerAccount;
+
+        private AddressModel _currentAddress;
+        public AddressModel CurrentAddress
+        {
+            get
+            {
+                return _currentAddress;
+            }
+
+            set
+            {
+                _currentAddress = value;
+                OnPropertyChanged(nameof(CurrentAddress));
+            }
+        }
         public CustomerModel CurrentCustomerAccount
         {
             get
@@ -51,11 +66,24 @@ namespace ShopWPFUI.ViewModels
 
         public PlaceOrderViewModel(CustomerModel currentCustomerAccount, decimal totalPrice)
         {
-            CurrentCustomerAccount = currentCustomerAccount;
-            TotalPrice = totalPrice;
             DataRepository = new DataRepository();
 
-            PlaceOrderCommand = new RelayCommand(PlaceOrder);
+            NumberOfProducts = numberOfProduct;
+            CurrentCustomerAccount = currentCustomerAccount;
+            TotalPrice = totalPrice;
+            CurrentAddress =DataRepository.GetCurrentAddressByCustomer(currentCustomerAccount);
+
+            PlaceOrderCommand = new RelayCommand(PlaceOrder, CanPlaceOrder);
+        }
+
+        private bool CanPlaceOrder(object arg)
+        {
+            bool validData = true;
+            if (CurrentAddress == null)
+            {
+                validData = false;
+            }
+            return validData;
         }
 
         private void PlaceOrder(object obj)
@@ -67,7 +95,7 @@ namespace ShopWPFUI.ViewModels
                 Customer = CurrentCustomerAccount
             };
 
-            OrderModel orderInDB = DataRepository.AddOrder(CurrentCustomerAccount, order);
+            OrderModel orderInDB = DataRepository.AddOrder(CurrentCustomerAccount, order, DataRepository.GetCurrentAddressByCustomer(CurrentCustomerAccount));
             DataRepository.AddOrderDetailsFromCarts(orderInDB, DataRepository.GetCartByCustomer(CurrentCustomerAccount));
 
             DataRepository.DeleteAllCartsByCustomer(CurrentCustomerAccount);

@@ -4,7 +4,8 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:vm="clr-namespace:ShopWPFUI.ViewModels"
-             xmlns:local="clr-namespace:ShopWPFUI.Views" d:DataContext="{d:DesignInstance Type=vm:AuthorizationViewModel}"
+             xmlns:local="clr-namespace:ShopWPFUI.Views" 
+             d:DataContext="{d:DesignInstance Type=vm:AuthorizationViewModel}"
              mc:Ignorable="d" 
              d:DesignHeight="570" d:DesignWidth="850">
     
@@ -19,10 +20,8 @@
 
     <Grid>
 
-        <StackPanel Width="240"
-                    Orientation="Vertical"
-                    Margin="0, 70,0,0">
-
+        <StackPanel Width="240" VerticalAlignment="Center"
+                    Orientation="Vertical">
 
             <TextBlock Text="Магазин"  
                                
@@ -32,7 +31,7 @@
                         FontFamily="Montserrat"
                         HorizontalAlignment="Center"/>
 
-            <TextBlock Text="Мы знаем, что ты хочешь (написать курсач)"
+            <TextBlock Text="Вкусно приготовим и быстро доставим"
                         Foreground="LightGray"
                         FontSize="12"
                         FontWeight="Medium"
@@ -40,6 +39,23 @@
                         TextWrapping="Wrap"
                         TextAlignment="Center"
                         Margin="0,5,0,0"/>
+            <ComboBox ItemsSource="{Binding AllRoles}"
+                      SelectedItem="{Binding SelectedRole}"
+                      DisplayMemberPath="Role"
+                      Text="{Binding SelectedRole.Role}"
+                      Background="Green"
+                      Margin="0, 15, 0, 0">
+                <ComboBox.Resources>
+
+                    <SolidColorBrush x:Key="{x:Static SystemColors.WindowBrushKey}" Color="DarkGray" />
+                    <!--<SolidColorBrush x:Key="ComboBox.Static.Background" Color="Yellow"/>-->
+
+                    <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="DarkGray" />
+
+                </ComboBox.Resources>
+            </ComboBox>
+
+
 
 
             <TextBlock Text="Электронная почта"
@@ -87,7 +103,7 @@
                         Foreground="White"
                         Style="{StaticResource TextBlock}">
                     <TextBlock.InputBindings>
-                        <MouseBinding Command="{Binding NavigateRegistrationCommand}" MouseAction="LeftClick" />
+                        <MouseBinding Command="{Binding RegistrationCommand}" MouseAction="LeftClick" />
                     </TextBlock.InputBindings>
                 </TextBlock>
 

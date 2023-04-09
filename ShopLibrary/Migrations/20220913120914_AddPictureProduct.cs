@@ -1,5 +1,4 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore.Migrations;
+﻿using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace PizzaShop.Migrations
 {
@@ -18,6 +17,6 @@ namespace PizzaShop.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
         }
-            
+
     }
 }

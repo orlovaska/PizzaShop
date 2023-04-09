@@ -46,9 +46,118 @@
                    Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"
                    Margin="10" FontSize="22"/>
 
+        <ListView  x:Name="OrdersListView" ItemsSource="{Binding CurrentListOrders}"
+                        ScrollViewer.VerticalScrollBarVisibility="Auto"
+                        ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                        Grid.Column="0" Grid.ColumnSpan="3"
+                        Grid.Row="2" Margin="10, 0, 20, 0" 
+                        Background="Transparent"
+                        BorderThickness="0"
+                        SelectedItem="{Binding SelectedOrder}">
 
 
-        <ListView   x:Name="OrdersListView"
+            <ListView.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <StackPanel />
+                </ItemsPanelTemplate>
+            </ListView.ItemsPanel>
+
+            <ListView.View>
+                <GridView ColumnHeaderContainerStyle="{StaticResource GridViewColumnHeaderStyle1}" ScrollViewer.VerticalScrollBarVisibility="Auto">
+
+
+                    <GridViewColumn Header="Адрес доставки" Width="120">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Margin="0" Text="{Binding Address.Address}" 
+                                        Foreground="#DBDBDB" FontSize="15"
+                                           TextWrapping="Wrap"/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+
+                    <GridViewColumn Header="Дата оформления" Width="140">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Margin="0" Text="{Binding OrderPlaced, StringFormat=dd.MM.yyyy HH:mm}" 
+                                        Foreground="#DBDBDB" FontSize="15"/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+
+
+                    <GridViewColumn Header="Дата Завершения" 
+                                Width="{Binding WidthOrderFulfilledColumn}">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Margin="0" Text="{Binding OrderFulfilled,  StringFormat=dd.MM.yyyy HH:mm}" 
+                                        Foreground="#DBDBDB" FontSize="15"/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+
+                    <GridViewColumn Header="Сумма" 
+                                Width="100">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Margin="0" Text="{Binding Price}" 
+                                        Foreground="#DBDBDB" FontSize="15"/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+
+
+                    <GridViewColumn Header="Cтатус"
+                                Width="Auto">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Margin="0" Text="{Binding Status.Status}" 
+                                        Foreground="#DBDBDB" FontSize="15"
+                                        HorizontalAlignment="Center"/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    
+                    <GridViewColumn Header="Действия" 
+                                Width="auto">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+
+
+                                    <Button x:Name="btnDeleteProduct" 
+                                        Command="{Binding ElementName=OrdersListView, 
+                                    Path= DataContext.ShowSelectedOrderCommand}"
+                                    Content=">"
+                                    Style="{StaticResource BtnQuntityStyle}"
+                                    Margin="0" />
+                                    
+                                </StackPanel>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                </GridView>
+            </ListView.View>
+
+            <ListView.Resources>
+                <Style TargetType="GridViewColumnHeader">
+                    <Setter Property="Padding" Value="0,0" />
+                </Style>
+                <Style TargetType="ListViewItem">
+                    <Style.Triggers >
+
+                        <EventTrigger RoutedEvent="MouseLeftButtonDown"/>
+
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="IsSelected" Value="True" />
+                        </Trigger>
+
+                    </Style.Triggers>
+                </Style>
+            </ListView.Resources>
+        </ListView>
+
+        <!--<ListView   x:Name="OrdersListView"
                     ItemsSource="{Binding CurrentListOrders}"
                     ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                     Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2"
@@ -81,12 +190,12 @@
 
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
-                    <Border Margin="10" Height="120">
+                    <Border Margin="10" Height="80">
                         <StackPanel Orientation="Horizontal">
-                            <TextBlock Margin="5, 20, 0, 0" Text="{Binding OrderPlaced}" 
+                            <TextBlock Margin="5, 20, 0, 0" Text="{Binding OrderPlaced,  StringFormat=dd.MM.yyyy HH:mm}" 
                                         Foreground="#DBDBDB" FontSize="15"/>
-                            
-                            <TextBlock Margin="5, 20, 0, 0" Text="{Binding OrderFulfilled}" 
+
+                            <TextBlock Margin="5, 20, 0, 0" Text="{Binding OrderFulfilled,  StringFormat=dd.MM.yyyy HH:mm}" 
                                         Foreground="#DBDBDB" FontSize="15"/>
                             
                             <TextBlock Margin="5, 20, 0, 0" 
@@ -103,12 +212,12 @@
                                     Path= DataContext.DeleteProductFromCart}"
                                     Content="+"
                                     Style="{StaticResource BtnQuntityStyle}"
-                                    Margin="10,0,10,0" />-->
+                                    Margin="10,0,10,25" />
                         </StackPanel>
                     </Border>
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
-        </ListView>
+        </ListView>-->
 
 
 
