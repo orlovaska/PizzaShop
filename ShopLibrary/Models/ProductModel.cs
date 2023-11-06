@@ -12,16 +12,17 @@ namespace PizzaShop.Models
         public string Name { get; set; } = null!;
         [Column(TypeName = "decimal(6 ,2)")]
         public decimal CurrentPrice { get; set; }
-        [Column(TypeName = "image")]
-        public byte[] Image { get; set; }
+        public string ImageUrl { get; set; }
+        public string Description { get; set; }
+        public int WeightInGrams { get; set; }
         public int CategoryId { get; set; }
         public CategoryModel Category { get; set; }
 
-        public ProductModel(int id, string name, decimal currentPrice, byte[] image, int categoryId)
+        public ProductModel(int id, string name, decimal currentPrice, string image, int categoryId)
         {
             Id = id;
             Name = name;
-            Image = image;
+            ImageUrl = image;
             CurrentPrice = currentPrice;
             CategoryId = categoryId;
         }
@@ -29,6 +30,6 @@ namespace PizzaShop.Models
         {
 
         }
-        public object Clone() => new ProductModel(Id, Name, CurrentPrice, Image, CategoryId);
+        public object Clone() => new ProductModel(Id, Name, CurrentPrice, ImageUrl, CategoryId);
     }
 }

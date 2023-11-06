@@ -1,0 +1,77 @@
+.store-name {
+  display: inline-block;
+  text-align: start;
+  color: #fe5f1e;
+  font: bold;
+}
+
+.logo img {
+  object-fit: cover;
+  max-width: 40px;
+  height: auto;
+  margin-right: 10px;
+}
+
+.nav-links {
+  cursor: pointer;
+  margin-left: 10px;
+  margin-right: 10px;
+  color: black; /* Цвет по умолчанию */
+  text-decoration: none; /* Убираем подчеркивание */
+}
+
+.nav-links.active {
+  cursor: default;
+  color: #fe5f1e; /* Цвет для активной кнопки */
+}
+
+.nav-links:hover {
+  color: #fe5f1e; /* Цвет при наведении */
+  text-decoration: underline; /* Подчеркивание при наведении */
+}
+
+.profile img {
+  width: 25px;
+  height: 25px;
+  margin-top: 5px;
+}
+
+.circle {
+  width: 39px;
+  height: 39px;
+  border: 2px solid rgba(0, 0, 0, 0);
+  background-color: #ffebea;
+  border-radius: 50%;
+}
+
+.circle:focus,
+.circle:hover {
+  outline: none;
+  border-color: #fe5f1e;
+}
+
+.cart-item-container {
+  border-radius: 20px;
+  /* max-width: 700px; */
+  display: grid;
+  height: 125px;
+  margin: 0px 40px;
+  grid-template-columns: 150px 150px auto auto auto;
+  grid-gap: 10px; /* Промежуток между столбцами */
+  align-items: center; /* Выравнивание элементов по вертикали */
+  box-shadow: rgba(0, 0, 0, 0.1) 3px 6px 12px 0px;
+}
+
+.grid-item {
+  background-color: white;
+  padding: 10px;
+  text-align: center;
+}
+
+.left {
+  align-content: start;
+}
+.cart-product-image {
+  width: 90px;
+  height: 90px;
+}

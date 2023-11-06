@@ -17,12 +17,13 @@ namespace PizzaShop.Models
         public ICollection<OrderModel> Orders { get; set; } = null!;
         public ICollection<AddressModel> Addresses { get; set; } = null!;
 
-        public CustomerModel(string firstName, string lastName, string hashPassword, string email)
+        public CustomerModel(string firstName, string lastName, string hashPassword, string email, string phone)
         {
             FirstName = firstName;
             LastName = lastName;
             HashPassword = hashPassword;
             Email = email;
+            Phone = phone;
         }
 
         public CustomerModel()

@@ -1,0 +1,76 @@
+.light-orange-oval {
+  align-self: self-end;
+  height: 36px;
+  width: 36px;
+  display: flex;
+  cursor: pointer;
+  border: 2px solid rgba(0, 0, 0, 0);
+  background: #ffebea;
+  border-radius: 40px;
+  transition: box-shadow 0.3s; /* Плавное изменение тени */
+  transition: height 0.5s ease, width 0.5s ease;
+}
+
+.light-orange-oval.visible {
+  height: 36px;
+  width: 120px;
+  transition: height 0.5s ease, width 0.5s ease;
+}
+
+  
+.light-orange-oval:focus,
+.light-orange-oval:hover {
+  outline: none;
+  border-color: #fe5f1e;
+}
+
+.dark-orange-oval {
+  visibility: hidden;
+  font-size: 14px;
+  align-self: center;
+  margin-left: 5px;
+  height: 0px;
+  width: 0px;
+  text-align: center;
+  border-radius: 30px;
+  background: #fe5f1e;
+  color: white;
+  transition: height 0.5s ease, width 0.5s ease;
+}
+
+.dark-orange-oval.visible {
+  visibility: visible;
+  height: 20px;
+  width: 76px;
+  transition: height 0.5s ease, width 0.5s ease;
+}
+
+.cart-image {
+  margin-left: 6px;
+  margin-top: 3px;
+  display: block; /* Изменено на block, чтобы занять всю ширину контейнера */
+  width: 26px;
+  height: 26px;
+}
+
+.image-text {
+  margin: 0px 0px 5px 3px;
+  font-size: 15px;
+  position: relative; /* Изменено на relative */
+  top: -68%; 
+  left: 50%;
+  transform: translateX(-50%); /* Только горизонтальный сдвиг */
+  color: black;
+  background-color: transparent;
+  border-radius: 50%;
+  white-space: nowrap; /* Запрещаем перенос текста на новую строку */
+}
+
+.image-container {
+  display: inline-block;
+  position: relative;
+}
+
+
+
+

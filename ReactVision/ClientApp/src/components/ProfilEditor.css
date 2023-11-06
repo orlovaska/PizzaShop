@@ -1,0 +1,81 @@
+.profil-editor-container {
+  border-radius: 20px;
+  display: grid;
+  height: 400px;
+  margin: 100px 30px 0px 3px;
+  align-items: center;
+  box-shadow: rgba(0, 0, 0, 0.1) 3px 6px 12px 0px;
+}
+
+.auth-form {
+  box-sizing: border-box;
+  font-family: Nunito, sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  width: 400px;
+  padding: 32px;
+  height: auto;
+  display: block;
+  position: relative;
+  -webkit-font-smoothing: antialiased;
+}
+
+.input-field {
+  width: 300px;
+  margin-bottom: 10px;
+  border: 2px solid white;
+  padding: 8px;
+  border-radius: 18px;
+  font-size: 16px;
+  color: black;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: border-color 0.3s, color 0.3s; /* Плавное изменение цвета и границы */
+}
+
+.input-field:hover,
+.input-field:focus {
+  outline: none;
+  border-color: #fe5f1e; /* Изменение цвета границы при наведении или фокусе на оранжевый */
+}
+
+.form-container {
+  position: relative; /* Для позиционирования внутренних элементов */
+  margin-bottom: 15px; /* Допустимая высота блока с ошибкой */
+}
+
+.error-message {
+  font-size: 14px;
+  color: rgba(255, 0, 0, 0.73);
+  margin-left: 10px;
+  margin-bottom: 2px;
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  transition: max-height 0.4s ease, opacity 0.4s ease;
+}
+
+.error-message.visible {
+  max-height: 30px;
+  opacity: 1;
+  transition: max-height 0.4s ease, opacity 0.4s ease;
+}
+
+.submit-button {
+  background-color: #fe5f1e;
+  color: white;
+  border: none;
+  border-radius: 18px;
+  padding: 8px 16px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.link-container {
+  margin-top: 16px;
+}
+
+.link-container a {
+  margin-right: 8px;
+  text-decoration: none;
+  color: #007bff;
+}

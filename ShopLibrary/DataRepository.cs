@@ -18,6 +18,8 @@ namespace ShopLibrary
                 return context.Products.Where(c => c.Id == productId).FirstOrDefault();
             }
         }
+
+
         public ProductModel AddProduct(ProductModel product, CategoryModel category)
         {
             using (SqlConnector context = new SqlConnector())
@@ -138,46 +140,37 @@ namespace ShopLibrary
         }
         public bool PasswordVerification(string email, string password)
         {
+            //TODO - сделать проверку по роли, сейчас работает только для покупателя
             bool verificationIsSuccess = false;
             using (SqlConnector context = new SqlConnector())
             {
+                int customerId = GetCustomerRole().Id;
                 foreach (CustomerModel customer in context.Customers.ToList())
                 {
-                    if (customer.RoleId == role.Id && customer.Email == email && customer.HashPassword == HashingUtility.HashingPassword(password))
+                    if (customer.RoleId == customerId && customer.Email == email && customer.HashPassword == HashingUtility.HashingPassword(password))
                         verificationIsSuccess = true;
                 }
-            }        //TODO - Исправить вывод - сейчас для тестов 
-            return true;
-        }
-        public void AddCustomer(CustomerModel customer, RoleModel role, string password)
-        {
-            using (SqlConnector context = new SqlConnector())
-            {
-                RoleModel currentRole = context.Roles.Where(p => p.Id == role.Id).SingleOrDefault();
-                if (currentRole != null)
-                {
-                    customer.Role = currentRole;
-                    customer.RoleId = customer.Id;
-                    customer.HashPassword = HashingUtility.HashingPassword(password);
-                    context.Customers.Add(customer);
-                    context.SaveChanges();
-                }
             }
+            return verificationIsSuccess;
         }
-        public void EditCustomer(CustomerModel customer)
+
+        public void EditUser(int userId, string firstName,
+  string lastName,
+  string email,
+  string phone)
         {
             using (SqlConnector context = new SqlConnector())
             {
                 CustomerModel CurrentCustomer = context.Customers
-                   .Where(c => c.Id == customer.Id)
+                   .Where(c => c.Id == userId)
                    .SingleOrDefault();
 
                 if (CurrentCustomer != null)
                 {
-                    CurrentCustomer.FirstName = customer.FirstName;
-                    CurrentCustomer.LastName = customer.LastName;
-                    CurrentCustomer.Email = customer.Email;
-                    CurrentCustomer.Phone = customer.Phone;
+                    CurrentCustomer.FirstName = firstName;
+                    CurrentCustomer.LastName = lastName;
+                    CurrentCustomer.Email = email;
+                    CurrentCustomer.Phone = phone;
                     context.SaveChanges();
                 }
             }
@@ -193,7 +186,6 @@ namespace ShopLibrary
         {
             using (SqlConnector context = new SqlConnector())
             {
-
                 CustomerModel CurrentCustomer = context.Customers
                    .Where(c => c.Id == customer.Id)
                    .FirstOrDefault();
@@ -209,6 +201,41 @@ namespace ShopLibrary
                 order.Status = CurrentStatus;
                 order.Address = CurrentAddress;
                 order.Customer = CurrentCustomer;
+                context.Orders.Add(order);
+                context.SaveChanges();
+                return order;
+            }
+        }
+
+        public OrderModel AddNewOrder(int customerId, int addressId, string comment)
+        {
+            using (SqlConnector context = new SqlConnector())
+            {
+
+                CustomerModel CurrentCustomer = context.Customers
+                   .Where(c => c.Id == customerId)
+                   .FirstOrDefault();
+
+                AddressModel CurrentAddress = context.Addresses
+                   .Where(c => c.Id == addressId)
+                   .FirstOrDefault();
+
+                StatusModel CurrentStatus = context.Statuses
+                   .Where(c => c.Status == "Оформлен")
+                   .FirstOrDefault();
+
+                int statusId = context.Statuses
+                   .FirstOrDefault().Id;
+
+                DateTime currentTime = DateTime.Now;
+                DateTime defaultDateTime = DateTime.MinValue;
+
+
+                OrderModel order = new OrderModel(currentTime, defaultDateTime, comment);
+                order.Customer = CurrentCustomer;
+                order.Address = CurrentAddress;
+                order.Status = CurrentStatus;
+
                 context.Orders.Add(order);
                 context.SaveChanges();
                 return order;
@@ -274,22 +301,22 @@ namespace ShopLibrary
             }
         }
 
-        public void AddToCart(CustomerModel customer, ProductModel product)
+        public void AddToCart(int customerId, int productId)
         {
             List<CartsModel> carts = new List<CartsModel>();
             using (SqlConnector context = new SqlConnector())
             {
-                carts = context.Carts.Where(p => p.Customer == customer && p.Product == product).ToList();
+                carts = context.Carts.Where(p => p.CustomerId == customerId && p.ProductId == productId).ToList();
 
                 if (carts.Count == 0)
                 {
 
                     CustomerModel CurrentCustomer = context.Customers
-                    .Where(c => c.Id == customer.Id)
+                    .Where(c => c.Id == customerId)
                     .FirstOrDefault();
 
                     ProductModel CurrentProduct = context.Products
-                    .Where(c => c.Id == product.Id)
+                    .Where(c => c.Id == productId)
                     .FirstOrDefault();
 
 
@@ -311,21 +338,21 @@ namespace ShopLibrary
             }
         }
 
-        public List<CartsModel> GetCartByCustomer(CustomerModel customer)
+        public List<CartsModel> GetCartByCustomer(int customerId)
         {
             List<CartsModel> carts = new List<CartsModel>();
             using (SqlConnector context = new SqlConnector())
             {
-                carts = context.Carts.Where(p => p.CustomerId == customer.Id).Include(p => p.Product).ToList();
+                carts = context.Carts.Where(p => p.CustomerId == customerId).Include(p => p.Product).ToList();
             }
             return carts;
         }
 
-        public void DeleteFromCart(CustomerModel customer, ProductModel product)
+        public void DeleteFromCart(int customerId, int productId)
         {
             using (SqlConnector context = new SqlConnector())
             {
-                var result = context.Carts.Single(p => p.CustomerId == customer.Id && p.ProductId == product.Id);
+                var result = context.Carts.Single(p => p.CustomerId == customerId && p.ProductId == productId);
                 if (result != null)
                 {
                     context.Carts.Remove(result);
@@ -334,11 +361,11 @@ namespace ShopLibrary
             }
         }
 
-        public void ReduceQuntityOfProductFromCart(CustomerModel customer, ProductModel product)
+        public void ReduceQuntityOfProductFromCart(int customerId, int productId)
         {
             using (SqlConnector context = new SqlConnector())
             {
-                var result = context.Carts.Single(p => p.CustomerId == customer.Id && p.ProductId == product.Id);
+                var result = context.Carts.Single(p => p.CustomerId == customerId && p.ProductId == productId);
                 if (result != null)
                 {
                     result.Quntity--;
@@ -347,11 +374,11 @@ namespace ShopLibrary
             }
         }
 
-        public void DeleteAllCartsByCustomer(CustomerModel customer)
+        public void DeleteAllCartsByCustomer(int customerId)
         {
             using (SqlConnector context = new SqlConnector())
             {
-                var result = context.Carts.Where(p => p.CustomerId == customer.Id);
+                var result = context.Carts.Where(p => p.CustomerId == customerId);
                 if (result != null)
                 {
                     context.Carts.RemoveRange(result);
@@ -360,12 +387,17 @@ namespace ShopLibrary
             }
         }
 
-        public void AddOrderDetailsFromCarts(OrderModel order, ICollection<CartsModel> carts)
+        public void AddOrderDetailsFromCarts(int orderId)
         {
             using (SqlConnector context = new SqlConnector())
             {
+                int customerId = context.Orders.Where(c => c.Id == orderId).FirstOrDefault().CustomerId;
+
+                IEnumerable<CartsModel> carts = context.Carts
+                    .Include(cart => cart.Product)
+                    .Where(p => p.CustomerId == customerId).ToList(); ;
                 OrderModel CurrentOrder = context.Orders
-                    .Where(c => c.Id == order.Id)
+                    .Where(c => c.Id == orderId)
                     .FirstOrDefault();
 
                 foreach (var cart in carts)
@@ -480,7 +512,7 @@ namespace ShopLibrary
                 if (CurrentCategory != null)
                 {
                     CurrentCategory.Name = category.Name;
-                    CurrentCategory.Image = category.Image;
+                    CurrentCategory.ImageUrl = category.ImageUrl;
                     context.SaveChanges();
                     return CurrentCategory;
                 }
@@ -603,22 +635,26 @@ namespace ShopLibrary
             }
         }
 
-        public AddressModel AddAddressesByCustomer(AddressModel address, CustomerModel customer)
+        public AddressModel AddAddress(int customerId, string address)
         {
             using (SqlConnector context = new SqlConnector())
             {
+                AddressModel addressModel = new AddressModel();
                 CustomerModel CurrentCustomer = context.Customers
-                        .Where(c => c.Id == customer.Id)
+                        .Where(c => c.Id == customerId)
                         .FirstOrDefault();
 
                 if (CurrentCustomer != null)
                 {
-                    address.Customer = CurrentCustomer;
-                    address.CustomerId = CurrentCustomer.Id;
-                    context.Add(address);
+                    addressModel.Customer = CurrentCustomer;
+                    addressModel.CustomerId = customerId;
+                    addressModel.IsSelected = true;
+                    addressModel.Address = address;
+                    context.Add(addressModel);
                     context.SaveChanges();
                 }
-                return address;
+                
+                return addressModel;
             }
         }
 
@@ -678,6 +714,28 @@ namespace ShopLibrary
             using (SqlConnector context = new SqlConnector())
             {
                 return context.Statuses.Where(p => p.Id == 6).SingleOrDefault();
+            }
+        }
+
+        public RoleModel GetCustomerRole()
+        {
+            using (SqlConnector context = new SqlConnector())
+            {
+                return context.Roles.Where(p => p.Role == "Покупатель").SingleOrDefault();
+            }
+        }
+
+        public void AddCustomer(string firstName, string lastName, string email, string phone, string password, int roleId)
+        {
+            CustomerModel customer = new CustomerModel(firstName, lastName, HashingUtility.HashingPassword(password), email, phone);
+            using (SqlConnector context = new SqlConnector())
+            {
+                RoleModel role = context.Roles
+   .Where(c => c.Id == roleId)
+   .FirstOrDefault();
+                customer.Role = role;
+                context.Customers.Add(customer);
+                context.SaveChanges();
             }
         }
     }

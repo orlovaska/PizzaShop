@@ -1,0 +1,119 @@
+.products_item {
+  max-width: 300px;
+  display: block;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 5px;
+  padding-right: 5px;
+  background-color: transparent;
+  margin: 0px;
+  overflow: hidden;
+}
+
+.products_item-margin {
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
+.products_item-wrapper {
+  position: relative; /* Добавляем позиционирование для псевдоэлементов */
+  box-shadow: rgba(0, 0, 0, 0.1) 3px 6px 12px 0px;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding-bottom: 20px;
+  padding-top: 10px;
+  overflow: hidden; /* Добавляем overflow для обрезания псевдоэлементов */
+}
+
+.products_item-wrapper::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.4); /* Цвет и прозрачность затемнения */
+  opacity: 0; /* Начальная прозрачность */
+  transition: opacity 0.3s ease; /* Плавное изменение прозрачности */
+  pointer-events: none; /* Позволяет кликать сквозь псевдоэлемент */
+}
+
+.products_item-wrapper:hover::before {
+  opacity: 0.2; /* Прозрачность при наведении */
+}
+
+.image {
+  max-width: 100%;
+  height: auto;
+  margin-bottom: 10px; /* Добавляем отступ снизу для картинки */
+}
+
+/* .products_item-body {
+  cursor: pointer;
+} */
+
+.products_item-content {
+  padding: 10px;
+  height: 168px;
+  width: 250px;
+}
+
+.products_item-name {
+  text-align: left;
+  font-size: 18px;
+  font-weight: bold;
+  color: #4a465c;
+}
+
+.products_item-size {
+  text-align: left;
+  margin-bottom: 16px;
+  font-size: 14px;
+  color: #8c8b8f;
+}
+
+.products_item-desc {
+  text-align: left;
+  font-size: 14px;
+  color: #8c8b8f;
+}
+
+.products_item-foot {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.products_item-price {
+  font-size: 16px;
+  font-weight: bold;
+  color: #4a465c;
+  margin-left: 10px;
+}
+
+.cart-btn {
+  width: 30px;
+  height: 30px;
+  background-color: #4a465c;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.add-to-cart-button {
+  background-color: #fe5f1e;
+  color: white;
+  border: none;
+  border-radius: 18px;
+  padding: 8px 16px;
+  margin: 0px 20px 0px 0px;
+  font-size: 16px;
+  cursor: pointer;
+}

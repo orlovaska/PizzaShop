@@ -1,0 +1,32 @@
+.custom-select {
+  margin: 0px 40px;
+    border: 2px solid rgba(0, 0, 0, 0);
+    height: 36px;
+    width: 120px;
+    background: #ffebea;
+    border-radius: 40px;
+    padding: 6px 14px;
+    font-size: 14px;
+    color: black;
+    cursor: pointer;
+    appearance: none; /* Убираем стандартные стили браузера */
+    transition: border-color 0.3s; /* Плавное изменение цвета обводки */
+  }
+  
+  .custom-select:focus,
+  .custom-select:hover {
+    outline: none;
+    border-color: #fe5f1e;
+  }
+  
+  .select-option {
+    background: #ffebea;
+    color: black;
+    border: none;
+    border-radius: 40px;
+  }
+  
+  .select-option:hover {
+    background: #fe5f1e;
+    color: white;
+  }

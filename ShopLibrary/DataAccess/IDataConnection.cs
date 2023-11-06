@@ -8,9 +8,16 @@ namespace PizzaShop.DataAccess
     {
         bool PasswordVerification(string email, string password);
         bool EmailIsUnique(string email);
-        void AddCustomer(CustomerModel customer, RoleModel role, string password);
-        void EditCustomer(CustomerModel customer);
-        //void DeleteCustomer(CustomerModel customer);
+        void AddCustomer(string firstName,
+  string lastName,
+  string email,
+  string phone,
+  string password, 
+  int roleId);
+        void EditUser(int userId, string firstName,
+  string lastName,
+  string email,
+  string phone);
         CustomerModel GetByEmail(string email);
         List<CustomerModel> GetCustomers_Managers();
         List<CustomerModel> GetCustomers_Customers();
@@ -18,10 +25,8 @@ namespace PizzaShop.DataAccess
 
 
         List<OrderDetailModel> GetOrderDetails_ByOrder(OrderModel order);
-        void AddOrderDetailsFromCarts(OrderModel order, ICollection<CartsModel> carts);
-
-        OrderModel AddOrder(CustomerModel customer, OrderModel order, AddressModel address);
-        //List<OrderModel> GetOrders_All();
+        void AddOrderDetailsFromCarts(int orderId);
+        OrderModel AddNewOrder(int customerId, int addressId, string comment);
         List<OrderModel> GetActiveOrders_All();
         List<OrderModel> GetCompletedOrders();
         List<OrderModel> GetCancelledOrders();
@@ -46,12 +51,16 @@ namespace PizzaShop.DataAccess
 
 
 
-        public void DeleteFromCart(CustomerModel customer, ProductModel product);
-        public void ReduceQuntityOfProductFromCart(CustomerModel customer, ProductModel product);
-        public void AddToCart(CustomerModel customer, ProductModel product);
-        public List<CartsModel> GetCartByCustomer(CustomerModel customer);
-        void DeleteAllCartsByCustomer(CustomerModel customer);
+        public void DeleteFromCart(int customerId, int productId);
+        public void ReduceQuntityOfProductFromCart(int customerId, int productId);
+        public void AddToCart(int customerId, int productId);
+        public List<CartsModel> GetCartByCustomer(int customerId);
+        void DeleteAllCartsByCustomer(int customerId);
 
-        public List<RoleModel> GelAllRoles();
+
+        public List<RoleModel> GetAllRoles();
+        public RoleModel GetCustomerRole();
+
+        public AddressModel AddAddress(int customerId, string addresss);
     }
 }

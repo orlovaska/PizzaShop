@@ -9,8 +9,7 @@ namespace PizzaShop.Models
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        [Column(TypeName = "image")]
-        public byte[] Image { get; set; }
+        public string ImageUrl { get; set; }
         public ICollection<ProductModel> Products { get; set; }
 
         public CategoryModel()
@@ -18,15 +17,15 @@ namespace PizzaShop.Models
 
         }
 
-        public CategoryModel(int id, string name, byte[] image, ICollection<ProductModel> products)
+        public CategoryModel(int id, string name, string ImageUrl, ICollection<ProductModel> products)
         {
             Id = id;
             Name = name;
-            Image = image;
+            ImageUrl = ImageUrl;
             Products = products;
         }
 
-        public object Clone() => new CategoryModel(Id, Name, Image, Products);
+        public object Clone() => new CategoryModel(Id, Name, ImageUrl, Products);
     }
     //Add-Migration AddCategory -project ShopLibrary
     //Update-Database -project ShopLibrary

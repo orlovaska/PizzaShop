@@ -1,4 +1,5 @@
-﻿using PizzaShop.DataAccess;
+﻿using Microsoft.EntityFrameworkCore;
+using PizzaShop.DataAccess;
 using PizzaShop.Models;
 using System;
 using System.Collections.Generic;
@@ -11,6 +12,142 @@ namespace PizzaShop
 {
     class Program
     {
+        static string[] RussianNames = new string[]
+        {
+            "Александр",
+            "Мария",
+            "Михаил",
+            "Анна",
+            "Артём",
+            "София",
+            "Иван",
+            "Виктория",
+            "Дмитрий",
+            "Полина",
+            "Максим",
+            "Елизавета",
+            "Андрей",
+            "Анастасия",
+            "Кирилл",
+            "Ксения",
+            "Сергей",
+            "Валерия",
+            "Николай",
+            "Екатерина",
+            "Павел",
+            "Варвара",
+            "Алексей",
+            "Маргарита",
+            "Денис",
+            "Ольга",
+            "Артур",
+            "Юлия",
+            "Егор",
+            "Татьяна"
+        };
+
+        static string[] RussianSurnames = new string[]
+        {
+            "Иванов",
+            "Смирнов",
+            "Кузнецов",
+            "Попов",
+            "Соколов",
+            "Лебедев",
+            "Козлов",
+            "Новиков",
+            "Морозов",
+            "Петров",
+            "Волков",
+            "Соловьев",
+            "Васильев",
+            "Зайцев",
+            "Павлов",
+            "Семенов",
+            "Голубев",
+            "Виноградов",
+            "Богданов",
+            "Воробьев",
+            "Федоров",
+            "Михайлов",
+            "Беляев",
+            "Тарасов",
+            "Белов",
+            "Комаров",
+            "Орлов",
+            "Киселев",
+            "Макаров",
+            "Андреев"
+        };
+
+        static string[] PhoneNumbers = new string[]
+        {
+            "1234567890",
+            "2345678901",
+            "3456789012",
+            "4567890123",
+            "5678901234",
+            "6789012345",
+            "7890123456",
+            "8901234567",
+            "9012345678",
+            "0123456789",
+            "2345678901",
+            "3456789012",
+            "4567890123",
+            "5678901234",
+            "6789012345",
+            "7890123456",
+            "8901234567",
+            "9012345678",
+            "0123456789",
+            "2345678901",
+            "3456789012",
+            "4567890123",
+            "5678901234",
+            "6789012345",
+            "7890123456",
+            "8901234567",
+            "9012345678",
+            "0123456789",
+            "2345678901",
+            "3456789012"
+        };
+
+        static string[] Emails = new string[]
+        {
+            "example1@example.com",
+            "example2@example.com",
+            "example3@example.com",
+            "example4@example.com",
+            "example5@example.com",
+            "example6@example.com",
+            "example7@example.com",
+            "example8@example.com",
+            "example9@example.com",
+            "example10@example.com",
+            "example11@example.com",
+            "example12@example.com",
+            "example13@example.com",
+            "example14@example.com",
+            "example15@example.com",
+            "example16@example.com",
+            "example17@example.com",
+            "example18@example.com",
+            "example19@example.com",
+            "example20@example.com",
+            "example21@example.com",
+            "example22@example.com",
+            "example23@example.com",
+            "example24@example.com",
+            "example25@example.com",
+            "example26@example.com",
+            "example27@example.com",
+            "example28@example.com",
+            "example29@example.com",
+            "example30@example.com"
+        };
+
         public static string RandomString(int length)
         {
             Random random = new Random();
@@ -35,175 +172,259 @@ namespace PizzaShop
             }
         }
 
+        public static void ClearAll()
+        {
+            using (var dbContext = new SqlConnector())
+            {
+                dbContext.Categories.RemoveRange(dbContext.Categories);
+                dbContext.Customers.RemoveRange(dbContext.Customers);
+                dbContext.Orders.RemoveRange(dbContext.Orders);
+                dbContext.Products.RemoveRange(dbContext.Products);
+                dbContext.OrderDetails.RemoveRange(dbContext.OrderDetails);
+                dbContext.Carts.RemoveRange(dbContext.Carts);
+                dbContext.Addresses.RemoveRange(dbContext.Addresses);
+                dbContext.Roles.RemoveRange(dbContext.Roles);
+                dbContext.Statuses.RemoveRange(dbContext.Statuses);
+
+                dbContext.SaveChanges();
+            }
+        }
+
+
+
+
+
         static void Main(string[] args)
         {
-            //AddRolls();
-            //AddSushi();
-            //AddBurgers();
-            AddBut();
-            //string[] category123 = { "Суши", "Роллы", "Бургеры", "Сеты", "Шаурма", "Салаты", "Напитки" };
-            //for (int i = 0; i < category123.Length; i++)
-            //{
-            //    CategoryModel category = new CategoryModel();
-            //    {
-            //        category.Name = category123[i];
-            //        Image image = Image.FromFile(@"C:\Users\User\Desktop\Shop\Категории\"+ category123[i].ToString() +".jpg");
-            //        category.Image = ImageToByteArray(image);
-            //        context.AddAsync(category);
-            //    }
-            //}
+            ClearAll();
+            AddCategories();
 
+            AddRolls();
+            AddSets();
 
+            AddStatuses();
 
-            //for (int i = 5; i < 8; i++)
-            //{
-            //    Product product = new Product(); { product.Id = i; }
-            //    context.Products.Attach(product);
-            //    context.Remove(product);
-            //}
-
-            //for (int i = 0; i < 5; i++)
-            //{
-            //    Customer customer = new Customer();
-            //    {
-            //        customer.FirstName = RandomString(random.Next(6));
-            //        customer.Lastname = RandomString(random.Next(10));
-            //    }
-            //    context.Add(customer);
-            //}
-
-            //for (int i = 0; i < 5; i++)
-            //{
-            //    Order order = new Order();
-            //    {
-            //        order.OrderFulfilled = RandomDay();
-            //        order.OrderPlaced = RandomDay();
-            //        order.CustomerId = 2;
-            //    }
-            //    context.Add(order);
-            //}
-
-            //var products = from product in context.Products
-            //               where product.Id < 13
-            //               orderby product.Price
-            //               select product;
-
-            //var products = context.Products
-            //    .Where(p => p.Id < 13)
-            //    .OrderBy(p => p.Price);
-
-            //foreach (Product product in products)
-            //{
-            //    Console.WriteLine(product.Id);
-            //    Console.WriteLine(product.Name);
-            //    Console.WriteLine(product.Price);
-            //    Console.WriteLine();
-            //}
-
-            //List<int> productsId = new List<int>(); //получение уникальный Id продуктов
-            //foreach (Product product in context.Products)
-            //{
-            //    productsId.Add(product.Id);
-            //}
-            //var uniqueItemsProductsId = productsId.Distinct().ToList();
-
-            //List<int> orderId = new List<int>(); //получение уникальный Id ордеров
-            //foreach (Order order in context.Orders)
-            //{
-            //    orderId.Add(order.Id);
-            //}
-            //var uniqueItemsOrderId = orderId.Distinct().ToList();
-
-
-            //for (int i = 0; i < 150; i++) //добавление рандомных ОрдерДетейлс через листы Id продуктов и ордеров
-            //{
-            //    OrderDetail orderDetail = new OrderDetail();
-            //    orderDetail.Quntity = random.Next(200);
-            //    orderDetail.ProductId = uniqueItemsProductsId.ToArray()[random.Next(uniqueItemsProductsId.Count)];
-            //    orderDetail.OrderId = uniqueItemsOrderId.ToArray()[random.Next(uniqueItemsOrderId.Count)];
-            //    context.Add(orderDetail);
-            //}
-
-            //context.OrderDetails.Distinct();
+            AddRoles();
+            AddCustomers();
 
             Console.WriteLine("Выполнение закончено");
             Console.ReadLine();
         }
+
+        public static void AddCategories()
+        {
+            string[] imageUrls = {
+                "https://s3.smartofood.ru/rollme59_ru/menu/dfcf5a5a-227f-55fa-8218-9a06e7b05e4b.jpg",
+    "https://s3.smartofood.ru/rollme59_ru/menu/25f6f65d-d417-5fc4-936a-8996c366e9ec.jpg",
+    "https://s3.smartofood.ru/rollme59_ru/menu/5b61a4eb-4134-5bcb-80da-ebc058b9161e.jpg",
+    "https://s3.smartofood.ru/rollme59_ru/menu/5eb331f5-d261-58cb-88b0-08034886d8a4.jpg",
+    "https://s3.smartofood.ru/rollme59_ru/menu/ff84ee71-f6de-5d89-ada9-bb753a39d9fc.jpg",
+
+
+};
+
+            using SqlConnector context = new SqlConnector();
+
+            string[] category123 = { "Роллы", "Сеты", "Запеченные роллы", "Горячие блюда",  "Напитки" };
+            for (int i = 0; i < category123.Length; i++)
+            {
+                CategoryModel category = new CategoryModel();
+                {
+                    category.Name = category123[i];
+                    
+                    category.ImageUrl = imageUrls[i];
+                    context.AddAsync(category);
+                }
+            }
+            context.SaveChanges();
+        }
+
+        public static void AddRoles()
+        {
+            using SqlConnector context = new SqlConnector();
+
+
+            RoleModel roleModel = new RoleModel();
+            {
+                roleModel.Role = "Покупатель";
+            }
+            context.Add(roleModel);
+
+            RoleModel roleModel1 = new RoleModel();
+            {
+                roleModel1.Role = "Менеджер";
+            }
+            context.Add(roleModel1);
+
+            context.SaveChanges();
+        }
+
+        public static void AddStatuses()
+        {
+            using SqlConnector context = new SqlConnector();
+
+            Random random = new Random();
+
+            string[] statuses = { "Оформлен", "Подтвержен", "Готовится", "В доставке", "Завершен", "Отменен" };
+            for (int i = 0; i < statuses.Length; i++)
+            {
+                StatusModel status = new StatusModel();
+                {
+                    status.Status = statuses[i];    
+                }
+                context.Add(status);
+            }
+            context.SaveChanges();
+        }
+
+        public static void AddCustomers()
+        {
+            using SqlConnector context = new SqlConnector();
+
+            for (int i = 0; i < 30; i++)
+            {
+                Random random = new Random();
+
+                CustomerModel customer = new CustomerModel();
+                {
+                    customer.RoleId = context.Roles.Where(p => p.Role == "Покупатель").SingleOrDefault().Id;
+                    customer.Phone = PhoneNumbers[i];
+                    customer.Email = Emails[i];
+                    customer.FirstName = RussianNames[i];
+                    customer.LastName = RussianSurnames[i];
+                }
+                context.Add(customer);
+            }
+            context.SaveChanges();
+        }
+
         public static void AddRolls()
         {
+            string[] names = {
+            "3 сыра",
+            "Бонито",
+            "Калифорния крабс",
+            "Калифорния с креветкой",
+            "Калифорния с лососем",
+            "Красный эби",
+            "Филадельфия карамельная",
+            "Филадельфия хот (острый!)",
+            "Унаги филадельфия",
+        };
+
+            int[] weights = {
+    250,
+    215,
+    235,
+    245,
+    240,
+    250,
+    330,
+    255,
+    280
+};
+            string[] imageUrls = new string[]
+        {
+            "https://s3.smartofood.ru/rollme59_ru/menu/e74521d4-b037-5765-8065-4ef72d59ba1e.jpg",
+            "https://s3.smartofood.ru/rollme59_ru/menu/e505b725-197a-50c7-9152-23bad265825c.jpg",
+            "https://s3.smartofood.ru/rollme59_ru/menu/43696858-e00f-5aea-93db-d96408a59015.jpg",
+            "https://s3.smartofood.ru/rollme59_ru/menu/e1658fa4-b420-5e0b-b374-7d746cdeca65.jpg",
+            "https://s3.smartofood.ru/rollme59_ru/menu/bd403bef-089e-5d06-9c69-112e64d6632a.jpg",
+            "https://s3.smartofood.ru/rollme59_ru/menu/ff582d9f-383d-5cd3-b642-3d750fd5ef4d.jpg",
+            "https://s3.smartofood.ru/rollme59_ru/menu/b2e2f426-e976-5442-b615-0e33332dfa54.jpg",
+            "https://s3.smartofood.ru/rollme59_ru/menu/cd977dd0-904c-5979-9e41-3e2bce2e40a4.jpg",
+            "https://s3.smartofood.ru/rollme59_ru/menu/ccca721a-3786-5e1c-ab21-c70bca1e2e6c.jpg"
+        };
+
+            string[] descriptions = {
+            "8шт., Рис Shinaki, сыр творожный, сыр чеддер, сыр пармезан, тамаго, майонез, нори",
+            "8шт. - 215гр., 4шт. - 107гр., Рис Shinaki, лосось терияки, сыр творожный, огурец свежий, стружка тунца, нори",
+            "8шт. - 235гр., 4шт. - 117гр., Рис Shinaki, снежный краб, огурец свежий, икра тобико, майонез, нори",
+            "8шт. - 245гр., 4шт. - 122гр., Рис Shinaki, тигровая креветка су-вид, сыр творожный, огурец свежий, икра тобико, нори",
+            "8шт. - 240гр., 4шт. - 120гр., Рис Shinaki, лосось охлажденный, сыр творожный, огурец свежий, икра тобико, нори",
+            "8шт. - 250гр., 4шт. - 125гр., Рис Shinaki, сыр творожный, тигровая креветка су-вид, томаты, икра тобико, нори",
+            "8шт. - 330гр., 4шт. - 165гр., Рис Shinaki, сыр творожный, авокадо, лосось запеченный, сахар тростниковый, нори",
+            "8шт. - 255гр., 4шт. - 127гр., Рис Shinaki, сыр творожный, лосось охлажденый",
+             "8шт. - 240гр., 4шт. - 120гр., Рис Shinaki, лосось охлажденный, сыр творожный, огурец свежий, икра тобико, нори",};
             using SqlConnector context = new SqlConnector();
 
             Random random = new Random();
-
-            string[] rolls = { "Калифорния", "Филадельфия", "Бостон", "Темпура", "Цезарь", "Канада", "Сальмон" };
-            for (int i = 0; i < rolls.Length; i++)
+            for (int i = 0; i < names.Length; i++)
             {
                 ProductModel product = new ProductModel();
                 {
-                    product.Name = $"{rolls[i]} ролл";
+                    product.Name = names[i];
+                    product.WeightInGrams = weights[i];
+                    product.Description = descriptions[i];
+
                     product.CurrentPrice = Convert.ToDecimal(random.Next(10000) / 100);
-                    product.CategoryId = 3;
-                    Image image = Image.FromFile(@"C:\Users\User\Desktop\Shop\Роллы\" + rolls[i].ToString() + ".jpg");
-                    product.Image = ImageToByteArray(image);
+                    product.CategoryId = context.Categories.Where(p => p.Name == "Роллы").SingleOrDefault().Id ;
+                    product.ImageUrl =imageUrls[i];
                 }
                 context.Add(product);
             }
             context.SaveChanges();
         }
-        public static void AddBut()
+
+        public static void AddSets()
         {
+            string[] setNames = {
+    "Сет №1",
+    "Сет №2",
+    "Сет №3",
+    "Сет №4",
+    "Сет №5",
+    "Сет №6",
+    "Сет №7",
+    "Сет №8"
+};
+
+            string[] setDescriptions = {
+    "32шт. (на двоих) в сете: Филадельфия с огурцом 4шт., Филадельфия хот 4шт., Маки с лососем 8шт., Маки с креветкой 8шт., Маки с огурцом 8шт.",
+    "32шт. (на троих) в сете: Филадельфия классик 8шт., Филадельфия с огурцом 8шт., Филадельфия хот 8шт., Калифорния с лососем 8шт.",
+    "48 шт. (на 4-5 человек) в сете: Филадельфия классик 8 шт., Филадельфия с огурцом 8 шт., Филадельфия хот 8 шт., Калифорния с лососем 8 шт., Калифорния с креветкой 8 шт., Калифорния крабс 8 шт.",
+    "24шт. (на двоих) в сете: Чакин острый 8шт., Чакин с такуаном 8шт., Ролл 3 сыра 8шт.",
+    "56шт. (на 4-5 человек) в сете: Маки с такуаном 8шт., Маки с томаго 8шт., Чакин острый 8шт., 3 сыра 8шт., Бонито 8шт., Калифорния крабс 8шт., Филадельфия с огурцом 8шт.",
+    "56шт. (на двоих) в сете: Маки с такуаном 8шт., Маки с томаго 8шт., Маки с лососем 8шт., Маки с креветкой 8шт., Маки с огурцом 8шт., Маки с сыром 8шт., Маки с крабом 8шт.",
+    "40шт. (на троих) в сете: Чакин острый 8шт., Чакин с такуаном 8шт., 3 сыра 8шт., Бонито 8шт., Морской 8шт.",
+    "40шт. (на троих) в сете: Бруталити 8шт., Чука сливочный 8шт., Сливочный чикен 8шт., Маки тори 8шт., Классика жанра 8шт."
+};
+
+            int[] setWeights = {
+    590,
+    1035,
+    1515,
+    755,
+    1450,
+    775,
+    1185,
+    1225
+};
+            string[] imageUrls = {
+    "https://s3.smartofood.ru/rollme59_ru/menu/4beb94be-5e40-5bec-bf35-4e2a178b40a6.jpg",
+    "https://s3.smartofood.ru/rollme59_ru/menu/d4181bc2-6109-5130-8ade-c0be7d124b18.jpg",
+    "https://s3.smartofood.ru/rollme59_ru/menu/af534d1e-3d58-5231-88f3-fb6546640933.jpg",
+    "https://s3.smartofood.ru/rollme59_ru/menu/b86322cc-d78b-5c18-8102-f8938bb74802.jpg",
+    "https://s3.smartofood.ru/rollme59_ru/menu/be6bcb43-8b65-551a-971c-7c405a6d2db7.jpg",
+    "https://s3.smartofood.ru/rollme59_ru/menu/989d39f1-8657-5999-929f-dc9f882dea80.jpg",
+    "https://s3.smartofood.ru/rollme59_ru/menu/2fead64b-6b6e-587e-83a8-f2939c08f079.jpg",
+    "https://s3.smartofood.ru/rollme59_ru/menu/6d46fd1c-e598-5454-84de-d15abb6dd2fe.jpg"
+};
+
             using SqlConnector context = new SqlConnector();
 
             Random random = new Random();
 
-            ProductModel product = new ProductModel();
-            {
-                product.Name = "Бабочка";
-                product.CurrentPrice = Convert.ToDecimal(random.Next(10000) / 100);
-                product.CategoryId = 4;
-                Image image = Image.FromFile(@"C:\Users\User\Desktop\Shop\Категории\" + "Бабочка" + ".jpg");
-                product.Image = ImageToByteArray(image);
-            }
-            context.Add(product);
-            context.SaveChanges();
-        }
-        public static void AddBurgers()
-        {
-            using SqlConnector context = new SqlConnector();
-
-            Random random = new Random();
-
-            string[] burgers = { "Фишбургер", "Крабсбургер", "Чизбургер", "Чикенбургер", "Черный бургер", "Классический бургер", "Гамбургер" };
-            for (int i = 0; i < burgers.Length; i++)
+            for (int i = 0; i < setNames.Length; i++)
             {
                 ProductModel product = new ProductModel();
                 {
-                    product.Name = burgers[i];
+                    product.Name = setNames[i];
                     product.CurrentPrice = Convert.ToDecimal(random.Next(10000) / 100);
-                    product.CategoryId = 4;
-                    Image image = Image.FromFile(@"C:\Users\User\Desktop\Shop\Бургеры\" + burgers[i].ToString() + ".jpg");
-                    product.Image = ImageToByteArray(image);
-                }
-                context.Add(product);
-            }
-            context.SaveChanges();
-        }
-        public static void AddSushi()
-        {
-            using SqlConnector context = new SqlConnector();
-
-            Random random = new Random();
-
-            string[] sushi = { "с угрем", "с лососем", "с тунцом", "с креветкой", "с гребешком"};
-            for (int i = 0; i < sushi.Length; i++)
-            {
-                ProductModel product = new ProductModel();
-                {
-                    product.Name = $"Суши {sushi[i]}";
-                    product.CurrentPrice = Convert.ToDecimal(random.Next(10000) / 100);
-                    product.CategoryId = 2;
-                    Image image = Image.FromFile(@"C:\Users\User\Desktop\Shop\Суши\" + sushi[i].ToString() + ".jpg");
-                    product.Image = ImageToByteArray(image);
+                    product.CategoryId = context.Categories.Where(p => p.Name == "Сеты").SingleOrDefault().Id;
+                    product.ImageUrl = imageUrls[i];
+                    product.Description = setDescriptions[i];
+                    product.WeightInGrams = setWeights[i];
                 }
                 context.Add(product);
             }
